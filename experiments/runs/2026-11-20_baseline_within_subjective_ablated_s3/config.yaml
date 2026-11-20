@@ -1,0 +1,14 @@
+model: logistic_regression
+C: 1.0
+class_weight: balanced
+features: bandpower_40_spectral_only_ablated (43-feature set minus valid_TP9, valid_TP10,
+  both_temporals_masked)
+ablation: mask/validity-indicator features REMOVED (Reviewer 2 review 10 causal
+  test)
+imputation: training-fold median
+scaling: training-fold StandardScaler
+protocol: within
+labels: subjective (Amendment 1 windows)
+cap_seed: 3
+data: windows_a1_uncapped, M1 capped per session
+git_commit: d86c4f2

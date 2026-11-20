@@ -235,3 +235,72 @@ rather than asserted.
    dataset (prior stopped run, preserved for audit); the segment-grouped
    replacement still leaves 5 participants and 6 folds uncoverable under
    the pre-set feasibility criteria — logged per fold, never forced.
+
+## Ablation: EEG-features-only — the mask-shortcut causal test (Reviewer 2 review 10)
+
+**Why this run exists.** The mask-only baseline (session-out BA 0.530)
+matching the full 43-feature model (0.515) showed EEG adds nothing
+*beyond* the mask across sessions — but correlation is not causation:
+it did not prove the indicators were responsible for any part of the
+full model's behaviour. This ablation re-runs the identical baseline
+(same Amendment-1 windows, cap seeds 0–4, folds, train-fold-only
+imputation/scaling/class weights; code `src/models/baseline_ablated.py`,
+which imports the full model's pipeline verbatim) with the 3
+mask/validity-indicator features removed — 40 EEG spectral features
+only. Masked channels' spectral features remain NaN → training-fold
+median, exactly as in the full model; the model is simply no longer
+told which channels were masked. Reviewer 2's prediction: session-out
+collapses to ~0.50 and P08's inversion disappears.
+
+**Results** (per-seed aggregates, mean ± SD across seeds 0–4; run
+folders `2026-11-20_baseline_<protocol>_subjective_ablated_s<seed>`,
+summaries `results/tables/baseline_<protocol>_subjective_ablated_summary.csv`):
+
+| Protocol | Model | Bal. acc. | Macro-F1 | ROC-AUC | MCC |
+|---|---|---|---|---|---|
+| Session-out | Full (43 feat) | 0.515 ± 0.018 | 0.421 ± 0.023 | 0.548 ± 0.047 | 0.045 ± 0.043 |
+| Session-out | Mask-only (5 feat) | 0.530 ± 0.006 | 0.386 | 0.521 | 0.034 |
+| Session-out | **Ablated (40 feat)** | **0.519 ± 0.009** | **0.426 ± 0.010** | **0.566 ± 0.045** | **0.056 ± 0.023** |
+| Within | Full (43 feat) | 0.484 ± 0.011 | 0.440 ± 0.016 | 0.487 ± 0.027 | −0.032 ± 0.024 |
+| Within | **Ablated (40 feat)** | **0.509 ± 0.009** | **0.470 ± 0.018** | **0.509 ± 0.032** | **0.019 ± 0.025** |
+| Within, P08 only | Full | 0.225 ± 0.022 | — | 0.237 | −0.580 |
+| Within, P08 only | **Ablated** | **0.467 ± 0.024** | — | **0.490** | **−0.066** |
+
+**Reading.**
+1. **P08: prediction confirmed, decisively.** The confident inversion
+   (BA 0.225, AUC 0.237, MCC −0.580, every seed ≤ 0.245) collapses to
+   chance the moment the indicators are removed (BA 0.467, AUC 0.490 =
+   no ranking signal, MCC −0.066). The inversion was *caused* by the
+   mask/validity features — full stop. This also explains the small
+   within-subject aggregate rise (0.484 → 0.509): P08's recovery alone
+   contributes (0.467 − 0.225)/8 ≈ +0.030, i.e. all of it; for the
+   other 7 participants the indicators changed nothing on average.
+2. **Session-out aggregate: no collapse — because there was nothing to
+   collapse.** Ablated (0.519), full (0.515) and mask-only (0.530) are
+   indistinguishable (all well inside the block-permutation null 95%
+   range [0.449, 0.574]). The full model was never scoring above the
+   EEG-only model, so removing the indicators removes no performance.
+   Reviewer 2's "~0.50" prediction lands numerically (0.519 is chance), but
+   via equivalence of all three feature sets at chance level, not via
+   a drop from the full model.
+
+**Verdict.** The strong aggregate form of "the transferable residue was
+the mask shortcut" is *not* supported — there is no above-chance
+cross-session residue for any feature set. The refined claim, which
+this ablation does establish causally, is stronger where it matters:
+**no feature set transfers across sessions above chance; EEG spectral
+features and the recording-quality pattern are interchangeable at
+chance level (EEG contributes nothing beyond the mask); and the only
+systematic cross-session predictions demonstrated anywhere in this
+pipeline — P08's confident inversion — were produced by the
+mask/validity features and vanish without them.** The mask is not
+carrying a hidden positive signal; it is the only component shown to
+act across sessions at all, and when it acts, it acts as an artefact.
+
+**Problem hit during this run (documented).** scikit-learn was absent
+from this VM's Python (the Week-2 environment had not persisted);
+reinstalled scikit-learn 1.9.1 — the same version as the original
+runs — and verified faithfulness before ablating: the full model
+reproduced its stored seed-0 numbers exactly (session-out BA 0.4991 /
+MCC 0.0090; within P08 BA 0.245; within aggregate 0.4970). Only then
+was the ablation run.
