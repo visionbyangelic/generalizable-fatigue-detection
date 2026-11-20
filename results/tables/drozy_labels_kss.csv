@@ -1,0 +1,15 @@
+participant,sessions_with_data,alert_test,fatigued_test,middle_test,alert_value,fatigued_value,included,note
+P01,"1,2,3",1.0,3.0,2.0,3.0,7.0,True,
+P02,"1,2,3",1.0,2.0,3.0,3.0,7.0,True,
+P03,"1,2,3",1.0,3.0,2.0,2.0,4.0,True,
+P04,"1,2,3",1.0,3.0,2.0,4.0,9.0,True,
+P05,"1,2,3",1.0,3.0,2.0,3.0,8.0,True,
+P06,"1,2,3",1.0,3.0,2.0,2.0,7.0,True,
+P07,"2,3",2.0,3.0,,4.0,9.0,True,test 1 never recorded (score 0 = missing); contrast built on tests 2-3
+P08,"1,2,3",1.0,3.0,2.0,2.0,8.0,True,
+P09,"2,3",2.0,3.0,,6.0,8.0,True,
+P10,"1,3",1.0,3.0,,3.0,7.0,True,
+P11,"1,2,3",1.0,3.0,2.0,4.0,7.0,True,"tie at the top, later test taken"
+P12,1,,,,,,False,"fewer than two usable sessions; excluded: one recorded session, no within-person contrast exists"
+P13,"1,2",2.0,1.0,,3.0,6.0,True,
+P14,"1,2,3",1.0,3.0,2.0,5.0,8.0,True,
