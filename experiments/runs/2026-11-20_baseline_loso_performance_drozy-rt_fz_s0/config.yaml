@@ -1,0 +1,9 @@
+model: logistic_regression
+C: 1.0
+class_weight: balanced
+imputation: training-fold median
+scaling: training-fold StandardScaler
+protocol: loso (leave-one-participant-out)
+git_commit: a3ae879
+features: 'DROZY Fz-only: Fz log + relative band powers (8) + Fz ratios (4) = 12 features'
+labels: performance (DROZY RT arm, docs/dataset2_preregistration.md)

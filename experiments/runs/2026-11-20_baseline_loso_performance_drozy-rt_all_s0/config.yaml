@@ -1,0 +1,11 @@
+model: logistic_regression
+C: 1.0
+class_weight: balanced
+imputation: training-fold median
+scaling: training-fold StandardScaler
+protocol: loso (leave-one-participant-out)
+git_commit: a3ae879
+features: 'DROZY all-channel: log + relative band powers for Fz, Cz, Pz, C3, C4 (40)
+  + Fz ratios (4) + non-frontal ratios over valid channels (4) + 5 validity indicators
+  = 53 features (src/data/drozy_adapter.py)'
+labels: performance (DROZY RT arm, docs/dataset2_preregistration.md)
