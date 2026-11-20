@@ -1,6 +1,6 @@
 # Generalizable Fatigue Detection from Wearable Physiological Signals
 
-**Angelic Charles — Final-Year Computer Science**
+**Angelic Charles**
 
 Can a fatigue detector trained on some people's brain signals be trusted on a person it has never seen? This project builds a complete, leakage-controlled machine-learning pipeline to answer that question honestly — and reports what it finds, including when the answer is "not yet".
 
