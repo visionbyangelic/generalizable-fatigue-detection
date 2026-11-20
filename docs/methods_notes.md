@@ -42,3 +42,14 @@
 - **Blink caveat:** frontal amplitude rejection may remove blink-heavy windows, and slow blinks are a fatigue cue — the M1-vs-M3 failure-rate diagnostic must include frontal channels, not only temporals.
 - Statistics for Weeks 3–4: per-subject metrics, subject-level bootstrap CIs, label-permutation baseline, nested subject-wise tuning.
 *Lead to cross-check, not a citable source. Full answer in the Reviewer 1 conversation of 20 Nov 2026.*
+
+## Reviewer 2 review 6 — Week 2 baseline results review (20 Nov 2026)
+**Question:** baseline at chance within-subject (0.484) and session-out (0.515) — publishable finding or pipeline red flag? P08 at 0.225? Segment-grouped CNN validation defensible?
+**Verdict: treat "at chance" as an unconfirmed checkpoint, not yet a finding.** Protocol praised (masking, train-only scaling, session-held-out honesty), but four diagnostics must run before the claim stands:
+1. **Within-session ceiling check** — time-blocked split with buffer inside single sessions: if features separate early/late within a session but not across sessions → signal is session-specific (drift/impedance), which is itself the thesis story, properly evidenced. If chance even within-session → features/labels carry nothing.
+2. **Label-permutation test** — empirical scores must sit inside the null distribution (rules out metric/fold bugs).
+3. **Trivial baselines + Δ check** — window-index / low-frequency-power-only classifiers must not match the band-power model; performance should relate to Δmental magnitude.
+4. **Feature sanity** — band distributions post-masking, no degenerate constant features.
+**P08 (0.225):** too extreme for noise; most likely severe session shift on a tiny test set — inspect confusion matrix, LR weights, predicted-probability separation, window counts before any "inverted physiology" language.
+**CNN segment-grouped validation: defensible** with caveats — add a purge buffer at segment boundaries, state plainly it measures segment (not session) generalisation, watch seed variance; CNN ≤ baseline on LOSO would itself be a finding.
+*Lead to cross-check, not a citable source. Full answer in the Reviewer 2 conversation of 20 Nov 2026.*
