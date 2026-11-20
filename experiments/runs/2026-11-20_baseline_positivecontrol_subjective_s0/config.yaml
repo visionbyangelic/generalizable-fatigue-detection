@@ -1,0 +1,10 @@
+model: logistic_regression
+C: 1.0
+class_weight: balanced
+features: bandpower_43_amendment1 (re-extracted after injection)
+injection: 'spectral gain on fatigued windows only, valid channels only; full: theta
+  power x2.0, alpha power x1.5; half: theta x1.5, alpha x1.25'
+protocol: session-out
+labels: subjective (Amendment 1)
+cap_seeds: 0-4 (folder named s0; all seeds in metrics.csv)
+git_commit: 98760e5

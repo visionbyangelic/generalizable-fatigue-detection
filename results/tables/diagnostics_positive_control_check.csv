@@ -1,0 +1,5 @@
+variant,band,target_power_gain,target_log10_shift,observed_mean_log10_shift_frontal
+full_strength_theta_x2.0_alpha_x1.5,theta,2.0,0.3010299956639812,0.29219873635641136
+full_strength_theta_x2.0_alpha_x1.5,alpha,1.5,0.17609125905568124,0.18086221377082629
+half_strength_theta_x1.5_alpha_x1.25,theta,1.5,0.17609125905568124,0.17017739477742377
+half_strength_theta_x1.5_alpha_x1.25,alpha,1.25,0.09691001300805642,0.0997818346308911

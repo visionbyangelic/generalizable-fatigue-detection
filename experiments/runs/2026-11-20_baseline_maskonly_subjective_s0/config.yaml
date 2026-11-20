@@ -1,0 +1,9 @@
+model: logistic_regression
+C: 1.0
+class_weight: balanced
+features: 'MASK ONLY: valid_TP9, valid_TP10, both_temporals_masked, n_valid_temporals,
+  n_valid_channels (no EEG features)'
+protocol: session-out
+labels: subjective (Amendment 1)
+cap_seeds: 0-4 (folder named s0; all seeds in metrics.csv)
+git_commit: 98760e5

@@ -1,0 +1,11 @@
+model: logistic_regression
+C: 1.0
+class_weight: balanced
+features: bandpower_43_amendment1
+protocol: random window-level split (diagnostic demo of the leaky protocol - NOT a
+  registered protocol)
+split: StratifiedKFold(5, shuffle, random_state=0) over all 806 windows pooled across
+  sessions/participants
+labels: subjective (Amendment 1)
+cap_seed: 0
+git_commit: 98760e5
