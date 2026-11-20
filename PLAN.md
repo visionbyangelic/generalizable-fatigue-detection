@@ -169,10 +169,12 @@ fatigue-detection-thesis/
 
 **First milestone once access lands:** obtain FatigueSet + complete Week 1 data inspection (`notebooks/01_data_inspection.ipynb` + `docs/dataset_notes.md`).
 
-## 12. Deliverables (from proposal §2.9)
+## 12. Deliverables (from proposal §2.9, authorship clarified 20 Nov 2026)
 
 1. Documented, reproducible preprocessing + label-construction pipeline
 2. Implemented 1D-CNN + classical baseline
 3. Evaluation scripts + participant-level results
 4. Code repository with implementation + experiment documentation
-5. Thesis report + presentation slides
+5. **track.md — the complete build log I writes her paper from** (every step, parameter, error, result)
+6. Thesis report — **written by I herself** in the school format (see docs/school_format.md: 40+ pages, TNR 12, double-spaced, APA 6th; AI content ≤30% per institutional rules). I may supply drafts only as rewrite material.
+7. Presentation slides for the physical defense (Oct–Nov window)

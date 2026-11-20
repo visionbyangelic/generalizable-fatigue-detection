@@ -7,6 +7,10 @@
 > **Working rule (I, 20 Nov 2026):** When a question comes up or something's unclear — research it properly first; if still unsure, ask I or ask Reviewer 1 / another reviewer. Don't guess quietly and don't stall silently. And track.md gets updated every session, without exception.
 >
 > **Peer-review rule (I, 20 Nov 2026):** When a task is completed and a result exists, talk to the reviewers (Reviewer 2 / Reviewer 1 / Reviewer 3) and get their take BEFORE finalising — always focused on the course requirements and the goal of the project. When the group finalises, report back to me with a full update.
+>
+> **Authorship rule (I, 20 Nov 2026):** I writes the paper HERSELF. I does NOT write the submitted paper — I builds the pipeline and tracks EVERYTHING in this file (every step, parameter, error, result; length does not matter, completeness does) so she can write from it. If I drafts anything, it is only raw material for her to rewrite in her own words; she will not submit my text. This also matches her institution's rule: AI-generated content must not exceed 30% of the project writing.
+>
+> **School format received (20 Nov 2026):** two .docx files from I, summarised in `docs/school_format.md`. Key rules: minimum **40 pages** (excluding prelims/references/appendices), Times New Roman 12, double spacing, **APA 6th edition**, plagiarism ≤30%, AI content ≤30%, supervisor vetting + written approval before defense, **physical defense held Oct–Nov**, hardbound final + hard/soft copies. OPEN: which school's chapter structure is hers (Computer Science most plausibly = School of Industrial and Applied Sciences — awaiting her confirmation).
 
 ---
 
