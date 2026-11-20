@@ -12,7 +12,7 @@ from actual runs; run folders follow `experiments/README.md`.
 
 **Decision tree (Reviewer 2, review 6):** within-session separation
 works + across-session fails → the signal is session-specific
-(drift/impedance/quality), which is itself the thesis story, properly
+(drift/impedance/quality), which is itself the project story, properly
 evidenced. Both fail → features/labels carry nothing.
 
 **Falsification criterion (stated before these diagnostics ran):** the
@@ -130,7 +130,7 @@ Random stratified window-level 5-fold (pooled across sessions and
 participants): **BA 0.571, AUC 0.609, MCC 0.141**. Honest session-out:
 0.499 / 0.493 / 0.009. The leakage gap (+0.072 BA, +0.116 AUC, +0.132
 MCC) is real but modest on this dataset — and even the leaky number is
-nowhere near the 0.9+ figures this thesis's RQ1/RQ4 critique targets,
+nowhere near the 0.9+ figures this project's RQ1/RQ4 critique targets,
 because the within-session signal itself is only partial (ceiling 0.744
 with purged time-blocked folds). (`diagnostics_leakage_gap.csv`;
 run `..._baseline_leakygap_...`.)
@@ -218,7 +218,7 @@ is therefore narrow and strong: **for this feature family and this
 evaluation, the early-vs-late spectral differences in FatigueSet are
 session-bound — they do not survive a change of session, and the part
 of the signal that does transfer is indistinguishable from recording-
-quality structure.** That is precisely the failure mode the thesis was
+quality structure.** That is precisely the failure mode the project was
 designed to expose in the preliminary 99.18% result (RQ4), now evidenced
 rather than asserted.
 

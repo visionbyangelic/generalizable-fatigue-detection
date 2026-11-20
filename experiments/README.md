@@ -9,4 +9,4 @@ Each run folder must contain:
 
 Naming: model ∈ {cnn, baseline, multimodal}, protocol ∈ {within, session-out, loso}, labels ∈ {subjective, performance, session}
 
-No result counts for the thesis unless it has a run folder following this convention.
+No result counts for the project unless it has a run folder following this convention.

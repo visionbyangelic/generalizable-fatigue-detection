@@ -1,4 +1,4 @@
-# Thesis Project Plan — Generalizable Fatigue Detection from Wearable Physiological Signals
+# Project Plan — Generalizable Fatigue Detection from Wearable Physiological Signals
 
 **Author:** Angelic Charles — Final-Year Computer Science
 **Question:** Does a fatigue model still work on people it has never seen?
@@ -8,7 +8,7 @@
 
 Many fatigue papers report 95%+ accuracy — but train and test on the *same* people. The model may be learning a person's EEG fingerprint or a recording session's noise, not fatigue.
 
-This thesis tests that directly:
+This project tests that directly:
 - Preliminary result to interrogate: single-participant 1D-CNN on Muse EEG with **session labels** = 99.18% fatigued-class recall. Was that fatigue, or session artefacts?
 - Answer it with proper labels + participant-independent evaluation.
 
@@ -58,7 +58,7 @@ All three run for both models, both primary label sets:
 
 **Metrics:** recall, precision, F1, balanced accuracy. Reported per-participant (all 12) + aggregate. Mean ± variation across **5+ seeds** reported separately from variation across participants.
 
-## 7. Leakage Discipline — The Heart of the Thesis
+## 7. Leakage Discipline — The Heart of the Project
 
 Non-negotiable, applies to every fold:
 - Normalisation parameters fit on **training fold only**
@@ -76,7 +76,7 @@ I directed: **use Google Colab**, with the Google account I already has access t
 
 | Layer | Role | Access needed |
 |---|---|---|
-| **GitHub** (public repo `generalizable-fatigue-detection`) | Home — all code, notebooks, docs, results logs, thesis notes. The reproducible deliverable. | ✅ DONE 20 Nov 2026 — repo created, SSH-key push working |
+| **GitHub** (public repo `generalizable-fatigue-detection`) | Home — all code, notebooks, docs, results logs, project notes. The reproducible deliverable. | ✅ DONE 20 Nov 2026 — repo created, SSH-key push working |
 | **Google Colab** | **The GPU training engine.** Notebooks live in GitHub and open/run in Colab from the browser, using the already-signed-in visonbyangelic@gmail.com account. Dataset reaches Colab from its official Drive link / my Drive — never a public re-upload (no licence to redistribute). | Already signed in — nothing needed from me |
 | **Local VM** (small CPU) | Development, data inspection, preprocessing, classical baseline. | Already available |
 | ~~Kaggle~~ | Not used. Named fallback only if Colab free-tier limits ever block a run. No token needed. | — |
@@ -117,7 +117,7 @@ generalizable-fatigue-detection/
 │   └── runs/                  # One folder per run: config + metrics + notes
 ├── results/
 │   ├── tables/                # Per-participant + aggregate CSVs (in git)
-│   └── figures/               # Plots for thesis (in git)
+│   └── figures/               # Plots for project (in git)
 └── docs/
     ├── label_rules.md         # LOCKED before training — versioned
     ├── dataset_notes.md       # FatigueSet inspection findings (Week 1)
@@ -146,7 +146,7 @@ generalizable-fatigue-detection/
 - [ ] Repeat with 5+ seeds; separate seed variance from participant variance
 - [ ] RQ4: session-label run under identical protocols; compare
 - [ ] Generalisation gap analysis; per-participant tables + figures
-- [ ] Start thesis draft (Methods + Results skeleton)
+- [ ] Start project draft (Methods + Results skeleton)
 
 ### Weeks 5–6 — Multimodal extension (optional, RQ3)
 - [ ] Align E4/Zephyr/eSense signals to EEG windows + labels (only where reliable)
@@ -155,7 +155,7 @@ generalizable-fatigue-detection/
 
 ### Weeks 7–8 — Writing / slides / repo cleanup
 - [ ] Full analysis + discussion + limitations
-- [ ] Thesis report finalised
+- [ ] Project report finalised
 - [ ] Presentation slides
 - [ ] Repo: README reproduction steps verified from a clean clone, results tables/figures final
 
@@ -163,7 +163,7 @@ generalizable-fatigue-detection/
 
 ## 11. Access Checklist — COMPLETE (20 Nov 2026)
 
-- [x] **GitHub:** repo created under Visionbyangelic as `fatigue-detection-thesis`; renamed 20 Nov 2026 to `generalizable-fatigue-detection` and made public; login saved via Secure Vault; pushes via SSH key "Muse — thesis VM"
+- [x] **GitHub:** repo created under Visionbyangelic as `fatigue-detection-project`; renamed 20 Nov 2026 to `generalizable-fatigue-detection` and made public; login saved via Secure Vault; pushes via SSH key "Muse — project VM"
 - [x] **Google Colab:** uses the already-signed-in visonbyangelic@gmail.com account (free tier) — nothing needed from me
 - Kaggle token: **no longer needed** (my Colab decision, 20 Nov 2026)
 
@@ -176,5 +176,5 @@ generalizable-fatigue-detection/
 3. Evaluation scripts + participant-level results
 4. Code repository with implementation + experiment documentation
 5. **track.md — the complete build log I write my paper from** (every step, parameter, error, result)
-6. Thesis report — **written by me** in the school format (see docs/school_format.md: 40+ pages, TNR 12, double-spaced, APA 6th; AI content ≤30% per institutional rules). Any drafts produced along the way are only rewrite material.
+6. Project report — **written by me** in the school format (see docs/school_format.md: 40+ pages, TNR 12, double-spaced, APA 6th; AI content ≤30% per institutional rules). Any drafts produced along the way are only rewrite material.
 7. Presentation slides for the physical defense (Oct–Nov window)

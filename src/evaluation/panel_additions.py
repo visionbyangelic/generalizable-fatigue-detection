@@ -371,7 +371,7 @@ participants, stratified 5-fold): balanced accuracy
 {oof['balanced_accuracy']:.3f}, ROC-AUC {oof['roc_auc']:.3f}, MCC
 {oof['mcc']:.3f}. Honest session-out on the same seed: 0.499 / 0.493 /
 0.009. The gap between these numbers is what the split discipline is
-worth; the leaky number is the kind of figure the thesis's RQ1/RQ4
+worth; the leaky number is the kind of figure the project's RQ1/RQ4
 argue is uninterpretable as fatigue detection.
 
 Leakage checklist (for the honest pipeline this demo contrasts with):

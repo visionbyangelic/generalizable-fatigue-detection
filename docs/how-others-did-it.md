@@ -21,7 +21,7 @@
 2. **Block inheritance** (Shuchih-Negi): windows inherit their measurement block's rating — no interpolation assumptions, but coarse (3 distinct values/session) and block = phase-confounded.
 3. **Linear interpolation** (MSARNet): smooth continuous targets — but interpolation uses *future* ratings to label earlier windows (look-ahead; see §6).
 
-> **DOI correction:** the FatigueSense DOI recorded in `fatigueset-research.md`/`literature.md` (10.1145/3797885, from the ACM listing) conflicts with the DOI given by rs2lab's README and secondary indexes (**10.1145/3709363**). Verify against ACM before the thesis bibliography is finalised.
+> **DOI correction:** the FatigueSense DOI recorded in `fatigueset-research.md`/`literature.md` (10.1145/3797885, from the ACM listing) conflicts with the DOI given by rs2lab's README and secondary indexes (**10.1145/3709363**). Verify against ACM before the project bibliography is finalised.
 >
 > **The gap, stated plainly:** no published FatigueSet pipeline found uses LOSO or any subject-wise split, and none models the EEG specifically. Our design is not a replication of any of these — it is the evaluation they all skipped.
 
@@ -95,7 +95,7 @@ Keeping 256 Hz is the most common choice. Downsampling to 128 Hz is the most com
 No well-sourced 1 s raw-CNN *fatigue* LOSO result exists.
 
 ### CNNs on Muse S raw EEG — the cupboard is nearly bare
-**No peer-reviewed Muse/Muse S raw-EEG *fatigue* CNN was found** (supports the thesis's novelty, subject to a formal database search before claiming "first"). Closest recipe: a DecNef neurofeedback project page (non-peer-reviewed) — Muse S, **TP9+TP10 only** (AF7/AF8 amplitudes too low in their data), **4 s windows = 2 ch × 1,024 samples @256 Hz**, per-channel normalisation with **training-set-only mean/SD**, EEGNet with kernel kept at 1×64 (violating the fs/2 rule — a decision to make explicitly, not inherit silently). Motor-vs-rest AUC 0.904. Krigolson et al. 2021 (n=1,000, Muse) found a linear combination of ERP+EEG features predicted perceived fatigue — classical, no CNN, no LOSO accuracy.
+**No peer-reviewed Muse/Muse S raw-EEG *fatigue* CNN was found** (supports the project's novelty, subject to a formal database search before claiming "first"). Closest recipe: a DecNef neurofeedback project page (non-peer-reviewed) — Muse S, **TP9+TP10 only** (AF7/AF8 amplitudes too low in their data), **4 s windows = 2 ch × 1,024 samples @256 Hz**, per-channel normalisation with **training-set-only mean/SD**, EEGNet with kernel kept at 1×64 (violating the fs/2 rule — a decision to make explicitly, not inherit silently). Motor-vs-rest AUC 0.904. Krigolson et al. 2021 (n=1,000, Muse) found a linear combination of ERP+EEG features predicted perceived fatigue — classical, no CNN, no LOSO accuracy.
 
 ---
 
@@ -214,7 +214,7 @@ Each default is tied to the sources above and checked against PLAN.md §7 leakag
 3. **Performance Δ-vs-M1 labels use held-out-subject data (their M1 block)** — defensible under §7's "estimable without held-out labels" clause because block identity is protocol metadata, but it must be argued explicitly in `label_rules.md`, not assumed. (Labels #2)
 4. **No conflict, but a correction:** FatigueSense's DOI is likely **10.1145/3709363**, not the 10.1145/3797885 recorded earlier — verify before citing. (§1)
 5. **No conflict, but a scope note:** PLAN §5 says the baseline classifier is picked "via training-only validation, then frozen" — the literature supports pre-registering LR as primary *now* (Lan comparability) and treating SVM/RF as secondaries, which satisfies §5/§7 without any test-informed choice. (§6, Baseline)
-6. **FatigueSense's split strategy is unverifiable** — do not claim in the thesis that FatigueSense did or did not use subject-wise splits; claim only that no subject-wise FatigueSet evaluation was *found in verifiable sources* (FATE excepted). (§1)
+6. **FatigueSense's split strategy is unverifiable** — do not claim in the project that FatigueSense did or did not use subject-wise splits; claim only that no subject-wise FatigueSet evaluation was *found in verifiable sources* (FATE excepted). (§1)
 
 ---
 

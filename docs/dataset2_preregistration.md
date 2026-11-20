@@ -16,7 +16,7 @@ Leave-one-participant-out balanced accuracy of the locked band-power + logistic-
 - EEGNet: kernel lengths scaled by the sampling-rate ratio (512/128) by rule, never tuned. Same declared V1/V2 sensitivities, same seed count, run once.
 
 ## Pre-declared outcome table (claims fixed in advance — Reviewer 1, review 14)
-| DROZY LOPO result | What the thesis may say |
+| DROZY LOPO result | What the project may say |
 |---|---|
 | Clearly above FatigueSet, CI excludes 0.50, positive control recovered | Transfer is achievable under a strong manipulation + clean hardware; the Muse null is not a generic evaluation limit. Attribution only via the label/channel ablations. |
 | Above chance with RT labels, at chance with KSS labels | Label-construction effect (same EEG, same hardware — only the labels differ). |
@@ -24,7 +24,7 @@ Leave-one-participant-out balanced accuracy of the locked band-power + logistic-
 | High only under random-window splits | The leakage gap replicated on independent data. |
 
 ## Scope guardrails
-One secondary dataset only. No DROZY-specific tuning. SEED-VIG is a separate audit project (not this thesis). STEW is excluded (workload construct; no repeated sessions). Timeline: DROZY work slots into Weeks 3–4 alongside the FatigueSet CNN LOSO; if anything slips, the multimodal extension (RQ3) is cut first, as already planned.
+One secondary dataset only. No DROZY-specific tuning. SEED-VIG is a separate audit project (not this project). STEW is excluded (workload construct; no repeated sessions). Timeline: DROZY work slots into Weeks 3–4 alongside the FatigueSet CNN LOSO; if anything slips, the multimodal extension (RQ3) is cut first, as already planned.
 
 ## Code freeze (recorded before DROZY download)
 
