@@ -1,0 +1,10 @@
+combo,basis,se,delta_min_90pct_power,definition
+kss_all,perm_null_swap_A_participant_mean_statistic,0.03736118076853171,0.1093339533988156,SD of the LOPO participant-mean BA under 200 within-participant session-label swaps (rng 20000+p)
+kss_all,analytical_participant_N13_from_null,0.027934629898655427,0.08174804598588127,mean per-participant BA SD across the swap_A permutations / sqrt(13)
+kss_all,perm_null_swap_B_participant_mean_statistic,0.04109913154709015,0.12027271196648374,SD of the LOPO participant-mean BA under 100 within-participant session-label swaps (rng 30000+p)
+kss_fz,perm_null_swap_A_participant_mean_statistic,0.04165797748371565,0.12190812161722994,SD of the LOPO participant-mean BA under 200 within-participant session-label swaps (rng 20000+p)
+kss_fz,analytical_participant_N13_from_null,0.029346053950964332,0.0858784446613719,mean per-participant BA SD across the swap_A permutations / sqrt(13)
+rt_all,perm_null_swap_A_participant_mean_statistic,0.029333262204663146,0.08584101082857502,SD of the LOPO participant-mean BA under 200 within-participant session-label swaps (rng 20000+p)
+rt_all,analytical_participant_N13_from_null,0.022798358637491387,0.06671723509714247,mean per-participant BA SD across the swap_A permutations / sqrt(13)
+rt_fz,perm_null_swap_A_participant_mean_statistic,0.03771342106625486,0.11036475123507898,SD of the LOPO participant-mean BA under 200 within-participant session-label swaps (rng 20000+p)
+rt_fz,analytical_participant_N13_from_null,0.027032582587493737,0.07910829005062059,mean per-participant BA SD across the swap_A permutations / sqrt(13)
