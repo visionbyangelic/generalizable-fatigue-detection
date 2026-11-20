@@ -5,6 +5,8 @@
 > Format per day: **Done / Errors & issues / Results / What's left**
 >
 > **Working rule (I, 20 Nov 2026):** When a question comes up or something's unclear — research it properly first; if still unsure, ask I or ask Reviewer 1 / another reviewer. Don't guess quietly and don't stall silently. And track.md gets updated every session, without exception.
+>
+> **Peer-review rule (I, 20 Nov 2026):** When a task is completed and a result exists, talk to the reviewers (Reviewer 2 / Reviewer 1 / Reviewer 3) and get their take BEFORE finalising — always focused on the course requirements and the goal of the project. When the group finalises, report back to me with a full update.
 
 ---
 
