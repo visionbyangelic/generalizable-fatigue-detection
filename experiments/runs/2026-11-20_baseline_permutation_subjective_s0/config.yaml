@@ -1,0 +1,11 @@
+model: logistic_regression
+C: 1.0
+class_weight: balanced
+features: bandpower_43_amendment1
+protocol: session-out with within-session label permutation
+labels: subjective (Amendment 1 windows), permuted
+cap_seed: 0
+n_permutations: 200
+permutation_rng: default_rng(10000 + permutation_index)
+aggregate: mean over valid held-out sessions (same as the baseline AGGREGATE row)
+git_commit: '6813232'

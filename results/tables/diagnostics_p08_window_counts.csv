@@ -1,0 +1,4 @@
+participant,session,n_alert_capped_s0,n_fatigued_capped_s0,n_alert_uncapped,n_fatigued_uncapped
+P08,S01,5,26,5,26
+P08,S02,27,27,33,27
+P08,S03,21,21,29,21

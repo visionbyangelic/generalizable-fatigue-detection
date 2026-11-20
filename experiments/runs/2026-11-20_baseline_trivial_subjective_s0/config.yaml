@@ -1,0 +1,8 @@
+model: logistic_regression
+C: 1.0
+class_weight: balanced
+features: 'variants: window_index_only / delta_logpower_only / full_43_features'
+protocol: session-out
+labels: subjective (Amendment 1)
+cap_seeds: 0-4 (folder named s0; all seeds in metrics.csv)
+git_commit: '6813232'

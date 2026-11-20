@@ -1,0 +1,12 @@
+model: logistic_regression
+C: 1.0
+class_weight: balanced
+features: bandpower_43_amendment1
+protocol: within-session time-blocked diagnostic (NOT a registered protocol - Reviewer 2
+  review 6)
+labels: subjective (Amendment 1 windows)
+cap_seed: 0
+split: per class 3 contiguous time chunks; fold k tests chunk k of both classes; 2-window
+  purge at chunk boundaries
+eligibility: both classes and >=20 windows/class (capped)
+git_commit: '6813232'
