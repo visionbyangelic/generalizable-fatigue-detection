@@ -7,13 +7,13 @@ Sources: `~/workspace/user/files/SCHOOLS_PROJECT_FORMATS_Office.docx` and `~/wor
 - **Font:** Times New Roman, 12 pt. **Spacing:** double line. Standard institutional margins. Headings consistent.
 - **Referencing:** APA, 6th edition, strictly.
 - **Plagiarism:** must not exceed 30% on approved detection tools.
-- **AI-generated content:** must not exceed 30% of the project writing; the submitted work must reflect the student's own intellectual effort. → This is why **I writes the paper herself**; my role is the build + complete tracking in track.md (+ optional drafts purely as material for her to rewrite in her own words — she will not submit my text).
+- **AI-generated content:** must not exceed 30% of the project writing; the submitted work must reflect the student's own intellectual effort. → This is why **I write the paper myself**; the build work and complete tracking live in track.md, and any draft produced along the way is purely material for me to rewrite in my own words — I will not submit text I didn't write.
 - **Supervisor:** work goes to the assigned supervisor for vetting/proofreading; **no defense without the supervisor's written approval**; final submission needs supervisor signature; hard + soft copies.
 - **Defense:** physical, in-person, held annually **October–November**.
 - Content must be thoroughly developed — superficial treatment risks rejection/revision.
 - Final binding: hardbound.
 
-## Chapter structure — WHICH SCHOOL? (to confirm with I)
+## Chapter structure — WHICH SCHOOL? (to confirm)
 The formats doc gives per-school structures. Computer Science in this institution most plausibly sits in the **School of Industrial and Applied Sciences** (structure B below) — but this is NOT confirmed. I to confirm her school; until then, track material so it can feed either structure.
 
 ### A. School of Engineering Technology
@@ -37,4 +37,4 @@ Prelims: same as Engineering (may include List of Equations)
 (Other schools in the doc — Communication Arts, Business Management Technology, Hospitality Management — do not fit Computer Science and are not reproduced here; full text is in the source .docx files.)
 
 ## What this means for track.md
-I writes from track.md, so it must contain EVERYTHING in her own-words-ready form: every step taken, every parameter and why, every error and fix, every number/result with its file, and enough methodological detail to write Chapters 3–4 (design, procedures, testing, results) without coming back to ask. Length is explicitly not a concern — completeness is.
+I write from track.md, so it must contain EVERYTHING in my own-words-ready form: every step taken, every parameter and why, every error and fix, every number/result with its file, and enough methodological detail to write Chapters 3–4 (design, procedures, testing, results) without needing to ask anyone. Length is explicitly not a concern — completeness is.

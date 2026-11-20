@@ -777,7 +777,7 @@ def gate():
               f"""# Feasibility-gate INPUTS - NO VERDICT DECLARED
 
 docs/decision_table_lock.md section 2: the equivalence bound Delta is
-my to confirm (candidate value 0.05). This run supplies ONLY
+mine to confirm (candidate value 0.05). This run supplies ONLY
 the gate's inputs - standard errors of the headline statistics from
 label-free sources - and the conditional table: IF a given Delta were
 locked, WOULD equivalence be testable at ~90% power (N as stated)?

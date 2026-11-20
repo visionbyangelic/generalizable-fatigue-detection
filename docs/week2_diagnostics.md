@@ -373,7 +373,7 @@ Per-participant values are in `baseline_loso_subjective*_a1_summary.csv`
   `..._positivecontrol-hetero_...`.)
 
 ### 15. Feasibility-gate inputs — NO verdict declared
-Per the lock doc §2, Δ is my to confirm; this section supplies
+Per the lock doc §2, Δ is mine to confirm; this section supplies
 only the gate's inputs (SEs from label-free sources; Δ_min = (z.95 +
 z.90)·SE = 2.9265·SE for ~90% power, one-sided α = 0.05, true effect 0):
 | SE basis | SE | Δ_min |

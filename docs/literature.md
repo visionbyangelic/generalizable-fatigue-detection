@@ -1,6 +1,6 @@
 # Literature Notes — Generalizable Fatigue Detection from Wearable Physiological Signals
 
-**Thesis:** I Charles — *Does a fatigue model still work on people it has never seen?*
+**Thesis:** Angelic Charles — *Does a fatigue model still work on people it has never seen?*
 **Compiled:** 20 Nov 2026
 **Method note:** Every summary below is drawn from a source actually opened/read during this review (abstract, full text, or author PDF, as noted). No findings or numbers are reported that were not verified in the source. Where full text was paywalled, this is stated and the summary uses the abstract/author manuscript only. Preprints are flagged **PREPRINT**.
 

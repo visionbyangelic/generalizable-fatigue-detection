@@ -1,8 +1,8 @@
 # Thesis Project Plan — Generalizable Fatigue Detection from Wearable Physiological Signals
 
-**Author:** I Charles — Final-Year Computer Science
+**Author:** Angelic Charles — Final-Year Computer Science
 **Question:** Does a fatigue model still work on people it has never seen?
-**Proposal source:** `~/workspace/user/files/I_Charles_Revised_Thesis_Proposal.pdf` (read 20 Nov 2026)
+**Proposal source:** `~/workspace/user/files/Angelic_Charles_Revised_Thesis_Proposal.pdf` (read 20 Nov 2026)
 
 ## 1. Core Idea
 
@@ -77,8 +77,8 @@ I directed: **use Google Colab**, with the Google account I already has access t
 | Layer | Role | Access needed |
 |---|---|---|
 | **GitHub** (private repo `fatigue-detection-thesis`) | Home — all code, notebooks, docs, results logs, thesis notes. The reproducible deliverable. | ✅ DONE 20 Nov 2026 — repo created, SSH-key push working |
-| **Google Colab** | **The GPU training engine.** Notebooks live in GitHub, open/run in Colab; I drives Colab in the browser using the already-signed-in visonbyangelic@gmail.com account. Dataset reaches Colab from its official Drive link / my Drive — never a public re-upload (no licence to redistribute). | Already signed in — nothing needed from I |
-| **my VM** (small CPU) | Development, data inspection, preprocessing, classical baseline. | Already available |
+| **Google Colab** | **The GPU training engine.** Notebooks live in GitHub and open/run in Colab from the browser, using the already-signed-in visonbyangelic@gmail.com account. Dataset reaches Colab from its official Drive link / my Drive — never a public re-upload (no licence to redistribute). | Already signed in — nothing needed from me |
+| **Local VM** (small CPU) | Development, data inspection, preprocessing, classical baseline. | Already available |
 | ~~Kaggle~~ | Not used. Named fallback only if Colab free-tier limits ever block a run. No token needed. | — |
 
 Flow: develop locally → push to GitHub → run heavy CNN in Colab (notebook pulled from GitHub, data pulled from the official source) → results (CSV + logs + plots) committed back to GitHub.
@@ -164,7 +164,7 @@ fatigue-detection-thesis/
 ## 11. Access Checklist — COMPLETE (20 Nov 2026)
 
 - [x] **GitHub:** repo `fatigue-detection-thesis` created under Visionbyangelic (private); login saved via Secure Vault; pushes via SSH key "Muse — thesis VM"
-- [x] **Google Colab:** I uses the already-signed-in visonbyangelic@gmail.com account (free tier) — nothing needed from I
+- [x] **Google Colab:** uses the already-signed-in visonbyangelic@gmail.com account (free tier) — nothing needed from me
 - Kaggle token: **no longer needed** (my Colab decision, 20 Nov 2026)
 
 **First milestone once access lands:** obtain FatigueSet + complete Week 1 data inspection (`notebooks/01_data_inspection.ipynb` + `docs/dataset_notes.md`).
@@ -175,6 +175,6 @@ fatigue-detection-thesis/
 2. Implemented 1D-CNN + classical baseline
 3. Evaluation scripts + participant-level results
 4. Code repository with implementation + experiment documentation
-5. **track.md — the complete build log I writes her paper from** (every step, parameter, error, result)
-6. Thesis report — **written by I herself** in the school format (see docs/school_format.md: 40+ pages, TNR 12, double-spaced, APA 6th; AI content ≤30% per institutional rules). I may supply drafts only as rewrite material.
+5. **track.md — the complete build log I write my paper from** (every step, parameter, error, result)
+6. Thesis report — **written by me** in the school format (see docs/school_format.md: 40+ pages, TNR 12, double-spaced, APA 6th; AI content ≤30% per institutional rules). Any drafts produced along the way are only rewrite material.
 7. Presentation slides for the physical defense (Oct–Nov window)
