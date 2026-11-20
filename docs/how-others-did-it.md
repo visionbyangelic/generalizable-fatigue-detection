@@ -235,3 +235,18 @@ Each default is tied to the sources above and checked against PLAN.md §7 leakag
 - FACED gap benchmark: https://www.mdpi.com/2079-3197/14/10/230
 - Wang et al. 2024, cross-subject degradation: https://arxiv.org/abs/2410.03057
 - Plus the full source lists in the three research passes summarised here and in `literature.md` §§D–E.
+
+---
+
+## Addendum (20 Nov 2026) — Reviewer 2 peer review of the §6 recommended defaults
+
+Per my peer-review rule, Reviewer 2 reviewed the defaults above before finalisation. Verdict: pipeline is solid on leakage; **label construction is the weakest part and the highest defence risk.** Points adopted into the working defaults (full text in docs/methods_notes.md):
+
+1. **Subjective/block labels:** M1-vs-M3 confounds fatigue with time-on-task and dry-electrode impedance drift. ADOPTED: primary analysis only includes sessions where the participant actually reported a fatigue increase (Δrating > 0); add a low-fatigue-session negative control (if the model separates M1/M3 there too, it's learning drift); report M1-vs-M2 and M2-vs-M3 as sensitivity analyses.
+2. **Performance labels under LOSO:** using the held-out subject's own M1 to define their labels is a form of test-subject information use. ADOPTED framing: distinguish **Zero-Calibration LOSO** (thresholds from training subjects only — the strict primary) from **Baseline-Calibrated LOSO** (subject's own M1 allowed — clearly labelled variant). Simple deltas are noisy/regression-to-the-mean prone; a residualised variant is noted.
+3. **Artefact rejection:** ±100 µV is a wet-cap norm; ADOPTED ±75 µV (peak-to-peak, 1-s sub-windows) + flatline check (std < 0.5 µV); add an ocular sanity check correlating predictions with blink events (Muse provides them) since AF7/AF8 pick up blinks and blink rate changes with fatigue.
+4. **PSD:** Welch 2-s sub-windows give only 0.5 Hz resolution. ADOPTED: single 4-s Hann window per epoch (Δf = 0.25 Hz) for the baseline.
+5. **CNN validation:** random window-level validation inside training subjects is optimistic. ADOPTED: subject-grouped validation (hold out 2–3 training subjects) for early stopping/tuning. EEGNet-4,2 + dropout 0.5 added as a pre-registered capacity variant alongside 8,2.
+6. **Metrics:** ADOPTED: add ROC-AUC and MCC; report per-block (M1 vs M3) window rejection rates so class-balance skew is auditable.
+
+These amendments feed docs/label_rules.md and the Week 2 configs; they do not silently rewrite §6 — the original defaults and this review both stay on record.
