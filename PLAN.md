@@ -76,7 +76,7 @@ I directed: **use Google Colab**, with the Google account I already has access t
 
 | Layer | Role | Access needed |
 |---|---|---|
-| **GitHub** (private repo `fatigue-detection-thesis`) | Home — all code, notebooks, docs, results logs, thesis notes. The reproducible deliverable. | ✅ DONE 20 Nov 2026 — repo created, SSH-key push working |
+| **GitHub** (public repo `generalizable-fatigue-detection`) | Home — all code, notebooks, docs, results logs, thesis notes. The reproducible deliverable. | ✅ DONE 20 Nov 2026 — repo created, SSH-key push working |
 | **Google Colab** | **The GPU training engine.** Notebooks live in GitHub and open/run in Colab from the browser, using the already-signed-in visonbyangelic@gmail.com account. Dataset reaches Colab from its official Drive link / my Drive — never a public re-upload (no licence to redistribute). | Already signed in — nothing needed from me |
 | **Local VM** (small CPU) | Development, data inspection, preprocessing, classical baseline. | Already available |
 | ~~Kaggle~~ | Not used. Named fallback only if Colab free-tier limits ever block a run. No token needed. | — |
@@ -88,7 +88,7 @@ Flow: develop locally → push to GitHub → run heavy CNN in Colab (notebook pu
 ## 9. Repo Structure
 
 ```
-fatigue-detection-thesis/
+generalizable-fatigue-detection/
 ├── README.md                  # How to reproduce — entry point for examiners
 ├── PLAN.md                    # This plan (also kept in local workspace)
 ├── .gitignore                 # data/, checkpoints, secrets excluded
@@ -163,7 +163,7 @@ fatigue-detection-thesis/
 
 ## 11. Access Checklist — COMPLETE (20 Nov 2026)
 
-- [x] **GitHub:** repo `fatigue-detection-thesis` created under Visionbyangelic (private); login saved via Secure Vault; pushes via SSH key "Muse — thesis VM"
+- [x] **GitHub:** repo created under Visionbyangelic as `fatigue-detection-thesis`; renamed 20 Nov 2026 to `generalizable-fatigue-detection` and made public; login saved via Secure Vault; pushes via SSH key "Muse — thesis VM"
 - [x] **Google Colab:** uses the already-signed-in visonbyangelic@gmail.com account (free tier) — nothing needed from me
 - Kaggle token: **no longer needed** (my Colab decision, 20 Nov 2026)
 
