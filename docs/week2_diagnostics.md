@@ -514,3 +514,168 @@ equivalence stated in §10 must NOT be cited as null support
 4. §10's equivalence-at-0.58 statement is superseded by the
    conclusion above (review 11); the §10 text is retained
    unedited for audit, as is the stopped CNN run.
+
+---
+
+## 18. Pre-declared precision variants V1 / V2 — SENSITIVITIES, estimates only (20 Nov 2026)
+
+Declared in advance in track.md (20 Nov 2026) and the lock doc's
+status note, after I confirmed Δ = 0.05 ("confirm the 55% line
+and try to make it better"), with "better" scoped before any run to
+*measuring more precisely under the same honest rules* — the line
+does not move and no result below changes the primary (P) result or
+the estimation-only standing of the equivalence claim. **Reporting
+status is now settled by the lead reviewer's ruling (Reviewer 1,
+review 12; lock §6): the gate governs, the primary stays
+estimation-only, and a variant could earn the prescribed sensitivity
+sentence only if it BOTH attained its gate at Δ = 0.05 AND cleared
+0.55. No variant below does either completely** — every variant's
+Δ_min exceeds 0.05 on every basis (V1 0.081–0.092; V2 0.102–0.118),
+and the only sub-0.55 upper bound (V1-P session-out, 0.533) belongs
+to a variant whose gate is unattained. The variant results therefore
+stand as reported estimates under R2/R3, and Week 2's equivalence
+business is closed. Code:
+`src/evaluation/precision_variants.py`. All runs are single
+deterministic passes (no cap, no subsampling; LR deterministic;
+folder suffix s0 denotes that pass). CIs: bootstrap over units
+(10,000 resamples, rng 42) — session-level for session-out,
+participant-level for LOPO. Gate permutations: one common set of 200
+circular shifts (rng 60000+p) reused across all feature sets and
+protocols, so null SDs are paired across variants.
+
+### V1 — uncapped pool + class weighting
+Full Amendment-1 retained pool (1,053 windows: 564 alert /
+489 fatigued), NO per-session M1 cap; imbalance handled by
+training-fold balanced class weights (sklearn `class_weight=
+'balanced'`: w_c = n_train / (2 · n_c), fit inside each training
+fold — the same Pipeline as the primary). Stated design difference
+vs the capped primary: single-class sessions, which the cap reduced
+to zero windows, contribute their windows to TRAINING pools here
+(they still cannot be test folds: session-out has the same 20
+both-class test sessions; LOPO the same 11 both-class participants,
+with P05's 5 alert windows now present in other folds' training
+data instead of absent entirely).
+
+| Feature set | Protocol | BA [95% CI] | Macro-F1 [CI] | AUC [CI] | MCC [CI] |
+|---|---|---|---|---|---|
+| P (43) | session-out (20 sess) | 0.495 [0.451, 0.533] | 0.398 [0.352, 0.442] | 0.545 [0.456, 0.639] | −0.004 [−0.097, 0.078] |
+| P (43) | LOPO (11 part) | 0.503 [0.445, 0.552] | 0.407 [0.344, 0.469] | 0.552 [0.454, 0.653] | 0.005 [−0.116, 0.110] |
+| F (20) | session-out (20 sess) | 0.550 [0.509, 0.605] | 0.450 [0.400, 0.513] | 0.601 [0.523, 0.683] | 0.100 [0.021, 0.201] |
+| F (20) | LOPO (11 part) | 0.547 [0.503, 0.596] | 0.449 [0.395, 0.517] | 0.606 [0.538, 0.674] | 0.100 [0.012, 0.201] |
+
+Against the capped primaries (P session-out 0.515, CI [0.468, 0.555]
+from §10's table; P LOPO 0.508 [0.471, 0.542]; F session-out 0.553;
+F LOPO 0.544 [0.500, 0.589]): V1-P point estimates sit slightly
+BELOW the capped ones (0.495 / 0.503), with a marginally narrower
+session-out interval (width 0.082 vs 0.087) but a WIDER LOPO
+interval (0.107 vs 0.071) — restoring the discarded alert windows
+did not tighten the participant-level estimate, because that
+interval is driven by between-participant spread, not window count.
+V1-F is numerically almost identical to capped F. Per-participant
+LOPO values are in the summary tables; the widest single value is
+P04 under P features (BA 0.284), against 0.725 for the same
+participant under F — reported as an observation, not interpreted
+here. (`baseline_{session-out,loso}_subjective_V1uncapped(_frontal)
+_summary.csv`; runs `2026-11-20_baseline_{session-out,loso}
+_subjective_V1uncapped(-frontal)_s0`.)
+
+### V2 — within-session-normalised features (P, 43)
+Each continuous feature (40 of 43) centred/scaled per session with
+that session's own windows (nanmean / nanstd, ddof=0; labels never
+used); indicator features unchanged; Pipeline imputation/scaling
+still training-fold only, on top. **Transductivity, stated as
+required wherever V2 is reported: the normalisation uses each
+session's own unlabelled windows — for a test session, that
+session's own windows are included in its normalisation statistics —
+so V2 is transductive at session level by design** (Reviewer 2
+review 10 declared sensitivity). Guards fired as documented
+in the code: of 30 sessions × 40 continuous features = 1,200
+(session, feature) pairs, 224 were all-NaN in their session (left
+NaN; training-fold imputation downstream — these are temporal
+features in sessions where the channel was masked in every window)
+and 96 had SD 0 or undefined (centred only).
+
+| Protocol | BA [95% CI] | Macro-F1 [CI] | AUC [CI] | MCC [CI] |
+|---|---|---|---|---|
+| session-out (20 sess) | 0.583 [0.498, 0.665] | 0.525 [0.442, 0.610] | 0.627 [0.523, 0.726] | 0.152 [−0.003, 0.307] |
+| LOPO (11 part) | 0.556 [0.480, 0.613] | 0.503 [0.429, 0.567] | 0.596 [0.489, 0.701] | 0.099 [−0.046, 0.205] |
+
+V2's point estimates are the highest in this document (session-out
++0.088 over V1-P; LOPO +0.053) and its intervals are also the widest
+(session-out width 0.167; LOPO 0.133) — and its permutation null SDs
+are the largest of any feature set below (Δ_min 0.102–0.118), i.e.
+the same normalisation that lifts the point estimate also widens
+the null distribution of the statistic. All three facts are inputs
+for the ruling; none is interpreted here. (`baseline_{session-out,
+loso}_subjective_V2sessnorm_summary.csv`; runs `..._V2sessnorm_s0`.)
+
+### V2 mask-only arm (Reviewer 1 ruling R3)
+The 5 indicator/coverage features of §7's mask-only set (valid_TP9,
+valid_TP10, both_temporals_masked, n_valid_temporals,
+n_valid_channels), built from the index, NOT session-normalised
+(indicators/coverage are not continuous EEG features), on the same
+uncapped pool and V2 protocols — so any V2 change can be attributed
+between EEG features and the mask shortcut:
+
+| Protocol | BA [95% CI] | Macro-F1 [CI] | AUC [CI] | MCC [CI] |
+|---|---|---|---|---|
+| session-out (20 sess) | 0.532 [0.477, 0.595] | 0.414 [0.325, 0.506] | 0.537 [0.480, 0.601] | 0.040 [−0.091, 0.181] |
+| LOPO (11 part) | 0.544 [0.499, 0.593] | 0.418 [0.310, 0.521] | 0.509 [0.451, 0.561] | 0.080 [−0.036, 0.197] |
+
+Attribution inputs (estimates only): under the same pool and
+protocols, the mask-only arm sits at 0.532 / 0.544 against the V2
+EEG arm's 0.583 / 0.556 — a point-estimate separation of +0.051
+(session-out) and +0.012 (LOPO), with intervals overlapping
+throughout; the mask-only arm is itself close to its capped §7
+value (0.530, session-out). Two LOPO folds of the mask-only arm
+(P06, P07) score exactly 0.500 with MCC 0: within those
+participants' retained windows the mask features carry no
+class-varying prediction (single-class predictions). (`baseline_
+{session-out,loso}_subjective_V2sessnorm_maskonly_summary.csv`;
+runs `..._V2sessnorm-maskonly_s0`.)
+
+### Gate inputs per variant (NO verdict)
+Circular-shift permutation null SDs (n = 200, common set) and
+Δ_min = 2.9265 · SD (lock §2 formula), beside the observed BA
+interval and the confirmed SESOI line (upper bound 0.55). These are
+inputs for the lead reviewer's ruling; nothing here applies the
+tier table.
+
+| Variant | Basis (statistic / folds) | Null SD | Δ_min | Observed BA [CI] | CI upper vs 0.55 |
+|---|---|---|---|---|---|
+| V1 P | session-mean / session-out | 0.0295 | 0.086 | 0.495 [0.451, 0.533] | 0.533 — below |
+| V1 P | participant-mean / session-out | 0.0314 | 0.092 | 0.495 [0.451, 0.533] | 0.533 — below |
+| V1 P | participant-mean / LOPO | 0.0307 | 0.090 | 0.503 [0.445, 0.552] | 0.552 — above by 0.002 |
+| V1 F | session-mean / session-out | 0.0275 | 0.081 | 0.550 [0.509, 0.605] | 0.605 — above |
+| V1 F | participant-mean / session-out | 0.0305 | 0.089 | 0.550 [0.509, 0.605] | 0.605 — above |
+| V1 F | participant-mean / LOPO | 0.0287 | 0.084 | 0.547 [0.503, 0.596] | 0.596 — above |
+| V2 P | session-mean / session-out | 0.0396 | 0.116 | 0.583 [0.498, 0.665] | 0.665 — above |
+| V2 P | participant-mean / session-out | 0.0404 | 0.118 | 0.583 [0.498, 0.665] | 0.665 — above |
+| V2 P | participant-mean / LOPO | 0.0348 | 0.102 | 0.556 [0.480, 0.613] | 0.613 — above |
+| V2 mask | session-mean / session-out | 0.0232 | 0.068 | 0.532 [0.477, 0.595] | 0.595 — above |
+| V2 mask | participant-mean / session-out | 0.0204 | 0.060 | 0.532 [0.477, 0.595] | 0.595 — above |
+| V2 mask | participant-mean / LOPO | 0.0324 | 0.095 | 0.544 [0.499, 0.593] | 0.593 — above |
+
+For reference, the capped primary's gate inputs (§15) were Δ_min
+0.093–0.100 on the permutation bases. V1's permutation Δ_min values
+(0.081–0.092) are slightly smaller than the capped ones; V2's
+(0.102–0.118) are larger; every variant's Δ_min on every basis
+remains above the confirmed Δ = 0.05. Full table:
+`variants_gate_inputs.csv`; per-permutation statistics:
+`variants_gate_permutation_nulls.csv`; run folders
+`2026-11-20_baseline_gate-inputs_subjective_{V1uncapped,
+V1uncapped-frontal,V2sessnorm,V2sessnorm-maskonly}_s0`.
+
+### Problems encountered in the variant runs (documented)
+1. **Summary-CSV CI columns dropped on first write.** The first
+   version of the summary writer assigned the aggregate row with
+   `.loc`, which silently discarded the CI columns (they are not
+   among the per-unit columns). The point estimates were unaffected
+   and the CIs existed in the gate table; the writer was fixed
+   (row concatenation instead of `.loc` assignment) and all eight
+   summary tables were regenerated from the stored run metrics —
+   the regenerated CIs reproduce the originals exactly (bootstrap
+   rng 42), so no analysis was re-run and no number changed.
+2. No other problems: all folds, guards and skips behaved as
+   documented above; every skipped fold is listed in its run's
+   notes.md.

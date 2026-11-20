@@ -1,0 +1,10 @@
+model: logistic_regression (permutation reruns)
+variant: V1
+permutations: circular shifts within session x200 (rng 60000+p), one common set reused
+  across feature sets and protocols
+power_formula: delta_min = (z_0.95 + z_0.90) * SD = 2.9265 * SD (lock doc section
+  2)
+labels: subjective (Amendment 1)
+data: windows_a1_uncapped FULL retained pool, no cap
+status: gate INPUTS only - no verdict declared
+git_commit: f450634

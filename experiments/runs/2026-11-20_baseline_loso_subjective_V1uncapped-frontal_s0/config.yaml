@@ -1,0 +1,18 @@
+model: logistic_regression
+C: 1.0
+class_weight: 'balanced: w_c = n_train / (2 * n_c), computed on the training fold
+  only'
+features: 'FRONTAL-ONLY (F): 20 features = logpow + relpow for AF7/AF8 (4 bands each)
+  + 4 frontal ratios (AF7/AF8 means only). No temporals, no indicators.'
+imputation: training-fold median
+scaling: training-fold StandardScaler (Pipeline, per fold)
+protocol: loso
+labels: subjective (Amendment 1 windows)
+variant: V1
+data: windows_a1_uncapped FULL retained pool (1053 windows), NO per-session M1 cap
+seed: s0 = single deterministic pass (no cap, no subsampling; LR deterministic given
+  the data); bootstrap rng 42 where used
+status: PRE-DECLARED SENSITIVITY (track.md 20 Nov 2026; decision_table_lock.md). Estimates
+  + CIs only; no verdict under the lock doc tier table is declared. Reporting status
+  awaits the lead reviewer's ruling.
+git_commit: f450634
