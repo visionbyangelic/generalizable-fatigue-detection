@@ -1,20 +1,20 @@
-# Track — Generalizable Fatigue Detection Thesis
+# Track — Generalizable Fatigue Detection
 
-> **my building rule (20 Nov 2026, permanent):** Everything done on this project goes in this file — actions, results, AND errors/issues, not just successes. Updated at the end of every work session without exception. I reads this daily to know exactly where the project stands. **Nothing counts as done until it's logged here.**
+> **My building rule (20 Nov 2026, permanent):** Everything done on this project goes in this file — actions, results, AND errors/issues, not just successes. Updated at the end of every work session without exception. I read this daily to know exactly where the project stands. **Nothing counts as done until it's logged here.**
 >
 > Format per day: **Done / Errors & issues / Results / What's left**
 >
-> **Working rule (I, 20 Nov 2026):** When a question comes up or something's unclear — research it properly first; if still unsure, ask I or ask Reviewer 1 / another reviewer. Don't guess quietly and don't stall silently. And track.md gets updated every session, without exception.
+> **Working rule (20 Nov 2026):** When a question comes up or something's unclear — research it properly first; if still unsure, ask. Don't guess quietly and don't stall silently. And track.md gets updated every session, without exception.
 >
-> **Peer-review rule (I, 20 Nov 2026):** When a task is completed and a result exists, talk to the reviewers (Reviewer 2 / Reviewer 1 / Reviewer 3) and get their take BEFORE finalising — always focused on the course requirements and the goal of the project. When the group finalises, report back to me with a full update.
+> **Review rule (20 Nov 2026):** When a task is completed and a result exists, the result gets an independent methods review BEFORE finalising — always focused on the course requirements and the goal of the project.
 >
-> **WHY rule (I, 20 Nov 2026, permanent):** Every entry in this file must say **why** the thing was done, not just what was done — written clearly enough that I can read it and understand perfectly. If an entry doesn't explain its reason, it isn't finished.
+> **WHY rule (20 Nov 2026, permanent):** Every entry in this file must say **why** the thing was done, not just what was done — written clearly enough that I can read it and understand perfectly. If an entry doesn't explain its reason, it isn't finished.
 >
-> **Reviewer ranking (I, 20 Nov 2026):** Reviewer 1 is the lead peer reviewer — I trusts Reviewer 1's judgement more than Reviewer 2's. Reviewer 2 stays on the panel; where the two disagree, show both views to Reviewer 1 and try to reach an agreement, then record the outcome here.
+> **Reviewer ranking (20 Nov 2026):** Reviewer 1 leads — I trust Reviewer 1's judgement over Reviewer 2's. Reviewer 2 stays on the panel; where the two disagree, both views go back to Reviewer 1 to reach an agreement, and the outcome is recorded here.
 >
-> **Authorship rule (I, 20 Nov 2026):** I writes the paper HERSELF. I does NOT write the submitted paper — I builds the pipeline and tracks EVERYTHING in this file (every step, parameter, error, result; length does not matter, completeness does) so she can write from it. If I drafts anything, it is only raw material for her to rewrite in her own words; she will not submit my text. This also matches her institution's rule: AI-generated content must not exceed 30% of the project writing.
+> **Authorship rule (20 Nov 2026):** I write the paper MYSELF. The pipeline work and this log exist so I can write from them (every step, parameter, error, result; length does not matter, completeness does). Any draft text produced along the way is only raw material for me to rewrite in my own words — I will not submit text I didn't write. This also matches my institution's rule: AI-generated content must not exceed 30% of the project writing.
 >
-> **School format received (20 Nov 2026):** two .docx files from I, summarised in `docs/school_format.md`. Key rules: minimum **40 pages** (excluding prelims/references/appendices), Times New Roman 12, double spacing, **APA 6th edition**, plagiarism ≤30%, AI content ≤30%, supervisor vetting + written approval before defense, **physical defense held Oct–Nov**, hardbound final + hard/soft copies. OPEN: which school's chapter structure is hers (Computer Science most plausibly = School of Industrial and Applied Sciences — awaiting her confirmation).
+> **School format received (20 Nov 2026):** two .docx files, summarised in `docs/school_format.md`. Key rules: minimum **40 pages** (excluding prelims/references/appendices), Times New Roman 12, double spacing, **APA 6th edition**, plagiarism ≤30%, AI content ≤30%, supervisor vetting + written approval before defense, **physical defense held Oct–Nov**, hardbound final + hard/soft copies. OPEN: which school's chapter structure is mine (Computer Science most plausibly = School of Industrial and Applied Sciences — awaiting my confirmation).
 
 ---
 
