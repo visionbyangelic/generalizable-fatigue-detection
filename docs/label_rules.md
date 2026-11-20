@@ -47,3 +47,13 @@
 | Date | Change | Rationale | Runs affected |
 |---|---|---|---|
 | 2026-11-20 | Initial PROPOSED rule set (this document) | Week 1 inspection numbers + finalised defaults (`how-others-did-it.md` §6) + Reviewer 2 addendum | None yet — no training has run |
+
+---
+
+## Peer-review amendments (Reviewer 2 review of Week 1 findings, 20 Nov 2026 — adopted, still PROPOSED until I locks)
+
+1. **The 4 non-increasing sessions are NOT a clean "alert control".** Renamed: *non-increasing sessions — drift/sensitivity check set*. Non-increasing ratings may reflect M1 ceiling (already fatigued), rating insensitivity, or disengagement. Actions: audit their M1/M3 trajectories; report LOSO results with and without them; report their per-fold distribution (P07×2, P10×1, P12×1 — uneven across folds).
+2. **Channel quality is handled per-channel, not whole-window.** TP9/TP10 Bad does not by itself reject a window; channel-wise masking applies, and a **frontal-only (AF7/AF8) vs all-channel** comparison is a pre-registered LOSO variant. Never interpolate across gaps. Missingness will be reported by block (M1 vs M3) to check informative missingness.
+3. **Class balance by construction:** per session, M1 windows are capped/subsampled to match the retained M3 window count; retained counts per class/session are reported in the preprocessing log.
+4. **Performance labels are a secondary/exploratory target** (group-level performance did not decline: CRT ΔRT +0.004 s, n-back Δacc +0.015). No claim of "performance-defined fatigue detection" unless per-subject effects are shown. Agreement between subjective and performance label sets reported as Cohen's kappa.
+5. **Alignment accounting:** windows lost or re-anchored due to the +180 s clock step are counted and reported per affected session.
