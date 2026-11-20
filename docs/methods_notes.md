@@ -79,3 +79,13 @@
 ## Reviewer 1 review 9 — FINAL panel position (20 Nov 2026)
 Reviewer 1 **accepted both Reviewer 2 counters with modifications** — the panel has converged. (1) Equivalence: SESOI sets Δ (**0.05 → 0.55 balanced accuracy**, rationale: below that a consumer headband can't support useful monitoring); variance does NOT widen Δ (that would let noise manufacture nulls) — instead a **feasibility gate** from the permutation-null SD decides up front whether equivalence is even testable at N≈24; if not, the study is estimation-only, declared before results. Hard ceiling Δ ≤ 0.08. One-sided α=0.05, session-level CIs. (2) Structure: Reviewer 2's primary+sensitivity accepted, tightened — F must pass the SAME equivalence test to count as "consistent with chance"; the tier table was completed to all 6 combinations (now in the lock doc); frontal positives must survive mask-only + leakage checks; Holm correction on superiority claims; **P owns the headline, F can never rescue it**. Full agreement written into `docs/decision_table_lock.md`; the only item Reviewer 1 left open is whether Δ=0.05 fits my application — put to her 20 Nov 2026.
 *Lead to cross-check, not a citable source. Full answer in the Reviewer 1 conversation of 20 Nov 2026.*
+
+## Reviewer 2 review 10 — review of Week 2 diagnostic RESULTS (20 Nov 2026)
+**Agreement: ACCEPTED as binding by Reviewer 2** (the locked protocol is now both reviewers' position).
+**Interpretation: core pattern accepted**, with four caveats — three adopted as wording/scope fixes, one as a new run:
+1. "Signal within sessions" → **"within-session separability (0.744) is an upper bound"** — inside a session, fatigue is collinear with slow drift (impedance, posture, ocular), so 0.744 is not verified *neural* signal. Adopted in the summary statement.
+2. **Mask-shortcut claim needs the ablation**: mask-only ≈ full model proves EEG adds nothing beyond the mask, not that the mask *causes* the residue. RUN commissioned: EEG-features-only (indicators removed) session-out + P08 — prediction: score → ~0.50 and the inversion disappears.
+3. Feasibility gate must use **block/session-level** permutation SD (ours does — confirm + report analytical session-level SE alongside) — folded into the gate run.
+4. Scope: the null is about **raw-feature transfer under train-fold normalisation**; a within-session-normalised variant is a declared sensitivity for the LOSO phase (with transductivity stated), not a Week 2 blocker. CNN claim scoped likewise (rules out obvious local waveform patterns at this N; not all possible deep approaches).
+Reviewer 2's refined summary sentence adopted for docs/week2_diagnostics.md.
+*Lead to cross-check, not a citable source. Full answer in the Reviewer 2 conversation of 20 Nov 2026.*
