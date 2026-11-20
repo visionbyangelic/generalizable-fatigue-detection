@@ -20,6 +20,18 @@ way.** Temporal failure is significantly *higher* in M1 than in M3
 the first (85.1% vs 89.3%, p ≈ 0.015). Contact quality, if anything, improves
 as sessions proceed (settling-in), it does not degrade with fatigue.
 
+**Frontal channels too (Reviewer 1 peer-review addition, 20 Nov 2026):** the
+mirror concern — that blink-heavy fatigued windows might be disproportionately
+rejected by the *frontal* gate, biasing retention against M3 — is also **not
+supported**. Frontal failure (AF7 or AF8 failing any criterion = the
+Amendment-1 rejection event) is likewise *higher in M1 than M3*: all sessions
+31.98% vs 23.97% (−8.0 pp, p ≈ 6×10⁻⁴); primary sessions only 30.88% vs
+25.00% (−5.9 pp, p ≈ 0.015). Rows `frontal_block_M1_vs_M3` in
+`results/tables/mnar_diagnostic.csv`. Retention is therefore not biased
+against the fatigued class on either channel group; if anything it is
+slightly biased against alert windows, and the per-session M1 cap makes
+class counts symmetric by construction regardless.
+
 **Caveats, stated plainly:**
 - Missingness is therefore *not* MCAR — it is block-associated — which is
   exactly why Amendment 1 masks with explicit indicators instead of dropping

@@ -1,7 +1,10 @@
-comparison,scope,group_a,n_a,temporal_fail_a,fail_rate_a_pct,group_b,n_b,temporal_fail_b,fail_rate_b_pct,rate_diff_pp_b_minus_a,chi2_p
+comparison,scope,group_a,n_a,fail_a,fail_rate_a_pct,group_b,n_b,fail_b,fail_rate_b_pct,rate_diff_pp_b_minus_a,chi2_p
 block_M1_vs_M3,all_sessions,M1,888,810,91.22,M3,680,557,81.91,-9.3,7.217612772333396e-08
+frontal_block_M1_vs_M3,all_sessions,M1,888,284,31.98,M3,680,163,23.97,-8.01,0.0006125026792545316
 session_time_first_vs_second_half,all_sessions,first_half,776,693,89.3,second_half,791,673,85.08,-4.22,0.015379452698578065
 block_M1_vs_M3,primary_sessions_only,M1,816,738,90.44,M3,652,551,84.51,-5.93,0.0007489670626562123
+frontal_block_M1_vs_M3,primary_sessions_only,M1,816,252,30.88,M3,652,163,25.0,-5.88,0.015161523268194008
 session_time_first_vs_second_half,primary_sessions_only,first_half,727,653,89.82,second_half,741,636,85.83,-3.99,0.024015886161825862
 block_M1_vs_M3,check_sessions_only,M1,72,72,100.0,M3,28,6,21.43,-78.57,1.6176486141591315e-16
+frontal_block_M1_vs_M3,check_sessions_only,M1,72,32,44.44,M3,28,0,0.0,-44.44,5.363318927035442e-05
 session_time_first_vs_second_half,check_sessions_only,first_half,49,40,81.63,second_half,50,37,74.0,-7.63,0.501868055098613

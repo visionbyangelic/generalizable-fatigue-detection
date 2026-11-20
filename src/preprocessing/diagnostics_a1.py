@@ -45,8 +45,10 @@ def retention_table(cand):
             "participant": part,
             "set": "check" if is_ctrl else "primary",
             "candidate_M1M3": len(g),
-            "retained": len(ret),
-            "retention_pct": round(100 * len(ret) / len(g), 1) if len(g) else 0.0,
+            # Amendment 1 retention IS frontal-gated survival by construction:
+            # a window is retained iff AF7 AND AF8 pass all criteria.
+            "retained_frontal_gated": len(ret),
+            "frontal_gated_survival_pct": round(100 * len(ret) / len(g), 1) if len(g) else 0.0,
             "retained_alert_M1": int((src.label == 0).sum()),
             "retained_fatigued_M3": int((src.label == 1).sum()),
             "masked_TP9_pct_of_retained": round(100 * (~ret.valid_TP9).mean(), 1) if len(ret) else 0.0,
@@ -65,9 +67,9 @@ def _rate_test(df_a, df_b, name_a, name_b):
     table = np.array([[a_fail, a_n - a_fail], [b_fail, b_n - b_fail]])
     p = chi2_contingency(table)[1] if table.min() >= 0 and a_n and b_n else np.nan
     return {
-        "group_a": name_a, "n_a": a_n, "temporal_fail_a": a_fail,
+        "group_a": name_a, "n_a": a_n, "fail_a": a_fail,
         "fail_rate_a_pct": round(100 * a_fail / a_n, 2) if a_n else np.nan,
-        "group_b": name_b, "n_b": b_n, "temporal_fail_b": b_fail,
+        "group_b": name_b, "n_b": b_n, "fail_b": b_fail,
         "fail_rate_b_pct": round(100 * b_fail / b_n, 2) if b_n else np.nan,
         "rate_diff_pp_b_minus_a": round(100 * b_fail / b_n - 100 * a_fail / a_n, 2) if a_n and b_n else np.nan,
         "chi2_p": p,
@@ -77,12 +79,33 @@ def _rate_test(df_a, df_b, name_a, name_b):
 def mnar_table(cand):
     lab = cand[cand.block.isin(["M1", "M3"])].copy()
     lab["temporal_fail"] = ~(lab.valid_TP9 & lab.valid_TP10)
+    # Frontal failure (Reviewer 1 peer-review addition): a candidate window is
+    # frontal-failed iff AF7 or AF8 fails any criterion — this is exactly
+    # the Amendment-1 rejection event. If fatigued (blink-heavy) windows
+    # were disproportionately rejected frontally, retention itself would
+    # be label-biased; that is what these rows test.
+    lab["frontal_fail"] = ~(lab.valid_AF7 & lab.valid_AF8)
     rows = []
     for scope, d in [("all_sessions", lab),
                      ("primary_sessions_only", lab[~lab.control_session]),
                      ("check_sessions_only", lab[lab.control_session])]:
         rows.append({"comparison": "block_M1_vs_M3", "scope": scope,
                      **_rate_test(d[d.block == "M1"], d[d.block == "M3"], "M1", "M3")})
+        fr = _rate_test(d[d.block == "M1"], d[d.block == "M3"], "M1", "M3")
+        # recompute the generic test on the frontal_fail column
+        a = d[d.block == "M1"]; b = d[d.block == "M3"]
+        table = np.array([[int(a.frontal_fail.sum()), int((~a.frontal_fail).sum())],
+                          [int(b.frontal_fail.sum()), int((~b.frontal_fail).sum())]])
+        from scipy.stats import chi2_contingency as _c2
+        rows.append({
+            "comparison": "frontal_block_M1_vs_M3", "scope": scope,
+            "group_a": "M1", "n_a": len(a), "fail_a": int(a.frontal_fail.sum()),
+            "fail_rate_a_pct": round(100 * a.frontal_fail.mean(), 2),
+            "group_b": "M3", "n_b": len(b), "fail_b": int(b.frontal_fail.sum()),
+            "fail_rate_b_pct": round(100 * b.frontal_fail.mean(), 2),
+            "rate_diff_pp_b_minus_a": round(100 * (b.frontal_fail.mean() - a.frontal_fail.mean()), 2),
+            "chi2_p": _c2(table)[1],
+        })
         # Session time: first vs second half of each session's candidates.
         d = d.sort_values(["participant", "session", "centre_ms"]).copy()
         d["half"] = d.groupby(["participant", "session"]).cumcount()
