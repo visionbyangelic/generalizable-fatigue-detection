@@ -1,0 +1,4 @@
+model: none (data accounting)
+source: data/processed/candidates_a1.csv (primary, non-control sessions; M1=alert,
+  M3=fatigued) and windows_a1_index.csv (capped primary set)
+git_commit: 98760e5

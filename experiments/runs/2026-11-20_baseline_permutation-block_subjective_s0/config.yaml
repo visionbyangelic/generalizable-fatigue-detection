@@ -1,0 +1,11 @@
+model: logistic_regression
+C: 1.0
+class_weight: balanced
+features: bandpower_43_amendment1
+protocol: session-out with BLOCK permutation (circular label shifts within session)
+labels: subjective (Amendment 1 windows), block-permuted
+cap_seed: 0
+n_permutations: 200
+permutation_rng: default_rng(20000 + permutation_index); per session an independent
+  shift in 1..n_session-1 applied to the time-ordered label sequence
+git_commit: 98760e5

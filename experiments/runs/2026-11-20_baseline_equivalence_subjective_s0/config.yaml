@@ -1,0 +1,7 @@
+model: bootstrap CI on existing baseline aggregates
+resampling: 10,000 bootstrap resamples over held-out sessions (session-out) / participants
+  (within), percentile 95% CI, rng seed 42
+sesoi: balanced accuracy 0.58 (pre-specified smallest effect of interest, Reviewer 1 review
+  7)
+inputs: results/tables/baseline_*_subjective_a1_summary.csv
+git_commit: 98760e5
