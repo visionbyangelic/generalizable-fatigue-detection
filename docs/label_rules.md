@@ -57,3 +57,14 @@
 3. **Class balance by construction:** per session, M1 windows are capped/subsampled to match the retained M3 window count; retained counts per class/session are reported in the preprocessing log.
 4. **Performance labels are a secondary/exploratory target** (group-level performance did not decline: CRT ΔRT +0.004 s, n-back Δacc +0.015). No claim of "performance-defined fatigue detection" unless per-subject effects are shown. Agreement between subjective and performance label sets reported as Cohen's kappa.
 5. **Alignment accounting:** windows lost or re-anchored due to the +180 s clock step are counted and reported per affected session.
+
+---
+
+## AMENDMENT 1 — 20 Nov 2026 (my decision; Reviewer 2 peer-reviewed)
+**Replaces §0(c)'s whole-window rejection.** Rationale: the original rule retained only 12.7% of windows and zero windows for P04/P05/P06/P07, because TP9/TP10 carry genuine broadband contact noise (SD ≈42 µV) while AF7/AF8 are clean (5–8 µV) — evidence in `docs/week2_deviation.md`. A rule that deletes a third of the participants is a selection-bias risk (potentially missing-not-at-random if contact degrades with fatigue), so the rejection logic — not the labels — is amended. Label definitions (§1–§4) are unchanged.
+**New rejection/masking rules:**
+- A window is **retained iff both frontal channels (AF7, AF8) pass** criteria (a) amplitude, (b) flatline, (c) fit on those channels.
+- A temporal channel (TP9/TP10) failing any criterion in that window is **masked for that window**: excluded from feature computation (baseline aggregates over valid channels) and flagged with an explicit per-window validity indicator for the CNN (masked input + indicator; never silent unflagged zeros).
+- **Primary configuration (locked now, before any LOSO scores exist):** all-valid-channels with temporal masking as above. **Pre-registered variant:** frontal-only (AF7/AF8). The primary is not swapped after seeing results.
+- **Mandatory diagnostics:** (i) MNAR check — temporal failure rate by block (M1 vs M3) and over time-on-task, reported; (ii) per-subject retention + masking-% table; (iii) threshold-sensitivity curve (retention vs amplitude threshold) in the appendix.
+- The 4 non-increasing sessions remain the drift/sensitivity check set under the same masking rules.
