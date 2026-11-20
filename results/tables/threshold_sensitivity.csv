@@ -1,0 +1,6 @@
+p2p_limit_uv,equiv_pm_amplitude_uv,is_locked_operating_point,candidate_M1M3,retained,retention_pct
+50,25.0,False,1568,280,17.9
+75,37.5,False,1568,568,36.2
+100,50.0,False,1568,854,54.5
+125,62.5,False,1568,1015,64.7
+150,75.0,True,1568,1121,71.5

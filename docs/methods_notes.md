@@ -31,3 +31,14 @@
 - Option 3 rejected: channels aren't interchangeable slots; heterogeneous channel subsets across LOSO folds.
 - **Additions adopted as conditions:** (a) run the MNAR diagnostic — does TP failure rate rise with time-on-task / differ M1 vs M3? — and report it; (b) per-subject retention + masking-% table; (c) lock which configuration is PRIMARY before seeing LOSO scores (no picking the better one afterwards); (d) threshold-sensitivity curve (survival vs threshold) for the appendix; (e) for the baseline, compute band features per channel and aggregate over valid channels.
 *Lead to cross-check, not a citable source. Full answer in the Reviewer 2 conversation of 20 Nov 2026.*
+
+## Reviewer 1 review 5 — cross-check of the Week 2 amendment (20 Nov 2026)
+**Same question as Reviewer 2 review 4, asked at my suggestion.** Reviewer 1 signed in via Google (free plan). **Verdict: Option 1 agreed — with one structural difference from Reviewer 2:** Reviewer 1 recommends making **frontal-only the primary/confirmatory analysis** and the masked all-channel pipeline the pre-specified secondary (fewer researcher degrees of freedom, cleanest LOSO story). Reviewer 2 had endorsed masked-all-channel as primary with frontal-only as the comparison. I to arbitrate (presented in chat 20 Nov 2026).
+**Points adopted regardless of that choice:**
+- **Framing:** the amendment is a *documented protocol deviation* — post hoc, driven by label-blind signal-quality diagnostics, made before any model performance was examined. Do NOT call it "pre-registered" unqualified. The strict-rule yield (12.7%, 4/12 empty) is reported as a finding.
+- **Verify the noise diagnosis with a PSD** of a bad temporal session (broadband+unstable = contact; >20–30 Hz elevation = temporalis EMG; spike = mains). Note for the methods text: our 1–40 Hz bandpass already excludes 50 Hz mains; no separate notch in the primary pipeline (locked §0).
+- **Mask-as-fingerprint risk:** contact quality is a participant property — the CNN must use channel dropout in training, and an indicator-removed ablation is owed in the LOSO phase.
+- **Coverage reporting:** in LOSO, report accuracy alongside coverage (fraction of windows the system can score) — rejection-at-test-time isn't deployable; this turns the data-quality problem into a contribution.
+- **Blink caveat:** frontal amplitude rejection may remove blink-heavy windows, and slow blinks are a fatigue cue — the M1-vs-M3 failure-rate diagnostic must include frontal channels, not only temporals.
+- Statistics for Weeks 3–4: per-subject metrics, subject-level bootstrap CIs, label-permutation baseline, nested subject-wise tuning.
+*Lead to cross-check, not a citable source. Full answer in the Reviewer 1 conversation of 20 Nov 2026.*
