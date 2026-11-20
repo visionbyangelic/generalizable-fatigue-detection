@@ -304,3 +304,213 @@ runs — and verified faithfulness before ablating: the full model
 reproduced its stored seed-0 numbers exactly (session-out BA 0.4991 /
 MCC 0.0090; within P08 BA 0.245; within aggregate 0.4970). Only then
 was the ablation run.
+
+---
+
+## Closure pack (Reviewer 1 review 11 requirements) — 20 Nov 2026
+
+Consultation 11 accepted the diagnostics above but required six more
+items before Week 2 can close, and corrected the reading of §7 and §10
+(see the conclusion section below, which supersedes the §10 wording).
+All items below were run under the lock-doc rules (Amendment-1 windows,
+cap seeds 0–4, train-fold-only discipline); code:
+`src/evaluation/closure_pack.py`.
+
+### 12. Frontal-only (F) baseline — the tier table's missing column
+Feature set (exact, 20 features): log + relative band powers of AF7 and
+AF8 (4 bands each) + the 4 frontal ratios (computed from AF7/AF8 mean
+band powers only; no temporal channel enters any of them). No temporal
+features, no mask indicators. Results (cross-seed grand means):
+- **Within-subject: BA 0.535**, AUC 0.536, MCC 0.072 (8 participants —
+  same coverage as P).
+- **Pooled session-out: BA 0.553**, AUC 0.605, MCC 0.106 (20 sessions).
+F sits slightly above P on both Week-2 protocols (P: 0.484 / 0.515) —
+reported as estimates with the LOPO intervals below; no tier-table
+verdict is entered, because the equivalence side of the table awaits
+my confirmed Δ (§15). (`baseline_*_subjective_frontal_summary.csv`;
+runs `2026-11-20_baseline_{within,session-out}_subjective_frontal_s0..s4`.)
+
+### 13. Leave-one-PARTICIPANT-out (LOPO) — the participant-clustered headline
+Sessions are nested in 12 participants, so session-out alone overstates
+the effective sample. LOPO (test = all sessions of one participant,
+train = the other 11), cap seeds 0–4, aggregate = mean over
+participants of cross-seed per-participant BA, CI by participant-level
+bootstrap (10,000 resamples):
+- **P (masked all-channel): BA 0.508, 95% CI [0.471, 0.542]**, AUC 0.541,
+  MCC 0.018 (11 participants).
+- **F (frontal-only): BA 0.544, 95% CI [0.500, 0.589]**, AUC 0.571,
+  MCC 0.091 (11 participants).
+Per-participant values are in `baseline_loso_subjective*_a1_summary.csv`
+(P range: P10 0.382 … P07 0.582; F range: P10 0.408 … P04 0.680).
+**P05 has no LOPO fold** — mechanism documented in §17, item 2.
+(Runs `2026-11-20_baseline_loso_subjective(_frontal)_s0..s4`;
+`closurepack_lopo_aggregate.csv`.)
+
+### 14. Positive control, hardened — heterogeneous injection + MDE
+- **Heterogeneous injection** (per-session random amplitudes centred on
+  the half-strength dose: θ gain ~ LogNormal(ln 1.5, 0.55), α gain ~
+  LogNormal(ln 1.25, 0.45); ~20% of sessions null-or-opposite by design,
+  seed 20261120; realised draw: 26 graded, 3 opposite, 0 null of 29
+  sessions — see §17, item 3): recovered **BA 0.657, AUC 0.750,
+  MCC 0.317** (cross-seed means), vs 0.695 for the homogeneous
+  half-strength dose and 0.515 uninjected. The pipeline recovers a
+  realistic, session-varying effect, not only the best case.
+  Manipulation check passed (observed vs target mean log10 frontal
+  shifts: θ 0.071/0.072, α 0.032/0.027). Per-session recovery vs
+  injected log θ gain: Spearman ρ = 0.259 (descriptive).
+- **Minimum detectable effect (MDE):** extending the homogeneous dose
+  curve downward — θ/α power gains (2.0, 1.5) → BA 0.834, CI
+  [0.774, 0.885]; (1.5, 1.25) → 0.695 [0.631, 0.756];
+  (1.25, 1.125) → 0.562 [0.509, 0.614]; (1.1, 1.05) → 0.495
+  [0.452, 0.534] (session-level bootstrap CIs over cross-seed
+  per-session means). Against the block-permutation null band
+  (q975 = 0.574), the smallest tested dose whose CI clears the band is
+  **θ ×1.5 / α ×1.25** — the MDE for this pipeline/protocol. A
+  homogeneous cross-session θ/α effect smaller than that could exist
+  undetected; at or above it, it would have been seen.
+  (`diagnostics_positive_control_{doses,mde,hetero,hetero_gains,
+  hetero_check}.csv`; runs `..._positivecontrol-mde_...`,
+  `..._positivecontrol-hetero_...`.)
+
+### 15. Feasibility-gate inputs — NO verdict declared
+Per the lock doc §2, Δ is my to confirm; this section supplies
+only the gate's inputs (SEs from label-free sources; Δ_min = (z.95 +
+z.90)·SE = 2.9265·SE for ~90% power, one-sided α = 0.05, true effect 0):
+| SE basis | SE | Δ_min |
+|---|---|---|
+| Permutation null SD, session-mean statistic, circular shifts (n = 200) | 0.0319 | 0.093 |
+| Permutation null SD, session-mean statistic, block-length-8 (n = 100) | 0.0327 | 0.096 |
+| Permutation null SD, participant-mean statistic, circular (n = 200) | 0.0323 | 0.094 |
+| Permutation null SD, participant-mean statistic, block-8 (n = 100) | 0.0342 | 0.100 |
+| Analytical, per-session BA SD 0.104 / √24 | 0.0213 | 0.062 |
+| Analytical, per-session BA SD 0.104 / √20 (observed folds) | 0.0233 | 0.068 |
+| Analytical, per-participant LOPO BA SD 0.064 / √12 | 0.0184 | 0.054 |
+
+The permutation SD is robust across block structures (0.032–0.034).
+Conditional reading (no verdict): IF Δ = 0.05 were locked, equivalence
+would be **unattainable under every basis** (all Δ_min > 0.05); IF
+Δ = 0.08, testable under the analytical bases only; IF Δ = 0.10,
+testable under all but the block-8 participant basis; the lock doc's
+hard ceiling is Δ ≤ 0.08. Full conditional table:
+`diagnostics_gate_delta_table.csv`; per-permutation statistics:
+`diagnostics_gate_permutation_nulls.csv`. (Run
+`2026-11-20_baseline_gate-inputs_subjective_s0`.)
+
+### 16. Leakage gap with CI; with/without P08
+- **Leakage gap:** headline aggregate +0.072 BA (pooled leaky OOF
+  0.571 − honest mean-of-folds 0.499, seed 0). Paired per-session gap
+  (same session under both splits): **+0.052, 95% CI [−0.019, +0.121]**
+  (bootstrap over the 20 paired sessions). The interval includes zero:
+  at session level the gap is positive on average but not precisely
+  estimated at this N. No literature-contrast framing is attached
+  (review 11, item 6). (`diagnostics_leakage_gap_{ci,
+  paired_sessions}.csv`; run `..._leakygap-ci_...`.)
+- **Without P08:** session-out BA 0.515 → **0.530** (17 sessions);
+  LOPO P 0.508 → **0.514** [0.474, 0.548]; LOPO F 0.544 → **0.543**
+  [0.494, 0.592]. Removing the artefact participant moves every
+  headline by ≤ 0.015 — the null reading is not a P08 artefact.
+  P08 remains IN all headline numbers. (`closurepack_without_p08.csv`;
+  run `..._withoutp08_...`.)
+- **Mask-ablation (EEG-only features, parallel run):** removing the 3
+  validity indicators (40 spectral features): session-out BA **0.519**
+  (vs 0.515 with indicators), within **0.509** (vs 0.484), and P08's
+  within-subject BA rises from 0.225 to **0.467** — the inversion
+  disappears when the model cannot see the mask, confirming §5's
+  mechanism. (`baseline_*_subjective_ablated_summary.csv`; runs
+  `2026-11-20_baseline_*_subjective_ablated_s0..s4`.)
+
+---
+
+## Definitions table — every headline number, one canonical definition
+
+All rows: band-power features + logistic regression (C = 1.0,
+class_weight = balanced), Amendment-1 windows, subjective labels,
+unless the feature-set column says otherwise. "Fold-mean" = mean over
+folds of per-fold balanced accuracy; "cross-seed" refers to the M1-cap
+subsample seeds 0–4.
+
+| Value | Metric | Protocol | Seeds | Aggregation | Feature set |
+|---|---|---|---|---|---|
+| 0.499 | BA | session-out | 0 only | fold-mean over 20 held-out sessions | P, 43 feats |
+| 0.515 | BA | session-out | 0–4 | grand mean (20 sessions × 5 seeds; = mean over sessions of cross-seed per-session means) | P, 43 feats |
+| 0.484 | BA | within-subject | 0–4 | mean over 8 participants of per-participant BA (per participant: BA on concatenated out-of-fold predictions, cross-seed mean) | P, 43 feats |
+| 0.535 | BA | within-subject | 0–4 | as 0.484 | F, 20 frontal feats |
+| 0.553 | BA | session-out | 0–4 | as 0.515 | F, 20 frontal feats |
+| 0.508 | BA | LOPO | 0–4 | mean over 11 participants of cross-seed per-participant BA (test fold = the participant's pooled sessions) | P, 43 feats |
+| 0.544 | BA | LOPO | 0–4 | as 0.508 | F, 20 frontal feats |
+| 0.530 | BA | session-out | 0–4 | mean over seeds of per-seed fold-means | mask-only (3 indicators + 2 coverage counts, no EEG) |
+| 0.519 | BA | session-out | 0–4 | as 0.515 | EEG-only ablation (40 spectral feats, no indicators) |
+| 0.571 | BA | random window split (leaky demo) | 0 only | POOLED out-of-fold BA over all 806 windows (not a fold-mean) | P, 43 feats |
+| 0.744 | BA | within-session ceiling | 0 only | mean over 9 eligible sessions of per-session out-of-fold BA (time-blocked folds, 2-window purge) | P, 43 feats |
+| 0.914 | BA | session-out | 0–4 (identical each seed) | mean over seeds of per-seed fold-means | window-index only (AUC = 1.000) |
+| 0.544 | BA | session-out | 0–4 | mean over seeds of per-seed fold-means | δ-band log-power only |
+| 0.834 | BA | session-out, positive control | 0–4 | mean over seeds of per-seed fold-means | P, 43 feats; injected θ ×2.0 / α ×1.5 |
+| 0.695 | BA | session-out, positive control | 0–4 | as 0.834 | P, 43 feats; injected θ ×1.5 / α ×1.25 |
+| 0.657 | BA | session-out, positive control | 0–4 | as 0.834 | P, 43 feats; heterogeneous per-session injection (§14) |
+| 0.225 | BA | within-subject, P08 only | 0–4 | cross-seed mean of P08's per-seed out-of-fold BA | P, 43 feats |
+| 0.467 / 0.519 | BA | CNN within-subject (segment-grouped validation) | CNN seeds 0 / 1 (not cap seeds) | mean over 7 covered participants of per-participant BA | EEGNet-8,2 on raw windows + mask planes |
+
+Two clarifications the panel required, stated once here:
+- **Dose–response (§4):** Δmental DID rise — mean +18.0 VAS points,
+  positive in 32 of 36 sessions (Week 1 inspection) — so the labels
+  rest on a real reported fatigue increase. What §4 shows is only that
+  per-session classification accuracy does not *track the size* of
+  that rise. Label validity is therefore not the explanation §4
+  supports; it remains a rival explanation only via the coarseness of
+  a 3-ratings-per-session self-report (label_rules.md §1).
+- **Mask vs time:** the MNAR diagnostic (`mnar_diagnostic.csv`) shows
+  temporal-channel failure rates FALL across the session — 89.3% of
+  windows in first halves vs 85.1% in second halves (all sessions;
+  primary-only: 89.8% vs 85.8%) — and are lower in M3 than M1 blocks.
+  The mask pattern is therefore partly a time-on-task proxy (contact
+  settling), which is the mechanism behind §3/§5/§7's behaviour.
+
+---
+
+## Conclusion — Week 2 (wording adopted from Reviewer 1 review 11)
+
+Within sessions, temporal drift is decodable (ceiling 0.744) — but
+position alone ranks perfectly within sessions, so that separability
+is time-on-task structure, not evidence of a fatigue signal. Across
+sessions, no model exceeds the block-permutation null: the full
+43-feature model (session-out 0.515, LOPO 0.508), the frontal-only
+model (0.553, LOPO 0.544), the EEG-only ablation (0.519), and the
+mask-only model (0.530) all sit inside or beside the null band
+[0.449, 0.574], and the mask-only result does NOT establish a
+transferable shortcut — it is itself inside the null; the mask story
+is local to P08, whose inversion is a mask-carried domain-shift
+artefact (ablated: 0.467). The pipeline is not blind: homogeneous
+θ/α effects are recovered with a graded dose–response (MDE
+θ ×1.5 / α ×1.25), and a heterogeneous per-session effect is
+recovered at 0.657. The CNN shows no evidence of an advantage over
+the baseline at this N (underpowered; not "at/below baseline" as a
+settled comparison). The defensible Week-2 statement is therefore:
+**no detectable cross-session transfer for this feature family and
+evaluation; effects up to ~0.56 balanced accuracy cannot be excluded
+at N = 24 sessions.** The equivalence verdict itself awaits my
+confirmed SESOI Δ plus the feasibility gate (§15): the 0.58-based
+equivalence stated in §10 must NOT be cited as null support
+(review 11, item 3), and §10 is superseded by this section.
+
+## Problems encountered in the closure pack (documented)
+1. First diagnostics figure crash and imputer warnings — see the
+   earlier "Problems encountered" section; unchanged.
+2. **P05's absence mechanism corrected.** The closure pack's first
+   LOPO notes claimed P05's fold was "skipped by the both-classes
+   fold rule". Verification against the data showed the real
+   mechanism is upstream: P05's only retained session (S01) is
+   single-class (5 alert / 0 fatigued), so the per-session M1 cap
+   (cap M1 to the retained M3 count = 0) reduces P05 to zero windows
+   in EVERY capped dataset — P05 is absent from all capped analyses
+   (baseline, diagnostics, LOPO alike), not merely skipped in LOPO.
+   The LOPO run notes were corrected in place; the same absence
+   applies retroactively to the Week-2 baseline coverage statements.
+3. **Heterogeneous-injection realised draw:** with the fixed seed,
+   the ~20% null-or-opposite design realised as 3 opposite and
+   0 null sessions of 29 (P(no null) ≈ 5% under the design). The
+   run stands as drawn (seed fixed in advance); the realised
+   composition is reported in §14 and in the gains table rather than
+   re-drawn, which would have been seed-shopping.
+4. §10's equivalence-at-0.58 statement is superseded by the
+   conclusion above (review 11); the §10 text is retained
+   unedited for audit, as is the stopped CNN run.

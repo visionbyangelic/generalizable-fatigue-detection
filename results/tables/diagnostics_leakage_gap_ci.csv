@@ -1,0 +1,8 @@
+quantity,value
+leaky_OOF_pooled_BA,0.5713843355073445
+honest_session-out_mean_of_folds_BA_seed0,0.4990644010265485
+headline_gap_aggregate,0.07231993448079599
+paired_mean_gap_over_sessions,0.052073304706035176
+paired_gap_ci95_low,-0.018632369235240243
+paired_gap_ci95_high,0.12115846097907927
+n_paired_sessions,20.0

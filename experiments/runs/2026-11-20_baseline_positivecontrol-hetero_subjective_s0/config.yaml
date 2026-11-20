@@ -1,0 +1,11 @@
+model: logistic_regression
+C: 1.0
+class_weight: balanced
+features: bandpower_43_amendment1 (re-extracted after injection)
+injection: 'HETEROGENEOUS per-session gains (seed 20261120): theta gain ~ LogNormal(ln1.5,
+  0.55), alpha ~ LogNormal(ln1.25, 0.45); uniform draw per session: <0.10 null (gain
+  1), 0.10-0.20 opposite (gains inverted); fatigued windows only, valid channels only'
+protocol: session-out
+labels: subjective (Amendment 1)
+cap_seeds: 0-4 (folder named s0; all seeds in metrics.csv)
+git_commit: 482bb2b

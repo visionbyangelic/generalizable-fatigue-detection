@@ -1,0 +1,12 @@
+model: logistic_regression
+C: 1.0
+class_weight: balanced
+features: bandpower_43_amendment1
+protocol: 'leakage-gap CI: paired per-session bootstrap'
+leaky: StratifiedKFold(5, shuffle, random_state=0), identical to panel_additions leakage-gap
+  demo
+honest: session-out cap seed 0 predictions (original run)
+bootstrap: 10000 resamples over paired held-out sessions, rng 42
+labels: subjective (Amendment 1)
+cap_seed: 0
+git_commit: 482bb2b

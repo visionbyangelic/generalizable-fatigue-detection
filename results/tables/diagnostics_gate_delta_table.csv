@@ -1,0 +1,7 @@
+candidate_delta,perm_null_circular_session_mean_statistic,perm_null_block8_session_mean_statistic,perm_null_circular_participant_mean_statistic,perm_null_block8_participant_mean_statistic,analytical_session_N24,analytical_session_N20_observed,analytical_participant_N12
+0.03,unattainable,unattainable,unattainable,unattainable,unattainable,unattainable,unattainable
+0.05,unattainable,unattainable,unattainable,unattainable,unattainable,unattainable,unattainable
+0.08,unattainable,unattainable,unattainable,unattainable,testable,testable,testable
+0.1,testable,testable,testable,unattainable,testable,testable,testable
+0.12,testable,testable,testable,testable,testable,testable,testable
+0.15,testable,testable,testable,testable,testable,testable,testable

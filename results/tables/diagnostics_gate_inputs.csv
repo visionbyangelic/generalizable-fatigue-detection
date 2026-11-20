@@ -1,0 +1,8 @@
+basis,se,delta_min_90pct_power,definition
+perm_null_circular_session_mean_statistic,0.03186099151495643,0.09323817100744179,SD of the session-mean BA statistic under 200 circular-shift permutations (cap seed 0)
+perm_null_block8_session_mean_statistic,0.03272238818279043,0.09575896668899002,SD of the session-mean BA statistic under 100 block-length-8 permutations (cap seed 0)
+perm_null_circular_participant_mean_statistic,0.03225532886262037,0.09439216186924068,SD of the participant-mean BA statistic (mean over participants of per-participant fold means) under the same 200 permutations
+perm_null_block8_participant_mean_statistic,0.03424809555654555,0.10022380466977657,SD of the participant-mean BA statistic under the 100 block-length-8 permutations
+analytical_session_N24,0.021269172094745544,0.06224221565815592,"per-session BA SD 0.1042 (20 held-out sessions, cross-seed means) / sqrt(24)"
+analytical_session_N20_observed,0.02329921067150308,0.06818293109014652,per-session BA SD 0.1042 / sqrt(20 observed folds)
+analytical_participant_N12,0.018360627645196383,0.053730636078389626,per-participant LOPO BA SD 0.0636 (11 participants observed) / sqrt(12)

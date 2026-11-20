@@ -1,0 +1,8 @@
+model: logistic_regression (permutation reruns)
+permutations: circular shifts x200 (rng 20000+p, replicates panel_additions) + block-length-8
+  shuffles x100 (rng 30000+p); per-fold BA saved for both statistics
+power_formula: delta_min = (z_0.95 + z_0.90) * SE = 2.9265 * SE for a one-sided alpha=0.05
+  equivalence test at true effect 0, ~90% power (lock doc section 2)
+labels: subjective (Amendment 1)
+cap_seed: 0
+git_commit: 482bb2b

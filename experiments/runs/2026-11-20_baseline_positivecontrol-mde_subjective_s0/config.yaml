@@ -1,0 +1,14 @@
+model: logistic_regression
+C: 1.0
+class_weight: balanced
+features: bandpower_43_amendment1 (re-extracted after injection)
+injection: homogeneous spectral gain, fatigued windows only, valid channels only;
+  doses theta/alpha power x(2.0,1.5), (1.5,1.25), (1.25,1.125), (1.1,1.05) - extends
+  panel_additions.py doses downward, re-run with per-fold outputs
+protocol: session-out
+labels: subjective (Amendment 1)
+cap_seeds: 0-4 (folder named s0; all seeds in metrics.csv)
+mde_definition: smallest tested dose whose session-level bootstrap 95% CI for balanced
+  accuracy (cross-seed per-session means, 10000 resamples, rng 42) has lower bound
+  above the block-permutation null band q975
+git_commit: 482bb2b

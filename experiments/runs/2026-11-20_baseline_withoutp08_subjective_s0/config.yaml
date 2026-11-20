@@ -1,0 +1,6 @@
+model: none (re-aggregation of existing run outputs)
+sources: experiments/runs/2026-11-20_baseline_session-out_subjective_s0..s4/metrics.csv;
+  ..._loso_subjective(_frontal)_s0..s4/metrics.csv
+method: per-seed mean over units, then cross-seed mean; LOPO CIs by participant bootstrap
+  over cross-seed per-participant means (10000, rng 42)
+git_commit: 482bb2b
