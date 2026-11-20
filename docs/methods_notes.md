@@ -67,3 +67,11 @@
 **Overstatement warnings adopted:** scope the claim to "this feature family + this evaluation", never "fatigue isn't decodable from Muse S"; report coverage by class (masking is post-outcome selection); per-participant distribution with intervals; label-validity is a rival explanation for the null.
 **Status:** synthesis put to Reviewer 2 for accept/counter (review 8); if accepted, the panel agreement goes to me and the co-primary + decision table get locked into docs before diagnostics conclude.
 *Lead to cross-check, not a citable source. Full answer in the Reviewer 1 conversation of 20 Nov 2026.*
+
+## Reviewer 2 review 8 — response to Reviewer 1's synthesis (20 Nov 2026)
+**AGREED (full panel consensus, lockable):** mask-only baseline; positive control; leakage-gap demonstration; block permutation/circular shifts (not iid); dose-response descriptive only.
+**COUNTERED (2 points, both narrow):**
+1. **Equivalence bound:** Reviewer 2 accepts the equivalence principle but counters hard-coding ~0.58 — the bound must be pre-registered as a *derived* quantity: smallest scientifically meaningful effect for Muse S + session-level variance at N≈24 (TOST/CI framing), fixed before the final equivalence checks run.
+2. **Primary structure:** counters strict co-primary conjunction ("both must pass or inconclusive") — at N≈24 the joint requirement manufactures false inconclusives from sampling noise, and the two analyses test distinct hypotheses (distributed vs frontal-localised), not twins. Counter-proposal: masked all-channel = primary; frontal-only = co-equal pre-specified key sensitivity; explicit outcome tiers — *robust null* (primary equivalent-to-chance AND frontal consistent with chance), *localised/channel-sensitive signal* (one reliably above chance, the other null — reported as localised vs distributed, not "inconclusive"), *true inconclusive* (estimates straddle the boundaries).
+**Status:** counters put to Reviewer 1 for the final synthesis (my process: Reviewer 1 leads, panel must converge). Whichever structure locks, it goes into a dated decision-table document BEFORE the diagnostics conclude, per Reviewer 1's earlier demand.
+*Lead to cross-check, not a citable source. Full answer in the Reviewer 2 conversation of 20 Nov 2026.*
