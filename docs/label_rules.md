@@ -1,7 +1,7 @@
-# Label Rules — PROPOSED
+# Label Rules — LOCKED (20 Nov 2026)
 
-> ## STATUS: PROPOSED — awaiting my confirmation to lock
-> Drafted 20 Nov 2026 from the Week 1 inspection (`docs/dataset_notes.md`), the finalised defaults in `docs/how-others-did-it.md` §6, and the Reviewer 2 peer-review addendum to that document. **Nothing in this document is locked until I confirms it.** Once locked: thresholds are never tuned on test results, and any change requires a dated amendment below with rationale, plus re-running affected experiments.
+> ## STATUS: LOCKED — working rules adopted 20 Nov 2026
+> Drafted 20 Nov 2026 from the Week 1 inspection (`docs/dataset_notes.md`), the finalised defaults in `docs/how-others-did-it.md` §6, and the Reviewer 2 peer-review addendum to that document. Approved the same day; her response (recorded in track.md): she did not follow the technical detail, instructed that everything be recorded and the work proceed, and that any different results that come in be recorded too. These rules therefore stand as locked from 20 Nov 2026: thresholds are never tuned on test results, and any change requires a dated amendment below with rationale, plus re-running affected experiments.
 
 ---
 
