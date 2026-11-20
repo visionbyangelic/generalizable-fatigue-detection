@@ -1,0 +1,159 @@
+{
+  "n_sessions_delta_mental_pos": 32,
+  "mental_vas_mean": 26.41075102905041,
+  "mental_vas_range": [
+    0.0,
+    77.22222222222221
+  ],
+  "r_mental_physical": 0.5945876433878645,
+  "eeg_fs_mean": 234.0860962464194,
+  "eeg_duration_min_mean": 21.055896296296297,
+  "fit_good_all_mean": 51.999220320956674,
+  "fit_good_all_min": 0.0,
+  "crt_drt_mean_s": 0.005448369047576322,
+  "nback_dacc_mean": 0.015277777777777782,
+  "missing_markers": [
+    [
+      "01",
+      "01",
+      "start_nback",
+      15
+    ],
+    [
+      "02",
+      "01",
+      "start_nback",
+      15
+    ],
+    [
+      "03",
+      "01",
+      "start_nback",
+      15
+    ],
+    [
+      "04",
+      "01",
+      "start_nback",
+      15
+    ],
+    [
+      "05",
+      "01",
+      "start_nback",
+      15
+    ]
+  ],
+  "fatigue_offset_median_s": 0.06605720159132034,
+  "crt_offset_median_s": 0.006701320103445596,
+  "flags": [
+    [
+      "P01/S01",
+      "EEG gap burden 227s total in >100ms gaps"
+    ],
+    [
+      "P01/S02",
+      "EEG gap burden 148s total in >100ms gaps"
+    ],
+    [
+      "P01/S03",
+      "EEG gap burden 86s total in >100ms gaps"
+    ],
+    [
+      "P02/S01",
+      "poor fit (good_all=27%); EEG gap burden 354s total in >100ms gaps; CRT M1 baseline broken (acc=0.19) \u2014 performance baseline unusable"
+    ],
+    [
+      "P02/S02",
+      "EEG gap burden 84s total in >100ms gaps"
+    ],
+    [
+      "P03/S01",
+      "poor fit (good_all=45%)"
+    ],
+    [
+      "P03/S02",
+      "poor fit (good_all=31%); EEG gap burden 115s total in >100ms gaps"
+    ],
+    [
+      "P04/S01",
+      "poor fit (good_all=36%); EEG gap burden 567s total in >100ms gaps"
+    ],
+    [
+      "P04/S02",
+      "EEG gap burden 330s total in >100ms gaps"
+    ],
+    [
+      "P04/S03",
+      "poor fit (good_all=34%); EEG gap burden 86s total in >100ms gaps"
+    ],
+    [
+      "P05/S01",
+      "poor fit (good_all=13%); EEG gap burden 207s total in >100ms gaps"
+    ],
+    [
+      "P05/S02",
+      "poor fit (good_all=7%); EEG gap burden 148s total in >100ms gaps"
+    ],
+    [
+      "P05/S03",
+      "poor fit (good_all=19%); EEG gap burden 132s total in >100ms gaps"
+    ],
+    [
+      "P06/S01",
+      "poor fit (good_all=15%); EEG gap burden 515s total in >100ms gaps"
+    ],
+    [
+      "P06/S02",
+      "poor fit (good_all=21%)"
+    ],
+    [
+      "P06/S03",
+      "EEG gap burden 88s total in >100ms gaps"
+    ],
+    [
+      "P07/S01",
+      "poor fit (good_all=14%); delta_mental<=0 (-0.1) \u2014 excluded from primary subjective set; EEG gap burden 376s total in >100ms gaps"
+    ],
+    [
+      "P07/S02",
+      "delta_mental<=0 (0.0) \u2014 excluded from primary subjective set; EEG gap burden 202s total in >100ms gaps"
+    ],
+    [
+      "P07/S03",
+      "poor fit (good_all=18%); EEG gap burden 77s total in >100ms gaps"
+    ],
+    [
+      "P08/S01",
+      "EEG gap burden 227s total in >100ms gaps"
+    ],
+    [
+      "P08/S03",
+      "EEG gap burden 68s total in >100ms gaps"
+    ],
+    [
+      "P09/S02",
+      "EEG gap burden 219s total in >100ms gaps"
+    ],
+    [
+      "P10/S01",
+      "EEG gap burden 241s total in >100ms gaps"
+    ],
+    [
+      "P10/S03",
+      "poor fit (good_all=21%); delta_mental<=0 (-15.4) \u2014 excluded from primary subjective set; EEG gap burden 297s total in >100ms gaps"
+    ],
+    [
+      "P11/S03",
+      "poor fit (good_all=0%); EEG gap burden 171s total in >100ms gaps"
+    ],
+    [
+      "P12/S01",
+      "EEG gap burden 560s total in >100ms gaps"
+    ],
+    [
+      "P12/S03",
+      "delta_mental<=0 (-5.1) \u2014 excluded from primary subjective set; EEG gap burden 214s total in >100ms gaps"
+    ]
+  ]
+}
