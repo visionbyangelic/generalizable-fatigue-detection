@@ -3,6 +3,8 @@
 > **my building rule (20 Nov 2026, permanent):** Everything done on this project goes in this file — actions, results, AND errors/issues, not just successes. Updated at the end of every work session without exception. I reads this daily to know exactly where the project stands. **Nothing counts as done until it's logged here.**
 >
 > Format per day: **Done / Errors & issues / Results / What's left**
+>
+> **Working rule (I, 20 Nov 2026):** When a question comes up or something's unclear — research it properly first; if still unsure, ask I or ask Reviewer 1 / another reviewer. Don't guess quietly and don't stall silently. And track.md gets updated every session, without exception.
 
 ---
 
