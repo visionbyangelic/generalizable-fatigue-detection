@@ -59,3 +59,10 @@ e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855  src/utils/__in
 ```
 
 The DROZY file-format adapter is the only new code permitted, and it may implement only the rules declared above (windowing, bands, µV rejection, label construction). Any other change after this freeze must be logged as a deviation with its reason, before results are seen.
+
+## Amendment 1 — PROPOSED 20 Nov 2026 (pre-results; from the data inventory)
+Triggered by `docs/DROZY_INVENTORY.md` findings, before any DROZY modelling:
+- **A1 — Tie-break.** If a participant's highest or lowest KSS is tied across sessions, the fatigued (resp. alert) session is the tied session with the greater cumulative sleep-deprivation dose — i.e. the later test in protocol order. Rationale: the protocol orders tests by increasing deprivation, so among equal scores the later session is the stronger dose. The rule uses protocol design only, never signal data. (Affects Participant 11: tests 2 and 3 both KSS 7 → test 3 is the fatigued session.)
+- **A2 — Participant 12 excluded from both arms.** Only test 1 has data, so no within-person contrast exists for either label construction. Realised N: 13 participants (26 sessions) per arm with A1 applied. The feasibility gate is recomputed at realised N, as §"primary contrast" prescribes.
+- **A3 — Placeholder score.** Test 7-1's KSS of 0 is a provider placeholder for a session that was never recorded; treated as missing, not as a score.
+Status: proposed — to be confirmed through the usual review before any DROZY model runs. The locked rules above are unchanged.
