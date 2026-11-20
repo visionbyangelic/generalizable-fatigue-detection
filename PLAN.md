@@ -70,20 +70,20 @@ Non-negotiable, applies to every fold:
 
 Every experiment log must state how these were satisfied (see `experiments/README.md`).
 
-## 8. Platform Architecture — Simplified (updated 20 Nov 2026)
+## 8. Platform Architecture — Colab (my decision, 20 Nov 2026)
 
-Kaggle and Colab are two doors to the same free GPU — we do NOT need both. **Kaggle is the only compute engine to start.**
+I directed: **use Google Colab**, with the Google account I already has access to (visonbyangelic@gmail.com, already signed in, free tier — no premium, which is fine for this project's model sizes). This supersedes the earlier Kaggle-first simplification.
 
 | Layer | Role | Access needed |
 |---|---|---|
-| **GitHub** (private repo `fatigue-detection-thesis`) | Home — all code, notebooks, docs, results logs, thesis notes. The reproducible deliverable. | I creates repo + fine-grained PAT (read/write, that repo only) via Secure Vault |
-| **Kaggle** | **The sole GPU training engine.** I pushes code+data via API/CLI, runs notebooks headlessly, pulls results back to repo. Free GPU quota is enough if LOSO runs are lean. | Kaggle API token (`kaggle.json`) via Secure Vault |
+| **GitHub** (private repo `fatigue-detection-thesis`) | Home — all code, notebooks, docs, results logs, thesis notes. The reproducible deliverable. | ✅ DONE 20 Nov 2026 — repo created, SSH-key push working |
+| **Google Colab** | **The GPU training engine.** Notebooks live in GitHub, open/run in Colab; I drives Colab in the browser using the already-signed-in visonbyangelic@gmail.com account. Dataset reaches Colab from its official Drive link / my Drive — never a public re-upload (no licence to redistribute). | Already signed in — nothing needed from I |
 | **my VM** (small CPU) | Development, data inspection, preprocessing, classical baseline. | Already available |
-| ~~Google Colab~~ | **Parked — not part of starting setup.** Optional extra later only if I wants to run notebooks herself, or Kaggle quota runs short. Requires nothing, adds nothing to access list now. | — |
+| ~~Kaggle~~ | Not used. Named fallback only if Colab free-tier limits ever block a run. No token needed. | — |
 
-Flow: develop locally → commit to GitHub → run heavy CNN on Kaggle → results (CSV + logs + plots) committed back to GitHub.
+Flow: develop locally → push to GitHub → run heavy CNN in Colab (notebook pulled from GitHub, data pulled from the official source) → results (CSV + logs + plots) committed back to GitHub.
 
-**Status (updated 20 Nov 2026):** Local scaffold built; **dataset downloaded and verified locally** (see §3 outcome). No external accounts created, nothing pushed — still waiting on my GitHub + Kaggle access (see §11) before code leaves this VM.
+**Status (20 Nov 2026):** dataset downloaded + verified locally; repo live with scaffold pushed; Colab verification in progress.
 
 ## 9. Repo Structure
 
@@ -161,12 +161,11 @@ fatigue-detection-thesis/
 
 **Priority rule:** If time squeezes, cut Weeks 5–6 first. Core (RQ1, RQ2, RQ4) must be complete and clean.
 
-## 11. Access Checklist — What I Needs From I (only two things)
+## 11. Access Checklist — COMPLETE (20 Nov 2026)
 
-- [ ] **1. GitHub:** username + private repo created (suggested name `fatigue-detection-thesis`) + fine-grained PAT — read/write on that repo only — entered via Secure Vault (never paste in chat)
-- [ ] **2. Kaggle:** API token (`kaggle.json` from kaggle.com → Settings → API → Create New Token) via Secure Vault
-
-Colab is NOT on this list — parked as an optional extra for later, needs no setup now.
+- [x] **GitHub:** repo `fatigue-detection-thesis` created under Visionbyangelic (private); login saved via Secure Vault; pushes via SSH key "Muse — thesis VM"
+- [x] **Google Colab:** I uses the already-signed-in visonbyangelic@gmail.com account (free tier) — nothing needed from I
+- Kaggle token: **no longer needed** (my Colab decision, 20 Nov 2026)
 
 **First milestone once access lands:** obtain FatigueSet + complete Week 1 data inspection (`notebooks/01_data_inspection.ipynb` + `docs/dataset_notes.md`).
 
