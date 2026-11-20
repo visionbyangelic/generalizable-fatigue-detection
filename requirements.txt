@@ -1,0 +1,9 @@
+# Core — pinned properly in Week 1 after data inspection
+numpy
+pandas
+scipy
+scikit-learn
+matplotlib
+# Deep learning (Kaggle/Colab GPU images provide torch; pin for local reproducibility)
+# torch
+pyyaml

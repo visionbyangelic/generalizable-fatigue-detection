@@ -1,0 +1,45 @@
+# Track — Generalizable Fatigue Detection Thesis
+
+> **my building rule (20 Nov 2026, permanent):** Everything done on this project goes in this file — actions, results, AND errors/issues, not just successes. Updated at the end of every work session without exception. I reads this daily to know exactly where the project stands. **Nothing counts as done until it's logged here.**
+>
+> Format per day: **Done / Errors & issues / Results / What's left**
+
+---
+
+## 2026-11-20
+
+### Done
+- Read the full thesis proposal: "Generalizable Fatigue Detection from Wearable Physiological Signals" (I Charles) — `~/workspace/user/files/I_Charles_Revised_Thesis_Proposal.pdf`
+- Scaffolded local project at `~/workspace/thesis-fatigue/`: PLAN.md, README.md, .gitignore, requirements.txt, `src/` (data/preprocessing/labels/features/models/evaluation/utils), `notebooks/`, `experiments/` (with results-logging convention in experiments/README.md), `docs/` (label_rules.md template, dataset_notes.md, methods_notes.md), `configs/`, `results/{tables,figures}`, `data/{raw,interim,processed}` (data kept out of git)
+- Platform decision made and then simplified at my question: GitHub = repo home, **Kaggle = ONLY GPU compute engine to start** (I drives it headlessly via API), Colab parked as optional extra. PLAN.md §8/§11 updated to match.
+- Colab account note recorded: I uses her main Google account for Colab personally; I does not need those details and never asks for passwords. If I ever drives Colab it's visonbyangelic@gmail.com (already signed in, free tier, no premium — fine).
+- Step 1 launched: full FatigueSet research (official source, distribution, licence, contents, mirrors, existing code, Muse S practicalities) + dataset obtain attempt — research in progress, outcome to be logged here when it lands.
+- Literature research launched: docs/literature.md to be built from the proposal's 7 references, expanded by theme, each source mapped to RQ1–RQ4.
+- This track.md created at my instruction; rule recorded in memory so every future session follows it.
+- GitHub repo creation launched via browser for @visionbyangelic / `fatigue-detection-thesis` (private) — outcome to be logged here when known.
+
+### Errors & issues
+- None encountered yet in code (no code run yet).
+- Process issue (resolved): initial platform plan listed Kaggle AND Colab as if both were needed — I flagged this ("Why do you need both kaggle and colab at the same time?"); corrected to Kaggle-only. Lesson: keep the setup minimal.
+
+### Results
+- PLAN.md: complete project plan — architecture, repo structure, week-by-week checklist (Weeks 1–8), access checklist.
+- Preliminary result under investigation (from proposal): single-participant 1D-CNN, session labels, 99.18% fatigued-class recall — open question: fatigue vs session artefacts.
+- **DATASET DOWNLOADED + VERIFIED (20 Nov 2026):** `data/raw/fatigueset.zip` — 641,686,295 bytes, MD5 `a358db31c27a8c7e0a1ef255b7c6ba28`, SHA-256 `2db4c9d785307a309f66a404d90a5dbdbe1a45d0a954f980204dd39e2a7fd8ca`, CRC pass on all 1,473 files, 12 participants × 3 sessions × 39 core files, nothing missing. Source: official esense.io Google Drive link — **no form, no sign-in, no personal details submitted.** Docs: `docs/fatigueset-research.md` (24 KB, sourced), `docs/DATA_INVENTORY.md`. PLAN.md updated, Week 1 "obtain dataset" item checked off.
+- **Critical findings from the research (see fatigueset-research.md §8):**
+  - Subjective ratings are only **3 per session (108 total)** — no per-window ground truth; window labels need a documented block/interpolation rule. This shapes Week 1 label work.
+  - "Sessions" = low/medium/high treadmill-intensity days (counterbalanced, up to 19 days apart) — session labels encode intensity+day, strengthening the RQ4 artefact concern.
+  - Original paper: no significant correlation between subjective ratings and task RTs — the two label sets are expected to disagree.
+  - **No licence is stated** for FatigueSet (© Nokia Bell Labs 2021; citation requested). Rule for us: research use + citation; **never redistribute raw data** (not in GitHub, not re-posted to Kaggle as a public dataset).
+  - Published anchors: FATE (2026) saw random-split AUC 0.96–1.00 collapse to 0.47–0.62 on unseen participants in FatigueSet; FatigueSense (2025) AUC 0.63–0.88. No published 1D-CNN raw-EEG LOSO study of FatigueSet found — the thesis contribution looks unoccupied.
+- **GitHub repo CREATED (20 Nov 2026): https://github.com/visionbyangelic/fatigue-detection-thesis** — PRIVATE (verified badge on repo page), description set, initialised with README (1 commit on main). Sign-in path: I saved her GitHub login via the Secure Vault card in the thesis chat (Option 1, her choice), then GitHub device verification by emailed code, which she provided. No new account created, no password reset.
+- Still open: pushing the local scaffold as the next commit — git push cannot use the web password; it needs a GitHub personal access token (PAT). Awaiting that step (see What's left).
+
+### What's left
+- [x] FatigueSet research doc: `docs/fatigueset-research.md` — DONE 20 Nov 2026
+- [x] Dataset: downloaded + verified + inventoried — DONE 20 Nov 2026 (see Results)
+- [x] Literature: `docs/literature.md` — DONE 20 Nov 2026: 23 sources (all 7 proposal seeds verified + 16 expansion), each with full citation, verified summary, RQ1–RQ4 relevance; 1 preprint flagged (Cui et al. 2025), paywalled items marked abstract-only. Key anchors: Brookshire 2024 (>99% segment-holdout → 53% subject-holdout in one case); Lan et al. 2019 LOSO (CNN did NOT beat classical baseline cross-subject); FATE 2026 on FatigueSet (AUC 0.96–1.00 random → 0.47–0.62 unseen). **Positioning caution logged:** FATE already applied the leakage critique to FatigueSet, so the thesis claim is NOT "first to notice leakage" — it is the first dedicated, label-aware (subjective vs performance vs session), model-comparative (1D-CNN vs band-power, identical splits) LOSO study of FatigueSet EEG, plus the missing multimodal LOSO test (RQ3).
+- [x] GitHub: private repo `fatigue-detection-thesis` created under @visionbyangelic — DONE 20 Nov 2026: https://github.com/visionbyangelic/fatigue-detection-thesis
+- [ ] GitHub: push local scaffold (PLAN.md, track.md, docs/, src/ structure — 21 files, git-staged locally) as the next commit — needs a personal access token (PAT) for git push; web login alone can't push
+- [ ] Kaggle API token via Secure Vault (still needed from I to run training headlessly)
+- [ ] Week 1: data inspection notebook + locked label rules (`docs/label_rules.md`)

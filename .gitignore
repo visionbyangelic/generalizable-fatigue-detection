@@ -1,0 +1,28 @@
+# Data — never commit raw/processed FatigueSet
+data/raw/
+data/interim/
+data/processed/
+*.zip
+*.tar.gz
+
+# Secrets — never commit tokens
+kaggle.json
+.env
+*.token
+
+# Python
+__pycache__/
+*.py[cod]
+.venv/
+venv/
+.ipynb_checkpoints/
+
+# Model checkpoints / large outputs
+*.pt
+*.pth
+*.h5
+checkpoints/
+wandb/
+
+# OS
+.DS_Store
