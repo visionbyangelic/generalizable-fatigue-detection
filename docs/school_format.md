@@ -1,4 +1,4 @@
-# School Project Format — Requirements (from my uploads, 20 Nov 2026)
+# School Project Format: Requirements (from my uploads, 20 Nov 2026)
 
 Sources: `~/workspace/user/files/SCHOOLS_PROJECT_FORMATS_Office.docx` and `~/workspace/user/files/INSTITUTIONAL_G-WPS_Office.docx`
 
@@ -7,14 +7,14 @@ Sources: `~/workspace/user/files/SCHOOLS_PROJECT_FORMATS_Office.docx` and `~/wor
 - **Font:** Times New Roman, 12 pt. **Spacing:** double line. Standard institutional margins. Headings consistent.
 - **Referencing:** APA, 6th edition, strictly.
 - **Plagiarism:** must not exceed 30% on approved detection tools.
-- **AI-generated content:** must not exceed 30% of the project writing; the submitted work must reflect the student's own intellectual effort. → This is why **I write the paper myself**; the build work and complete tracking live in track.md, and any draft produced along the way is purely material for me to rewrite in my own words — I will not submit text I didn't write.
+- **AI-generated content:** must not exceed 30% of the project writing; the submitted work must reflect the student's own intellectual effort. → This is why **I write the paper myself**; the build work and complete tracking live in track.md, and any draft produced along the way is purely material for me to rewrite in my own words, I will not submit text I didn't write.
 - **Supervisor:** work goes to the assigned supervisor for vetting/proofreading; **no defense without the supervisor's written approval**; final submission needs supervisor signature; hard + soft copies.
 - **Defense:** physical, in-person, held annually **October–November**.
-- Content must be thoroughly developed — superficial treatment risks rejection/revision.
+- Content must be thoroughly developed, superficial treatment risks rejection/revision.
 - Final binding: hardbound.
 
-## Chapter structure — WHICH SCHOOL? (to confirm)
-The formats doc gives per-school structures. Computer Science in this institution most plausibly sits in the **School of Industrial and Applied Sciences** (structure B below) — but this is NOT confirmed. I to confirm her school; until then, track material so it can feed either structure.
+## Chapter structure: WHICH SCHOOL? (to confirm)
+The formats doc gives per-school structures. Computer Science in this institution most plausibly sits in the **School of Industrial and Applied Sciences** (structure B below), but this is NOT confirmed. I to confirm her school; until then, track material so it can feed either structure.
 
 ### A. School of Engineering Technology
 Prelims: Title Page, Certification, Dedication, Acknowledgements, Abstract, Table of Contents, List of Figures, List of Tables, List of Plates (if applicable), List of Symbols/Abbreviations
@@ -34,7 +34,7 @@ Prelims: same as Engineering (may include List of Equations)
 - Ch 5 Conclusion and Recommendations: 5.1 Summary · 5.2 Conclusion · 5.3 Recommendations · 5.4 Contribution to Knowledge · 5.5 Limitations
 - Back matter: References, Appendices (raw data, lab results)
 
-(Other schools in the doc — Communication Arts, Business Management Technology, Hospitality Management — do not fit Computer Science and are not reproduced here; full text is in the source .docx files.)
+(Other schools in the doc, Communication Arts, Business Management Technology, Hospitality Management, do not fit Computer Science and are not reproduced here; full text is in the source .docx files.)
 
 ## What this means for track.md
-I write from track.md, so it must contain EVERYTHING in my own-words-ready form: every step taken, every parameter and why, every error and fix, every number/result with its file, and enough methodological detail to write Chapters 3–4 (design, procedures, testing, results) without needing to ask anyone. Length is explicitly not a concern — completeness is.
+I write from track.md, so it must contain EVERYTHING in my own-words-ready form: every step taken, every parameter and why, every error and fix, every number/result with its file, and enough methodological detail to write Chapters 3–4 (design, procedures, testing, results) without needing to ask anyone. Length is explicitly not a concern, completeness is.

@@ -1,4 +1,4 @@
-# Week 2 — Phase A outcome and STOP decision (20 Nov 2026)
+# Week 2: Phase A outcome and STOP decision (20 Nov 2026)
 
 ## What was done
 Phase A (preprocessing + window dataset) was implemented **exactly** as written in
@@ -10,7 +10,7 @@ matching index CSVs, and `preprocessing_log.csv` (per session/block accounting).
 Sanity check passed: **0 of 177 windows cross a >100 ms gap**; no window crosses
 a run boundary (windows are cut inside runs by construction and verified).
 
-## The problem — the locked rejection rules leave almost no data
+## The problem: the locked rejection rules leave almost no data
 Of **1,568 candidate M1/M3 windows, only 199 (12.7%) survive** the §0 rejection
 rules. Cause breakdown (M1+M3): amplitude criterion (a) rejects ~87% of
 candidates; fit criterion (c) is secondary; flatline (b) rejects none.
@@ -26,12 +26,12 @@ Consequences for the locked protocols:
 - Single-class only: P03 (2 alert / 0 fatigued), P11 (4/0), P12 (3/0).
 - Both classes: only P01 (11/20), P02 (32/23), P08 (5/23), P09 (17/28), P10 (3/6).
 - The mandatory **negative control is unusable as specified**: the 4
-  non-increasing sessions yield 22 windows, all M3, all from P12/S03 — no M1
+  non-increasing sessions yield 22 windows, all M3, all from P12/S03, no M1
   windows, nothing from P07/S01, P07/S02 or P10/S03.
 
 ## Decision
 Per the build instruction ("if a rule proves impossible to implement as written,
-STOP that part and document why — do not silently deviate"), **Phases B and C
+STOP that part and document why, do not silently deviate"), **Phases B and C
 were NOT run**: the within-subject / session-out evaluations in PLAN §6 are
 undefined for 7 of 12 participants on the faithfully-built dataset, and any
 numbers produced from the 5 remaining participants would not be the registered
@@ -54,7 +54,7 @@ candidate fix, but adopting it is an amendment decision, not an implementer's.
    a frontal-only vs all-channel comparison as the pre-registered variant.
 2. **Frontal-only primary dataset** (AF7/AF8), temporal channels sensitivity-only.
 3. **Per-channel rejection counts with a quota** (e.g. window survives if ≥3 of
-   4 channels pass) — weaker provenance than 1–2 in the literature we reviewed.
+   4 channels pass), weaker provenance than 1–2 in the literature we reviewed.
 Any option must be written into `label_rules.md` as a dated amendment with
 rationale, and Phase A re-run, before Phase B/C.
 

@@ -1,4 +1,4 @@
-# RQ4 — Session-Label Diagnostic (21 Nov 2026)
+# RQ4: Session-Label Diagnostic (21 Nov 2026)
 
 **Question (PLAN.md RQ4, docs/label_rules.md section 3):** how much of
 the apparent performance in this literature is an artefact of labelling

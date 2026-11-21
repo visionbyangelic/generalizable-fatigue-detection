@@ -1,4 +1,4 @@
-# MNAR diagnostic — Amendment 1 mandatory check (20 Nov 2026)
+# MNAR diagnostic: Amendment 1 mandatory check (20 Nov 2026)
 
 **Question (Reviewer 2 review 4 condition):** does temporal-channel
 (TP9/TP10) failure correlate with the fatigued block (M3) or with time-on-task?
@@ -13,7 +13,7 @@ and by session time (first vs second half of each session's candidate
 windows), chi-square test. Full numbers: `results/tables/mnar_diagnostic.csv`.
 
 ## Verdict
-**The feared mechanism is NOT supported — the association runs the other
+**The feared mechanism is NOT supported, the association runs the other
 way.** Temporal failure is significantly *higher* in M1 than in M3
 (all sessions: 91.2% vs 81.9%, −9.3 pp, p ≈ 7×10⁻⁸; primary sessions only:
 90.4% vs 84.5%, p ≈ 7×10⁻⁴) and *lower* in the second half of sessions than
@@ -21,8 +21,8 @@ the first (85.1% vs 89.3%, p ≈ 0.015). Contact quality, if anything, improves
 as sessions proceed (settling-in), it does not degrade with fatigue.
 
 **Frontal channels too (Reviewer 1 peer-review addition, 20 Nov 2026):** the
-mirror concern — that blink-heavy fatigued windows might be disproportionately
-rejected by the *frontal* gate, biasing retention against M3 — is also **not
+mirror concern, that blink-heavy fatigued windows might be disproportionately
+rejected by the *frontal* gate, biasing retention against M3, is also **not
 supported**. Frontal failure (AF7 or AF8 failing any criterion = the
 Amendment-1 rejection event) is likewise *higher in M1 than M3*: all sessions
 31.98% vs 23.97% (−8.0 pp, p ≈ 6×10⁻⁴); primary sessions only 30.88% vs
@@ -33,7 +33,7 @@ slightly biased against alert windows, and the per-session M1 cap makes
 class counts symmetric by construction regardless.
 
 **Caveats, stated plainly:**
-- Missingness is therefore *not* MCAR — it is block-associated — which is
+- Missingness is therefore *not* MCAR, it is block-associated, which is
   exactly why Amendment 1 masks with explicit indicators instead of dropping
   windows, and why per-block masking rates are reported
   (`results/tables/retention_amendment1.csv`).
