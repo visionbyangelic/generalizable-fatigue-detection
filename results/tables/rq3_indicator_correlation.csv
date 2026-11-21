@@ -1,0 +1,6 @@
+,valid_TP9,valid_TP10,both_temporals_masked,hr_valid,eda_valid
+valid_TP9,1.0,0.7572,-0.8621,-0.1765,-0.1695
+valid_TP10,0.7572,1.0,-0.9211,-0.2063,-0.2101
+both_temporals_masked,-0.8621,-0.9211,1.0,0.1997,0.1941
+hr_valid,-0.1765,-0.2063,0.1997,1.0,0.9911
+eda_valid,-0.1695,-0.2101,0.1941,0.9911,1.0
