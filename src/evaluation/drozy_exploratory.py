@@ -312,6 +312,71 @@ def contrast():
     print(split.to_string(index=False), flush=True)
 
 
+# ------------------------------------------------------- paired KSS-order
+def paired_order():
+    """Paired contrast BA(KSS) - BA(order), all-channel features,
+    paired by participant, plus the share of the KSS-RT paired
+    contrast that is carried by the four disagreeing participants.
+
+    The KSS-minus-order contrast was owed once the order arm existed:
+    the two arms' label assignments are identical for 11 of the 13
+    participants, so the unpaired estimates (0.602 vs 0.536) cannot by
+    themselves say how far apart the two label constructions really
+    score on the same people. Pairing by participant is the same
+    recipe as Check 4 (10,000 bootstrap resamples of the per-
+    participant differences, rng 42).
+
+    The share computation is bookkeeping on stored numbers: the
+    overall KSS-RT mean difference is the average of the 13 per-
+    participant differences, so each group's contribution to it is
+    (group size x group mean difference) / (13 x overall difference).
+    It is reported so the write-up can say, with a number, how much of
+    the label contrast lives in the disagreeing subset."""
+    a = pd.read_csv(TAB / "baseline_loso_drozy_kss_all_summary.csv") \
+        .set_index("participant").balanced_accuracy
+    b = pd.read_csv(TAB / "baseline_loso_drozy_order_all_summary.csv") \
+        .set_index("participant").balanced_accuracy
+    diff = (a - b).dropna()
+    rng = np.random.default_rng(42)
+    idx = rng.integers(0, len(diff), size=(10_000, len(diff)))
+    means = diff.values[idx].mean(axis=1)
+    out = pd.DataFrame([{
+        "contrast": "BA(KSS all-channel) - BA(protocol-order "
+                    "all-channel), paired by participant",
+        "n_participants": len(diff), "mean_difference": diff.mean(),
+        "ci95_low": float(np.percentile(means, 2.5)),
+        "ci95_high": float(np.percentile(means, 97.5)),
+        "bootstrap_share_above_zero": float((means > 0).mean())}])
+    out.to_csv(TAB / "drozy_paired_contrast_kss_order.csv", index=False)
+    print(f"paired KSS-order: mean diff {diff.mean():.3f} "
+          f"[{np.percentile(means, 2.5):.3f}, "
+          f"{np.percentile(means, 97.5):.3f}] n={len(diff)} "
+          f"share>0 {float((means > 0).mean()):.3f}", flush=True)
+
+    rt = pd.read_csv(TAB / "baseline_loso_drozy_rt_all_summary.csv") \
+        .set_index("participant").balanced_accuracy
+    acct = pd.read_csv(TAB / "drozy_label_agreement.csv")
+    d_all = (a - rt).dropna()
+    dis = acct.loc[~acct.fatigued_agrees.astype(bool), "participant"]
+    agr = acct.loc[acct.fatigued_agrees.astype(bool), "participant"]
+    share = pd.DataFrame([
+        {"group": "disagree", "n_participants": len(dis),
+         "participants": ",".join(dis),
+         "mean_kss_minus_rt": float(d_all.reindex(dis).mean()),
+         "share_of_total_contrast":
+             float(d_all.reindex(dis).sum() / d_all.sum())},
+        {"group": "agree", "n_participants": len(agr),
+         "participants": ",".join(agr),
+         "mean_kss_minus_rt": float(d_all.reindex(agr).mean()),
+         "share_of_total_contrast":
+             float(d_all.reindex(agr).sum() / d_all.sum())}])
+    share.to_csv(TAB / "drozy_contrast_share.csv", index=False)
+    print(share.to_string(index=False), flush=True)
+    print(f"overall KSS-RT mean difference {d_all.mean():.4f} "
+          f"(n={len(d_all)})", flush=True)
+
+
 if __name__ == "__main__":
     cmd = sys.argv[1] if len(sys.argv) > 1 else "audit"
-    {"audit": audit, "order": order, "contrast": contrast}[cmd]()
+    {"audit": audit, "order": order, "contrast": contrast,
+     "paired_order": paired_order}[cmd]()

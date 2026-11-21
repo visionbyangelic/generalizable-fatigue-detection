@@ -190,19 +190,84 @@ this is a description of where the contrast lives, not a finding in
 its own right, and it is exactly why the headline wording says the
 contrast rests on a small disagreeing subset.
 
+Wording note (added with Check 6, 21 Nov 2026): the conclusion of
+Check 3 above was written before review 20 tightened the language on
+session order. "Weakened" should be read in the narrower sense
+Check 6 states: protocol order alone does not reach significance,
+and the paired sleepiness-minus-order separation rests on the
+2 participants whose labels differ between the arms. Session order
+is not ruled out as a contributor.
+
+## Check 6: paired sleepiness-minus-order contrast, and who carries
+## the label contrast (added 21 Nov 2026, after review 20)
+
+Why this was owed. Check 3 compared two unpaired estimates (0.602
+for sleepiness labels, 0.536 for order labels). Review 20 pointed
+out what that comparison cannot do: the two label assignments are
+identical for 11 of the 13 participants, so the gap between the
+arms is largely a statement about the 2 participants whose
+sleepiness labels break with session order (P02 and P13). The
+paired contrast, scoring the same people under both label
+assignments, is the number that was missing.
+
+Computation. Per-participant balanced accuracies from the stored
+summaries of the KSS all-channel arm and the protocol-order
+all-channel arm, differenced participant by participant, bootstrap
+over the 13 differences (10,000 resamples, rng 42), the same recipe
+as Check 4. Table: results/tables/drozy_paired_contrast_kss_order.csv.
+Code: the paired_order subcommand of src/evaluation/
+drozy_exploratory.py.
+
+Result. BA(KSS) minus BA(order) = 0.066, 95% interval [0.031,
+0.105], n = 13. Every one of the 10,000 resampled means was above
+zero.
+
+Reading, in the tightened wording. Protocol order alone does not
+reach significance against its own null (Check 3: 0.536,
+p = 0.229), and on the same participants the sleepiness labels
+score 0.066 higher than the order labels, with an interval clear of
+zero. That is a real paired separation, but it rests on the
+2 participants whose labels differ between the arms: for the other
+11 the two arms use identical labels, and their fold scores still
+move a little because the training labels of the remaining
+participants change. So this check does not rule session order out.
+It says the sleepiness labels carry something the order labels do
+not, measured on the same people, and that the size of that
+something is carried by a very small number of participants. The
+interval inherits the Check 1 caveat (fold scores are correlated
+through shared training data, so these bootstrap intervals are
+location intervals, not tests).
+
+Bookkeeping on the Check 4 contrast, also asked for by review 20:
+of the total +0.120 mean KSS-minus-RT difference, 62% is
+contributed by the 4 participants whose two label arms disagree on
+the fatigued session (their mean paired difference is 0.242,
+against 0.065 in the agreeing nine). Table:
+results/tables/drozy_contrast_share.csv. The RT arm's 0.388 in that
+subset (Check 5) is largely mechanical: where the two constructions
+choose different sessions, the RT labels point to the opposite
+session from the one the sleepiness construction calls fatigued,
+so a model that tracks the session-level structure the sleepiness
+labels follow is scored against the RT labels there.
+
 ## What these checks change
 
 No headline number changes. The claim language is now the locked
 sentence: KSS-extreme labels were decodable across participants;
 RT-extreme labels from the same recordings were not; this contrast
 is not isolated from session order and rests on a small disagreeing
-subset. The checks weaken the strongest alternative explanation
-(session order alone does not reproduce the KSS score), verify that
-the reported intervals and p-values were computed as described, put
-exact counts on the disagreeing subset (4 of 13), and measure the
-paired arm difference at 0.120 [0.062, 0.179]. Everything remains
-estimation-only under the feasibility gate, and the proposed
-positive control (Amendment 2, drafted in
-docs/dataset2_preregistration.md) is still the missing piece for any
+subset. The checks verify that the reported intervals and p-values
+were computed as described, put exact counts on the disagreeing
+subset (4 of 13, carrying about 62% of the paired label contrast),
+measure the paired arm difference at 0.120 [0.062, 0.179], and add
+the paired sleepiness-minus-order contrast at 0.066 [0.031, 0.105].
+On session order the position is the tightened one from review 20:
+protocol order alone does not reach significance, and the
+sleepiness labels score higher than order labels on the same
+participants, but the separation rests on the 2 participants whose
+labels differ between the arms, so session order is not ruled out
+as a contributor. Everything remains estimation-only under the
+feasibility gate, and the positive control (Amendment 2 in
+docs/dataset2_preregistration.md) is the missing piece for any
 statement about the RT arm's sensitivity or about cross-dataset
 ceilings.

@@ -115,20 +115,30 @@ docs/drozy_exploratory_checks.md; the short version:
   one the locked claim wording refers to.
 - Protocol-order arm: labels from session order alone (earliest
   session versus latest) score 0.536 [0.493, 0.572], p = 0.229
-  all-channel and 0.545 [0.502, 0.587], p = 0.154 Fz-only. The order
-  arm does not reproduce the KSS score, so the pure session-order
-  explanation of the KSS result is weakened. It is not removed as a
-  contributor: order labels agree with KSS labels for 11 of 13
-  participants by construction, and time awake stays entangled with
-  sleepiness in this protocol. The contrast is therefore still not
-  isolated from session order, as the locked wording says.
+  all-channel and 0.545 [0.502, 0.587], p = 0.154 Fz-only: protocol
+  order alone does not reach significance. The paired contrast on
+  the same participants puts BA(KSS) minus BA(order) at
+  0.066 [0.031, 0.105]. That separation rests on the 2 participants
+  whose labels differ between the arms (P02 and P13); for the other
+  11 the two arms use identical labels. Session order is therefore
+  not ruled out as a contributor: order labels agree with KSS labels
+  for 11 of 13 participants by construction, and time awake stays
+  entangled with sleepiness in this protocol. The contrast is still
+  not isolated from session order, as the locked wording says.
 - Paired contrast: BA(KSS) minus BA(RT) is 0.120 [0.062, 0.179]
   paired by participant (all-channel).
 - Agree/disagree split: the KSS arm scores about the same whether
   the arms agree on the fatigued session (0.590, n = 9) or disagree
   (0.630, n = 4); the RT arm drops to 0.388 in the disagreeing four.
-  With n = 4 that split is a description of where the contrast
-  lives, not a finding.
+  Bookkeeping on the paired differences: about 60% of the +0.120
+  KSS-minus-RT contrast (62% computed from the stored fold scores)
+  is carried by those 4 participants, whose mean paired difference
+  is 0.242 against 0.065 in the agreeing nine. The RT arm's 0.388
+  in that subset is largely mechanical: there the RT labels point
+  to the opposite session from the one the KSS labels call
+  fatigued, so a model tracking the session structure the KSS labels
+  follow is scored against them. With n = 4 that split is a
+  description of where the contrast lives, not a finding.
 
 ## Against the pre-declared outcome table
 
