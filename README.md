@@ -43,44 +43,19 @@ Consumer EEG headbands are cheap enough to put fatigue monitoring in trucks, fac
 
 ## Results
 
-### RQ1: generalisation is three tiers, not one gap
+Short version: when the evaluation is honest, the EEG fatigue signal on FatigueSet is not there, and the numbers that look like it are measuring something else. What follows is what I found, dataset by dataset, and then why I think it matters beyond this project.
 
-- **Same-session estimate: 0.744** balanced accuracy. This number is position-confounded: window position inside the block alone ranks the labels perfectly, and a block permutation null gives 0.508 (p = 0.612). It is an upper bound on separability, not evidence of decoding.
-- **Honest within-subject: at chance.** Baseline 0.484, CNN 0.493.
-- **Leave-one-participant-out: at chance.** Baseline 0.508, CNN 0.493.
+On FatigueSet, both models sit at chance on people they have never seen: leave-one-participant-out balanced accuracy 0.508 for the band-power baseline and 0.493 for the EEGNet CNN, with honest within-subject evaluation also at chance (0.484 and 0.493). The one high number, 0.744 within a session, is position-confounded: where a window sits inside its block ranks the labels perfectly on its own, and a block permutation null scores 0.508 (p = 0.612), so 0.744 is an upper bound on separability, not decoding. On the identical window set the CNN and baseline differ by +0.005 [-0.068, +0.071]. The conclusion I locked: no evidence that either model exceeds chance on unseen participants on FatigueSet, and no evidence of a CNN advantage. The CNN half of that is weak evidence, because 16 of its 55 fits were near-constant and a constant fit scores exactly 0.5; the null belongs to this configuration, not to neural networks in general.
 
-Because both honest tiers sit at the floor, the pre-registered within-minus-LOPO gap is uninformative, and RQ1 is reported as the three tiers above. The pipeline itself is not blind: on FatigueSet it recovers an injected effect down to a known minimum size (theta ×1.5 / alpha ×1.25), so these nulls are informative rather than a broken pipeline.
+These nulls are not a broken pipeline. On both datasets the pipeline recovers effects I injected at known sizes: on FatigueSet down to theta ×1.5 and alpha ×1.25, and on DROZY the recovery gate passed at 0.798 at full dose and 0.672 at half dose, against pre-set bars of 0.75 and 0.60. When it reports nothing, nothing of that size was there to find.
 
-### RQ2: the CNN does not beat the baseline on unseen participants
+My preliminary result is the clearest case. The preliminary result reproduces in its own configuration (logistic regression 1.000, CNN 0.993 balanced accuracy), but there the fatigued class coincides almost perfectly with a session-wide amplitude regime that fails the pre-declared quality criterion (mask-retained 97.1% vs 2.5%). The score therefore identifies the session and cannot be read as evidence of fatigue decoding. The available data do not separate placement or contact differences from state-correlated physiology or behaviour, and I have left that question open rather than picking a mechanism.
 
-- CNN LOPO balanced accuracy **0.493** [0.452, 0.529]; baseline LOPO **0.508** on the primary window pool.
-- On the identical canonical window set, the corrected paired contrast is **+0.005** [-0.068, +0.071].
+DROZY shows the labels deciding what transfers. On identical recordings, subjective sleepiness labels (KSS extremes) decode across participants at 0.602 [0.563, 0.644], while reaction-time labels do not (0.482 [0.421, 0.549]), a paired contrast of +0.120 [0.062, 0.179]. The locked headline: KSS-extreme labels were decodable across participants; RT-extreme labels from the same recordings were not; this contrast is not isolated from session order and rests on a small disagreeing subset. The positive control prices the RT null: injected shifts aligned with RT labels were detected at dose 0.5 and above on a 0.25-step dose grid, so smaller RT-related changes are not ruled out. I also do not claim the pre-registered cross-dataset row: the KSS advantage over FatigueSet is +0.094, under the 0.10 line set in advance for calling it clearly interpretable.
 
-The locked conclusion: **no evidence that either model exceeds chance on unseen participants on FatigueSet, and no evidence of a CNN advantage**, scoped to the frozen EEGNet configuration and early-stopping scheme used here. The CNN null is weak evidence: 16 of 55 fits were near-constant (predicting one class for almost every test window, which scores exactly 0.5), so the result is a null for this configuration and does not bound what a differently trained network could do.
+The wrist signals are the one positive FatigueSet result, and it comes with its confound attached. Peripheral features (heart rate and electrodermal activity) reach 0.741 [0.633, 0.851] across participants, against 0.539 [0.500, 0.595] for a model given only which windows have valid wrist data, an increment of +0.202 [0.085, 0.314], and +0.230 [0.128, 0.332] over EEG alone. The locked claim: peripheral features recover the protocol-defined M1/M3 contrast across participants, and the design cannot separate fatigue from exercise-related physiology. The early block is pre-treadmill and the late block post-treadmill, and the heart-rate gap scales with the day's treadmill intensity, so this is exertion physiology tracking the protocol, not a fatigue detector.
 
-### DROZY: the labels, not the recordings, decide what transfers
-
-This is an exploratory dissociation from a pre-registered pipeline, reported in that framing.
-
-- Subjective (KSS-extreme) labels: LOPO **0.602** [0.563, 0.644], p = 0.005.
-- Reaction-time (RT-extreme) labels, on the same recordings: LOPO **0.482** [0.421, 0.549], p = 0.726.
-- Paired contrast between the two label types: **+0.120** [0.062, 0.179].
-
-The locked headline: **KSS-extreme labels were decodable across participants; RT-extreme labels from the same recordings were not; this contrast is not isolated from session order and rests on a small disagreeing subset.**
-
-The positive control passed its gate: on label-permuted data, the pipeline recovered an injected effect at **0.798** at full dose and **0.672** at half dose, against pre-set bars of 0.75 and 0.60. The control detected RT-aligned injected shifts at dose 0.5 and above on a 0.25-step dose grid, so smaller RT-related band-power changes are **not** ruled out, and the dose scale, calibrated on label-permuted data, is not mapped onto the observed KSS score. The finding is pipeline-specific and sensitivity-bounded. One pre-registered outcome row is deliberately not claimed: the KSS-minus-FatigueSet gap is +0.094, which falls under the pre-registered 0.10 line for calling the cross-dataset difference clearly interpretable.
-
-### RQ4: session labels, and what my preliminary score was measuring
-
-- Swapping the primary labels for plain block-phase labels (early block = alert, late block = fatigued, no subjective filter) changes almost nothing under honest splits: LOPO **0.516** vs **0.508**. The subjective-rise inclusion filter does not matter; the labels were never the source of the FatigueSet null.
-- I rebuilt my preliminary single-participant experiment exactly (Subject 01, its own windowing, chronological split). The headline **reproduces**: logistic regression 1.000 and CNN 0.993 balanced accuracy. But in that setup the fatigued class coincides almost perfectly with a session-wide amplitude regime that fails the pre-declared quality criterion: the artefact mask retains **97.1%** of the alert session's windows and only **2.5%** of the fatigued session's. The score therefore identifies the session and cannot be read as evidence of fatigue decoding. The available data do not separate placement or contact differences from state-correlated physiology or behaviour, and the write-up says so rather than choosing one.
-
-### RQ3: wrist signals recover the protocol contrast, with the confound inside the claim
-
-- Peripheral-only features (mean heart rate, electrodermal level and slope) LOPO: **0.741** [0.633, 0.851]. Indicators-only (which windows have valid wrist data, nothing else): **0.539** [0.500, 0.595]. These two numbers are always reported together.
-- Increments: **+0.202** [0.085, 0.314] over the indicators-only arm, and **+0.230** [0.128, 0.332] over EEG-only. The result holds on the complete-data window pool as well.
-
-The locked claim: **peripheral features recover the protocol-defined M1/M3 contrast across participants, and the design cannot separate fatigue from exercise-related physiology.** The early block sits before the treadmill and the late block after it, so this is not fatigue detection and is never described as such. A descriptive check points the same way: the late-minus-early mean heart-rate gap scales with the day's treadmill intensity (minus 1.3 bpm on low days, +13.3 on medium, +18.2 on high).
+Why this matters: a large share of the fatigue-detection literature reports accuracies in the high nineties from evaluations that share people, sessions or windows between training and test. Under the evaluation those deployments actually need, a model meeting people it has never seen, this study finds the EEG effect at chance on a consumer headset, finds a published-style 99% result measuring session identity instead, and shows the label definition, not the recording, deciding whether anything transfers on clinical EEG. The practical lesson travels: report participant-held-out scores, publish the artefact controls beside the headline, and run a positive control so a null means the signal is absent, not that the pipeline is deaf. Until a fatigue model survives that standard, its accuracy is a property of its evaluation, not of fatigue.
 
 ## Preliminary work
 
