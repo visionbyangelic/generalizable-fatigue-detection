@@ -146,11 +146,18 @@ The pre-registration fixed four rows in advance. None matches the
 observed pattern exactly, and I am not going to pretend otherwise:
 
 - Row 1 (clearly above FatigueSet, interval excludes 0.50, positive
-  control recovered): the first two conditions hold for the KSS arm,
-  but no positive control was run on DROZY in this stage, so the row
-  is not claimed. The pipeline's positive control exists on FatigueSet
-  with the identical frozen feature and model code; whether it
-  recovers on DROZY data is untested here.
+  control recovered): the interval condition holds for the KSS arm,
+  and the control condition is now settled. The positive control was
+  run under Amendment 2 (docs/drozy_positive_control.md) and the
+  comparability gate passed: on label-permuted data the recovery is
+  0.798 at full dose against the 0.75 mark and 0.672 at half dose
+  against the 0.60 mark, so the pipeline recovers an injected effect
+  on DROZY channels about as it does on FatigueSet. What keeps the
+  row from being claimed in full is the first condition's own
+  qualifier: the cross-dataset gap is 0.094, just under the 0.10
+  size the pre-registration treats as clearly interpretable, so the
+  comparison stays a descriptive contrast, and under the
+  amendment's scope rule a passed control upgrades no claim.
 - Row 2 (above chance with RT labels, at chance with KSS labels, a
   label-construction effect): the direction that occurred is the
   reverse. KSS labels were decodable across participants, RT labels
@@ -160,7 +167,12 @@ observed pattern exactly, and I am not going to pretend otherwise:
   the row's wording.
 - Row 3 (at chance, positive control recovered): does not describe
   the KSS arm, which is not at chance. It describes the RT arm's
-  point pattern, without the control.
+  point pattern, and the control now prices that null: the RT arm's
+  minimum detectable effect is dose 0.5 (theta power x1.5, alpha
+  power x1.25), detected in 5 of 5 repeats, so the RT null excludes
+  injected effects of that size and above under its own label
+  structure, and does not exclude smaller ones (dose 0.25 was
+  detected in only 3 of 5 repeats).
 - Row 4 (high only under random splits): no random-split run was made
   on DROZY, so this row is not in play.
 
@@ -171,11 +183,13 @@ order and rests on a small disagreeing subset. This is an
 exploratory dissociation obtained with a pre-registered pipeline,
 in an estimation-only regime, and its direction reverses the
 pre-registered label prediction; all three qualifiers travel with
-it wherever it is reported. Anything stronger, in particular any
-statement about the RT arm's sensitivity or about absolute ceilings
-on either dataset, waits on the DROZY positive control, which is
-drafted as Amendment 2 in docs/dataset2_preregistration.md and has
-not been run.
+it wherever it is reported. The DROZY positive control has since
+been run under Amendment 2 (docs/drozy_positive_control.md): the
+comparability gate passed and the RT arm's sensitivity is now
+priced (minimum detectable effect at dose 0.5), so the one
+statement about sensitivity this document makes is the one in the
+Row 3 note above. Statements about absolute ceilings on either
+dataset remain out of reach of this design and are not made.
 
 ## Problems encountered
 
