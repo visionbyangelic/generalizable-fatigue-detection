@@ -1,0 +1,14 @@
+model: logistic_regression_multiclass
+C: 1.0
+class_weight: balanced
+features: bandpower_43_amendment1 (see src/features/bandpower.py)
+imputation: training-fold median
+scaling: training-fold StandardScaler
+protocol: within-participant stratified random-window CV, folds = min(5, smallest
+  session count)
+labels: 'PROBE target: session identity (S01/S02/S03) within participant; not a fatigue
+  label'
+seed: split shuffle seed 4
+data: windows_a1_uncapped + windows_a1_control (all retained Amendment-1 windows,
+  all 3 sessions)
+git_commit: f761331

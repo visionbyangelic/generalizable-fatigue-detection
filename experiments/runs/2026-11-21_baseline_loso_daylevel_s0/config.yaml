@@ -1,0 +1,17 @@
+model: logistic_regression
+C: 1.0
+class_weight: balanced
+features: bandpower_43_amendment1 (see src/features/bandpower.py)
+imputation: training-fold median
+scaling: training-fold StandardScaler
+protocol: loso (leave-one-participant-out)
+labels: 'DAY-LEVEL session labels (RQ4 diagnostic, POST HOC, never ground truth):
+  whole earliest recorded session (S01) = alert, whole latest recorded session (S03)
+  = fatigued, middle session excluded; P05 excluded entirely (latest session retained
+  no windows)'
+seed: 's0 by naming convention only: no stochastic element (no cap; logistic regression
+  is deterministic given the data)'
+cap_seed: 0
+data: windows_a1_uncapped + windows_a1_control (all retained Amendment-1 windows),
+  NO M1 cap (cap is a block-label construct)
+git_commit: f761331

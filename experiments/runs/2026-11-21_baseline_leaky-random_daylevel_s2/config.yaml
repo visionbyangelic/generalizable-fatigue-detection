@@ -1,0 +1,16 @@
+model: logistic_regression
+C: 1.0
+class_weight: balanced
+features: bandpower_43_amendment1 (see src/features/bandpower.py)
+imputation: training-fold median
+scaling: training-fold StandardScaler
+protocol: leaky random window split (stratified 5-fold, pooled across participants)
+labels: 'DAY-LEVEL session labels (RQ4 diagnostic, POST HOC, never ground truth):
+  whole earliest recorded session (S01) = alert, whole latest recorded session (S03)
+  = fatigued, middle session excluded; P05 excluded entirely (latest session retained
+  no windows)'
+seed: split shuffle seed 2 (the split is the stochastic element under test)
+cap_seed: 2
+data: windows_a1_uncapped + windows_a1_control (all retained Amendment-1 windows),
+  NO M1 cap (cap is a block-label construct)
+git_commit: f761331
