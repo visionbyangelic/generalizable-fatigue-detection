@@ -1,0 +1,13 @@
+model: logistic_regression
+C: 1.0
+class_weight: balanced
+solver_variant: tight solver sensitivity (tol=1e-08, max_iter=10000)
+features: bandpower_43_amendment1
+imputation: training-fold median
+scaling: training-fold StandardScaler
+protocol: loso (leave-one-participant-out)
+labels: subjective (Week 2 primary pool, restricted32)
+cap_seed: 0
+purpose: RQ4 audit solver sensitivity (docs/rq4_session_labels.md); not a primary
+  result
+git_commit: 1db6b90

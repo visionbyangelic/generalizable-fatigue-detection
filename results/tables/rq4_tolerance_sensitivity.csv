@@ -1,0 +1,11 @@
+comparison,cap_seed,max_abs_proba_diff,mean_abs_proba_diff,label_flips,n_windows
+tight vs standard (current stack),0,0.023193740529973472,0.0008347220558888418,2,806
+tight vs standard (current stack),1,0.00663449239898084,0.0005472332730110503,0,806
+tight vs standard (current stack),2,0.007664821989067594,0.00047333290758632676,1,806
+tight vs standard (current stack),3,0.02593557982283451,0.0007913856661299571,0,806
+tight vs standard (current stack),4,0.007940753967643377,0.0005681204876212307,2,806
+standard (current stack) vs stored Week 2 primary,0,0.002303165968851051,9.996797141699746e-05,0,806
+standard (current stack) vs stored Week 2 primary,1,0.0014102667962573867,0.00010970630125184569,0,806
+standard (current stack) vs stored Week 2 primary,2,0.0018708045471313994,0.00018132711404491707,0,806
+standard (current stack) vs stored Week 2 primary,3,0.0023945936771919696,0.0001506945899506109,0,806
+standard (current stack) vs stored Week 2 primary,4,0.0014347107496782696,0.0001025257865373761,1,806

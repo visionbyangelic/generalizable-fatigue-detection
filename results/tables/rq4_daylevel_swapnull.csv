@@ -1,0 +1,2 @@
+arm,n_participants,observed_mean_ba,null_n_assignments,null_mean,null_sd,null_q025,null_q975,p_two_sided_exact,definition
+day-level LOPO (post hoc),11,0.4841725859851264,2048,0.5,0.06853497472693972,0.36758550619888397,0.632414493801116,0.822265625,exact enumeration of all 2^11 sign flips of per-participant (BA - 0.5); statistic = mean BA; two-sided p = share of assignments with |mean - 0.5| >= |observed - 0.5|
