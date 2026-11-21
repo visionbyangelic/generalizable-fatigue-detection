@@ -1,0 +1,5 @@
+participant,session,scope,candidate_alert_M1,retained_alert_M1,candidate_fatigued_M3,retained_fatigued_M3,capped_alert_in_primary_pool,capped_fatigued_in_primary_pool,source
+P01,S01,per-session,5,5,17,17,5,17,"retention: results/tables/rq4_check3_retention_by_session.csv; capped: test-fold counts in experiments/runs/2026-11-20_baseline_session-out_subjective_s*/metrics.csv"
+P01,S02,per-session,24,22,10,9,9,9,"retention: results/tables/rq4_check3_retention_by_session.csv; capped: test-fold counts in experiments/runs/2026-11-20_baseline_session-out_subjective_s*/metrics.csv"
+P01,S03,per-session,34,2,22,0,0,0,"retention: results/tables/rq4_check3_retention_by_session.csv; capped: no fold exists because S03 retains 0 fatigued windows so the per-session M1 cap is 0 and S03 contributes no windows to the primary pool"
+P01,ALL,participant total,63,29,49,26,14,26,"candidates and retained: results/tables/diagnostics_coverage_by_class.csv and results/tables/retention_amendment1.csv (112 candidates, 55 retained, 49.1% survival); capped: n_alert and n_fatigued in the primary run metrics (n = 40)"
