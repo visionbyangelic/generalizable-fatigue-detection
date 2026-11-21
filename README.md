@@ -84,7 +84,7 @@ The locked claim: **peripheral features recover the protocol-defined M1/M3 contr
 
 ## Preliminary work
 
-This project follows up my earlier prototype, [Neuro-Fatigue-Prediction](https://github.com/visionbyangelic/Neuro-Fatigue-Prediction), a 1D-CNN on one participant's Muse EEG that reported 99.18% recall distinguishing an "alert" session from a "fatigued" session. That prototype is the motivation for RQ4 above: this project rebuilt its setup exactly, reproduced its score, and established what the score was actually measuring.
+This project follows up my earlier prototype, [Neuro-Fatigue-Prediction](https://github.com/visionbyangelic/Neuro-Fatigue-Prediction/tree/v0-preliminary), a 1D-CNN on one participant's Muse EEG that reported 99.18% recall distinguishing an "alert" session from a "fatigued" session. That prototype is the motivation for RQ4 above: this project rebuilt its setup exactly, reproduced its score, and established what the score was actually measuring.
 
 ## Repository structure
 
