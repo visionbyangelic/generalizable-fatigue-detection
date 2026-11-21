@@ -1,0 +1,23 @@
+model,variant,source,subset,n,n_alert,n_fatigued,accuracy,balanced_accuracy,recall_alert,recall_fatigued,roc_auc,ba_ci95_low,ba_ci95_high,recall_fatigued_ci95_low,recall_fatigued_ci95_high,macro_f1,mcc,precision_alert,precision_fatigued
+lr,full (replication),replication run,all,271.0,144.0,127.0,1.0,1.0,1.0,1.0,1.0,1.0,1.0,1.0,1.0,,,,
+lr,full (replication),replication run,a1_retained,142.0,142.0,0.0,1.0,1.0,1.0,0.0,,,,,,,,,
+lr,full (replication),replication run,a1_rejected,129.0,2.0,127.0,1.0,1.0,1.0,1.0,1.0,1.0,1.0,1.0,1.0,,,,
+cnn,full (replication),replication run,all,271.0,144.0,127.0,0.992619926199262,0.9930555555555557,0.9861111111111112,1.0,1.0,0.9791666666666666,1.0,1.0,1.0,,,,
+cnn,full (replication),replication run,a1_retained,142.0,142.0,0.0,1.0,1.0,1.0,0.0,,,,,,,,,
+cnn,full (replication),replication run,a1_rejected,129.0,2.0,127.0,0.9844961240310077,0.5,0.0,1.0,1.0,0.5,0.5,1.0,1.0,,,,
+lr,mask-only,"this run (LR stage, stored folder)",all,271.0,144.0,127.0,0.992619926199262,0.9930555555555556,0.9861111111111112,1.0,0.9990704286964129,0.9791666666666667,1.0,1.0,1.0,0.9925972465034965,0.9853032866852719,,
+lr,mask-only,"this run (LR stage, stored folder)",a1_retained,142.0,142.0,0.0,1.0,1.0,1.0,0.0,,,,,,1.0,0.0,,
+lr,mask-only,"this run (LR stage, stored folder)",a1_rejected,129.0,2.0,127.0,0.9844961240310077,0.5,0.0,1.0,0.9330708661417323,0.5,0.5,1.0,1.0,0.49609375,0.0,,
+lr,af7abl,"this run (LR stage, stored folder)",all,271.0,144.0,127.0,0.992619926199262,0.9930555555555556,0.9861111111111112,1.0,1.0,0.9791666666666667,1.0,1.0,1.0,0.9925972465034965,0.9853032866852719,,
+lr,af7abl,"this run (LR stage, stored folder)",a1_retained,142.0,142.0,0.0,0.9859154929577465,0.9859154929577465,0.9859154929577465,0.0,,,,,,0.49645390070921985,0.0,,
+lr,af7abl,"this run (LR stage, stored folder)",a1_rejected,129.0,2.0,127.0,1.0,1.0,1.0,1.0,1.0,1.0,1.0,1.0,1.0,1.0,1.0,,
+lr,frontalabl,"this run (LR stage, stored folder)",all,271.0,144.0,127.0,0.992619926199262,0.9930555555555556,0.9861111111111112,1.0,1.0,0.9791666666666667,1.0,1.0,1.0,0.9925972465034965,0.9853032866852719,,
+lr,frontalabl,"this run (LR stage, stored folder)",a1_retained,142.0,142.0,0.0,0.9859154929577465,0.9859154929577465,0.9859154929577465,0.0,,,,,,0.49645390070921985,0.0,,
+lr,frontalabl,"this run (LR stage, stored folder)",a1_rejected,129.0,2.0,127.0,1.0,1.0,1.0,1.0,1.0,1.0,1.0,1.0,1.0,1.0,1.0,,
+rule,predict fatigued iff not mask-retained,this run (no fitting),all,271.0,144.0,127.0,,0.9930555555555556,0.9861111111111112,1.0,,,,,,,,,
+cnn,af7abl,"this run (seed mean, recovery)",all,271.0,144.0,127.0,1.0,1.0,1.0,1.0,1.0,1.0,1.0,1.0,1.0,1.0,1.0,1.0,1.0
+cnn,af7abl,"this run (seed mean, recovery)",a1_retained,142.0,142.0,0.0,1.0,1.0,1.0,0.0,,,,,,1.0,0.0,1.0,0.0
+cnn,af7abl,"this run (seed mean, recovery)",a1_rejected,129.0,2.0,127.0,1.0,1.0,1.0,1.0,1.0,1.0,1.0,1.0,1.0,1.0,1.0,1.0,1.0
+cnn,frontalabl,"this run (seed mean, recovery)",all,271.0,144.0,127.0,1.0,1.0,1.0,1.0,1.0,1.0,1.0,1.0,1.0,1.0,1.0,1.0,1.0
+cnn,frontalabl,"this run (seed mean, recovery)",a1_retained,142.0,142.0,0.0,1.0,1.0,1.0,0.0,,,,,,1.0,0.0,1.0,0.0
+cnn,frontalabl,"this run (seed mean, recovery)",a1_rejected,129.0,2.0,127.0,1.0,1.0,1.0,1.0,1.0,1.0,1.0,1.0,1.0,1.0,1.0,1.0,1.0

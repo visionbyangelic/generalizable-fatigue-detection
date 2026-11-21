@@ -1,0 +1,27 @@
+model: band-power logistic regression (frozen baseline)
+features/input: 'band-power features minus 12 dropped columns: logpow_AF7_delta, logpow_AF7_theta,
+  logpow_AF7_alpha, logpow_AF7_beta, relpow_AF7_delta, relpow_AF7_theta, relpow_AF7_alpha,
+  relpow_AF7_beta, frontal_ratio_th_al_over_beta, frontal_ratio_al_over_beta, frontal_ratio_th_al_over_al_beta,
+  frontal_ratio_th_over_beta'
+protocol: 'RQ4 validity checks, Check 2 route location (POST HOC, panel review 28):
+  Subject 01 only, prototype window set (1,353 windows, whole-stream epoching), day-level
+  labels, chronological 80/20 split, identical to the replication'
+split: chronological 80/20 within each session (first floor(0.8*n) windows in stream
+  order = train, remainder = test, no purge at the cut)
+seed: deterministic (s0 by convention)
+data: windows_proto_p01 (the replication's window build)
+git_commit: 2b94c68
+dropped_features:
+- logpow_AF7_delta
+- logpow_AF7_theta
+- logpow_AF7_alpha
+- logpow_AF7_beta
+- relpow_AF7_delta
+- relpow_AF7_theta
+- relpow_AF7_alpha
+- relpow_AF7_beta
+- frontal_ratio_th_al_over_beta
+- frontal_ratio_al_over_beta
+- frontal_ratio_th_al_over_al_beta
+- frontal_ratio_th_over_beta
+n_features_used: 31

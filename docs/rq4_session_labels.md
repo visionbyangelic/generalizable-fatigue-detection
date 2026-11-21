@@ -489,7 +489,13 @@ test windows sat next to training windows in time, a stronger sharing
 than a random split; and it used a 1D-CNN on raw EEG with its own
 preprocessing rather than band-power features and logistic
 regression. Any or all of those may carry the remaining distance to
-99.18%. What the day-level arm settles is narrower and sufficient
+99.18%. (Two of the three are priced for Subject 01 by the
+prototype-faithful replication later in this document: model class
+turns out not to be a difference, because the logistic regression
+reproduces the number too, and the single-participant chronological
+configuration is where the confound documented there lives. The
+third, the preliminary's own preprocessing chain, remains unpriced.)
+What the day-level arm settles is narrower and sufficient
 for the thesis: the 99.18% is not evidence about fatigue detection,
 because the same labels collapse to chance the moment the evaluation
 stops sharing recordings, and a large part of what a
@@ -875,10 +881,15 @@ almost entirely composed of windows whose AF7 channel fails this
 project's amplitude rule. Two precisions keep the claim honest.
 First, neither model ever saw the mask: the indicator features and
 planes were held constant, so the mechanism is not a model reading
-a mask. It is that the label is almost perfectly confounded with
-frontal recording quality in this participant's two sessions, and
-the artefact-laden signal itself is part of the EEG the models
-read. Second, the scope is one participant and two recording days,
+a mask. It is that in this participant's two sessions the fatigued
+class is almost completely confounded with failure of the
+pre-specified AF7 amplitude criterion, so the score cannot be
+attributed to fatigue: the artefact-laden signal itself is part of
+the EEG the models read. (Panel review 28 locked the wording of
+this claim; the validity checks in the next subsection are the
+checks that wording was made conditional on, and they also
+supersede branch (A)'s shorthand "recording-quality shortcut" as
+the way the finding is stated.) Second, the scope is one participant and two recording days,
 the preliminary's own data slice: this run prices the
 preliminary's design on the data the preliminary used, and claims
 nothing beyond it. Branch (B) is excluded because the retained
@@ -900,3 +911,215 @@ folders), and the completed stages' bootstrap intervals were
 recomputed from their stored predictions in the process and
 reproduce the stored values exactly. No number in this section
 comes from the interrupted partial run.
+
+### Validity checks (panel-owed, review 28)
+
+The replication verdict above was reviewed before it was allowed to
+stand as the RQ4 headline (reviews 27 and 28), and the review locked
+the claim's wording and owed three checks. The locked claim is this
+sentence: "In its own configuration (Subject 01, two sessions,
+chronological split) the preliminary result reproduces (LR BA 1.000;
+CNN 0.993). In that configuration the fatigued class is almost
+completely confounded with failure of the pre-specified AF7
+amplitude criterion (2.5% of Session-03 windows retained vs 97.1% of
+Session-01; every fatigued test window mask-rejected), so the score
+cannot be attributed to fatigue. Blocked splitting within the same
+recordings barely reduces it (LR 0.975, CNN 0.915). Post hoc
+analysis; one participant." The three checks exist because three
+parts of that sentence were, at verdict time, thinner than they
+looked: the amplitude criterion is a rule about a number, and
+drowsiness itself raises frontal slow-wave and slow-eye-movement
+amplitude, so the criterion's failure needed auditing before it
+could carry weight (Check 1); neither model ever saw the mask, so
+where the score's information lives was an inference (Check 2); and
+Subject 01's retention asymmetry needed pricing against the whole
+cohort before it could be called exceptional (Check 3). Driver:
+`src/evaluation/rq4_validity_checks.py`. Tables:
+`results/tables/rq4_check1_*.csv`, `rq4_check2_route_location.csv`,
+`rq4_check3_*.csv`.
+
+**Check 1: the AF7 validity audit.** First, the mask numbers in the
+replication are recomputed here from the saved windows and the raw
+fit stream, not trusted: the recomputation reproduces the saved
+index's pass flags exactly (zero mismatches on all four channels
+and on the retention flag, 1,353 windows). What the audit finds:
+
+*The amplitude distributions barely overlap.* AF7 peak-to-peak
+amplitude (largest 1 s sub-window, the criterion's own quantity):
+
+| Session | AF7 p2p median [p25, p75] | AF7 amp-fail | AF8 p2p median | TP9 p2p median | TP10 p2p median |
+|---|---|---|---|---|---|
+| S01 (alert) | 46 µV [32, 65] | 2.6% | 37 µV | 147 µV | 137 µV |
+| S03 (fatigued) | 408 µV [233, 712] | 97.5% | 89 µV | 509 µV | 293 µV |
+
+Session 03's AF7 median is about nine times Session 01's, and its
+25th percentile (233 µV) sits above Session 01's 95th (121 µV).
+The threshold sweep settles the marginal-call question: Session
+03's 5th percentile (171 µV) already exceeds the locked 150 µV
+limit, and the full-rule frontal retention for Session 03 is 0.2%
+at half the threshold, 2.5% at the threshold, 21% at 1.5x, 35% at
+2x and 53% at 3x (450 µV), where Session 01 already retains 97.1%
+at 1x. No threshold inside a sixfold range changes the picture
+qualitatively: this is a wholesale regime difference in amplitude,
+not a distribution straddling a line.
+
+*The failure is amplitude, and the channel is not dead.* Of
+Session 03's 633 windows, AF7 fails on amplitude alone in 529 and
+on amplitude plus a Bad fit value in 88; the flatline criterion
+fails in zero windows, in either session, on any channel, and
+AF7's median window SD is 72.8 µV in Session 03 against 6.2 µV in
+Session 01. A disconnected or railed electrode would show the
+opposite signature (flat windows, tiny SD). Whatever Session 03's
+AF7 is doing, it is carrying much larger signals, not silence.
+
+*It is not AF7 alone.* Per-channel validity under the full rule,
+Session 03 vs Session 01: AF7 2.5% vs 97.1%, TP9 7.6% vs 51.4%,
+TP10 13.1% vs 56.8%, AF8 90.0% vs 99.2%. The amplitude elevation is
+headset-wide and graded, worst at AF7 and the temporals, mildest
+at AF8 (whose median still more than doubles). A single loose
+frontal electrode does not explain a pattern its neighbour largely
+escapes while both temporals collapse; a session-wide change in
+what the headset was recording does.
+
+*It is there from the first window.* Session 03's first AF7
+amplitude failure is stream window 0, the first window of the
+session; the failure fraction is 1.000 in eight of the ten stream
+deciles and 0.873 in the other two, 1.000 in both the first and
+last tenth of the session. There is no gradual rise to explain, so
+a within-session build-up (an electrode slowly drying or slipping
+as the session wears on) is not the shape of this data; the
+session starts in the high-amplitude regime and stays there.
+Session 01's sparse failures (2.6%) show no such structure.
+
+*The independent streams agree the session differed physically.*
+Streams that do not depend on my amplitude rule, Session 03 vs
+Session 01: the device's own fit stream rates AF7 Bad for 5.8% of
+samples vs 0.1% (worse, but nowhere near the amplitude failure's
+97.5% of windows; the device does not see a wholesale contact
+loss); forehead accelerometer dynamic component averages 0.062 g
+vs 0.027 g, with 12.9% vs 6.4% of samples above 0.1 g of dynamic
+acceleration; Muse-detected blinks run at 2,848 vs 1,189 per hour
+and jaw clenches at 223 vs 37 per hour; the touch stream shows the
+headset worn throughout both sessions (99.7% vs 99.9%).
+
+*What Check 1 does and does not establish.* It establishes that
+the criterion failure is a wholesale, session-long, headset-wide
+amplitude-regime property of Session 03, sharpest at AF7, and not
+a marginal threshold call or a dead channel. It does not establish
+why the regime differs, and the alternative has to be stated
+plainly: drowsiness itself raises frontal slow-wave amplitude and
+produces slow eye movements, and a fatigued participant blinks
+more, clenches their jaw and moves their head more, which is
+exactly what the independent streams record. Electrode placement
+differing that day and fatigue-linked physiology and behaviour
+both predict large frontal amplitudes, and nothing in this check
+separates them. That is why the locked claim says "failure of the
+pre-specified AF7 amplitude criterion" and not a hardware
+diagnosis: the criterion failure is a measured fact about the
+signal, its cause is not identified, and the confound stands under
+either cause, because a label that coincides with a different
+recording regime cannot be separated from that regime by any split
+inside the two recordings.
+
+**Check 2: where the score's information lives.** Same window set,
+labels and chronological split as the replication; only the inputs
+change. A mask-only logistic regression (the eight per-window
+validity features, no EEG) and the trivial rule it approximates:
+
+| Variant | Balanced accuracy | Fatigued recall |
+|---|---|---|
+| LR, full features (replication) | 1.000 | 1.000 |
+| CNN, full input (replication) | 0.993 | 1.000 |
+| LR, mask only (8 validity features) | 0.993 | 1.000 |
+| Rule: fatigued iff not mask-retained | 0.993 | 1.000 |
+| LR, AF7 features dropped (12 of 43) | 0.993 | 1.000 |
+| LR, frontal pair dropped (20 of 43) | 0.993 | 1.000 |
+| CNN, AF7 plane zeroed | 1.000 | 1.000 |
+| CNN, frontal planes zeroed | 1.000 | 1.000 |
+
+(Full table with slices and block-bootstrap intervals:
+`results/tables/rq4_check2_route_location.csv`; run folders
+`experiments/runs/2026-11-21_validity-check2_*`. The CNN adaptation
+is stated in every CNN run note: the frozen architecture fixes six
+input planes, so the ablated channel's EEG plane is zeroed for
+every window rather than removed, and the network receives no
+signal from that electrode; architecture, carve and seeds are
+unchanged. Mask-only is not natural for the CNN and was not run
+for it.)
+
+Two readings. First, the validity pattern alone is sufficient for
+the score: a model given nothing but which channels passed the
+quality bar reproduces 0.993, and a single bit, retained or not,
+does the same. Second, and this corrects the inference I drew at
+the verdict, removing the frontal route entirely does not deflate
+either model at all (the CNN ablations are perfect on all 271 test
+windows). The route is not frontal. Check 1 already showed why:
+the regime difference is headset-wide, so the temporal channels'
+band powers carry the same session signature as the frontal ones,
+and the mask pattern summarises all of it. Every route tested,
+mask, frontal spectra, temporal spectra, reaches the same ceiling,
+because in this configuration they are all the same route: session
+identity. What Check 2 does not show is which route the full
+models leaned on window by window; at ceiling through every route
+that question has no traction here, and it does not need an answer,
+because no route available in this configuration is a fatigue
+route: the honest evaluations of these same features (day-level
+LOPO 0.484 above; the Week 2 primary) sit at chance.
+
+**Check 3: Subject 01 against the cohort.** Amendment-1 retention
+over the M1 and M3 candidate windows of all 36 sessions, from the
+preprocessing log, cross-checked against the candidate-window
+audit file (the two agree on all 36 sessions;
+`results/tables/rq4_check3_retention_by_session.csv`). The
+day-level gap (latest-session retention minus earliest-session
+retention, percentage points) runs from −96.4 to +76.5 across the
+12 participants and changes sign: P01 −96.4 (100.0% to 3.6%), P03
+−86.6, then a long gap to P05 −22.7, with five participants
+positive (P12 +76.5, P04 +70.3 the largest). Subject 01 is the
+cohort's extreme, with P03 the only other participant in the same
+territory, which is the idiosyncratic, varying-sign pattern the
+review expected. For Subject 01 the asymmetry is a between-day
+property, not a block-phase one: pooled over Subject 01's sessions,
+M3 blocks retain slightly more than M1 blocks (+7.0 points, the
+opposite direction), while inside Session 03 both blocks collapse
+(M1 5.9%, M3 0.0%) against Session 01's 100% in both. So Subject
+01 does show the same alert-day vs fatigued-day retention
+direction in this pipeline's windows as in the prototype window
+set, and does not show a matching alert-block vs fatigued-block
+asymmetry. One attribution the review asked for, with a precision:
+the Week 2 mask-driven below-chance 0.225 was P08's, in the
+within-subject protocol (docs/week2_diagnostics.md section 5; its
+largest coefficients are the mask indicators, and removing them
+returns P08 to 0.467). It was not Subject 01, and no LOPO fold sits
+at 0.225 (P08's LOPO value is 0.447).
+
+**Where this leaves the claim.** The locked sentence above stands,
+and the checks change its basis rather than its wording: the
+criterion failure behind it is now known to be a wholesale
+amplitude-regime property of the fatigued session (Check 1), the
+score is now known to be reachable through the validity pattern
+alone and through every channel family with the frontals removed
+(Check 2), and Subject 01's asymmetry is now known to be the
+cohort's extreme case of an idiosyncratic pattern rather than a
+typical one (Check 3). For Subject 01, the replication and these
+checks also price two of the three differences the day-level arm
+left open: model class is not a difference (the logistic regression
+reproduces the number, and still does with its frontal features
+removed), and the gap between the pooled leaky arm's 0.741 and this
+configuration's 1.000 is a Subject-01 confound effect. The
+preliminary's exact preprocessing chain remains unpriced, as
+stated at the verdict. The panel's optional exploratory extension
+(the prototype configuration run on the other participants, scores
+plotted against retention asymmetry) was not run; nothing in the
+locked claim rests on it, and it stays available as future work
+rather than being silently dropped.
+
+Execution note for these checks, recorded rather than hidden: an
+environment restart interrupted the first execution during Check
+2's CNN stage, after the three LR run folders were written. The
+CNN stage was completed by a recovery run
+(`check2_cnn_recovery` in the driver) that reused the stored LR
+folders for the summary table and the driver's own functions for
+the fits, with the specification unchanged; the recovery is noted
+in the CNN run folders. No number in this subsection comes from
+the interrupted partial run.
