@@ -1,0 +1,15 @@
+model: logistic_regression
+C: 1.0
+class_weight: balanced
+imputation: training-fold median
+scaling: training-fold StandardScaler
+protocol: loso (leave-one-participant-out)
+git_commit: 450ebf0
+control: Amendment 2 permuted-label positive control
+arm: kss
+dose: 0.0
+theta_gain: 1.0
+alpha_gain: 1.0
+repeat: 4
+perm_seed: 70004
+labels: within-participant swapped (permuted)

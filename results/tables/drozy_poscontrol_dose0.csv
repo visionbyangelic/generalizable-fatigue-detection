@@ -1,0 +1,3 @@
+arm,n_participants,ba_dose0_injection_path,ba_reported,abs_diff,identity_ok
+kss,13,0.6022027166641284,0.6022027166641284,0.0,True
+rt,13,0.482389347924287,0.482389347924287,0.0,True

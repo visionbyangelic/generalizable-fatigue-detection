@@ -1,0 +1,13 @@
+model: logistic_regression
+C: 1.0
+class_weight: balanced
+imputation: training-fold median
+scaling: training-fold StandardScaler
+protocol: loso (leave-one-participant-out)
+git_commit: ed3a307
+control: Amendment 2 dose-0 identity check
+arm: rt
+dose: 0.0
+theta_gain: 1.0
+alpha_gain: 1.0
+labels: true labels
