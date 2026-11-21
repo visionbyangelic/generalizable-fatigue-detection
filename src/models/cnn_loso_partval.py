@@ -6,11 +6,13 @@ Why this run exists: in the RQ2 headline run
 run-segments carved from the training participants, and the frozen
 strategy search's first feasible carve placed those segments inside a
 single training participant's session, sharing sessions with the
-subtraining data. A reviewer pointed out that this can bias the CNN
-downward: validation that shares a session with training rewards
-session fingerprinting and can stop training late, which is exactly
-the direction that would manufacture a "no CNN advantage" result.
-One labelled post hoc sensitivity was owed in reply, and this is it.
+subtraining data. That sharing can bias the CNN downward: validation
+that shares a session with training rewards session fingerprinting
+and can stop training late, which is exactly the direction that
+would manufacture a "no CNN advantage" result. The headline cannot
+stand next to that worry unanswered, so this run is the labelled
+post hoc sensitivity that answers it: same everything, with the
+validation carve moved somewhere the sharing is impossible.
 
 What changes, and only this: the early-stopping validation set is one
 WHOLE training participant, held out of subtraining entirely, so no

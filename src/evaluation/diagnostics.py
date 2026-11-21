@@ -1,4 +1,12 @@
-"""Week 2 diagnostics on the band-power baseline (Reviewer 2 review 6).
+"""Week 2 diagnostics on the band-power baseline.
+
+Why these exist: a headline score at chance can mean several very
+different things (no signal anywhere, signal only inside sessions,
+a label construction problem, a pipeline that could not find a real
+effect if one were there), and the Week 2 numbers on their own do
+not separate those readings. Each diagnostic below is aimed at one
+of them, so that whatever I conclude from the baseline rests on
+more than the headline itself.
 
 All diagnostics use the Amendment-1 feature set (src/features/bandpower.py,
 43 features), logistic regression (C=1.0, class_weight='balanced'), and the

@@ -1,9 +1,12 @@
-"""RQ3 descriptive table — mean heart rate by block and treadmill day.
+"""RQ3 descriptive table: mean heart rate by block and treadmill day.
 
-Status: DESCRIPTIVE ONLY. Added after the RQ3 results were reviewed
-(docs/methods_notes.md, reviews 37-38) as the agreed non-modelled
-companion to the results: no model is fitted, no interval or test is
-computed, and no inferential language attaches to the numbers. The
+Status: DESCRIPTIVE ONLY. I added this after the RQ3 results were in,
+as the non-modelled companion to them: the heart-rate pattern behind
+the peripheral arm can be shown directly, in raw means, without
+fitting anything, and a table nobody has to take on a model's word
+is the honest way to show it. No model is fitted, no interval or
+test is computed, and no inferential language attaches to the
+numbers. The
 table simply records, over the primary-pool windows, the mean of the
 E4 heart-rate feature on M1 windows and on M3 windows, grouped by the
 treadmill intensity of the session the windows come from, with the

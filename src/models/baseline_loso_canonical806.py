@@ -1,5 +1,5 @@
 """Band-power baseline LOPO on the canonical cap-seed-0 window set
-(21 Nov 2026, panel-owed sensitivity).
+(21 Nov 2026, labelled sensitivity).
 
 Why this run exists: the RQ2 contrast in docs/cnn_loso_results.md
 compares the CNN (run on the canonical cap-seed-0 set, 806 windows)

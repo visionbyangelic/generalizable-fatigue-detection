@@ -1,8 +1,17 @@
-"""Panel additions to the Week 2 diagnostics (Reviewer 1 review 7,
-synthesis round - docs/methods_notes.md). Same discipline as
-src/evaluation/diagnostics.py: Amendment-1 features, logistic regression
-(C=1.0, class_weight='balanced'), imputation/scaling fit on training
-folds only. Each item is logged as its own run folder.
+"""Further additions to the Week 2 diagnostics.
+
+The first diagnostics round (src/evaluation/diagnostics.py) left six
+questions open that the headline numbers cannot answer on their own,
+and I am not willing to read the baseline either way until they are
+closed: how much of the score the mask alone can produce, whether
+the pipeline could find a real effect if one were there, how much of
+the apparent signal is the split rather than the data, whether the
+permutation null respects the label block structure, whether the
+estimates are precise enough to support an equivalence claim, and
+whether retention itself favoured one class. Same discipline as
+src/evaluation/diagnostics.py: Amendment-1 features, logistic
+regression (C=1.0, class_weight='balanced'), imputation/scaling fit
+on training folds only. Each item is logged as its own run folder.
 
   1. mask-only baseline     - labels predicted from validity indicators +
                               coverage counts ONLY (no EEG), session-out,

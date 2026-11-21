@@ -1,10 +1,12 @@
-"""RQ3 post hoc ablation — HR-only and EDA-only arms (descriptive).
+"""RQ3 post hoc ablation: HR-only and EDA-only arms (descriptive).
 
 Status: POST HOC. These two arms were not in docs/rq3_preregistration.md
-or its Amendment 1. They were added after the RQ3 results were reviewed
-(docs/methods_notes.md, reviews 37-38), for one descriptive purpose:
-to record what each signal family scores on its own under the identical
-locked design, beside the peripheral arm that combines them. No
+or its Amendment 1. I added them after the RQ3 results were in, for
+one descriptive purpose: to record what each signal family scores on
+its own under the identical locked design, beside the peripheral arm
+that combines them. The combined arm's score on its own invites the
+question of which family carries it; these arms answer that question
+descriptively, and nothing stronger is claimed from them. No
 feature-set selection is made from these arms, and no conclusion about
 which channel matters more is drawn beyond the two estimates
 themselves; both are reported whatever they show.

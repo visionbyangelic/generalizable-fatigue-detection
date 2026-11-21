@@ -5,7 +5,7 @@ PSD: Welch, 2-s Hamming segments, 50% overlap (nperseg=256 @128 Hz) within
 each 4-s window, per channel. Bands: delta 1-4, theta 4-8, alpha 8-12,
 beta 12-30 Hz (gamma excluded per section 6).
 
-Feature layout — FIXED 43 columns for every window:
+Feature layout: FIXED 43 columns for every window:
   [0:16]  log10 band power, channel-major [TP9, AF7, AF8, TP10] x [d,t,a,b]
   [16:32] relative band power (band / sum of the 4 band powers), same order
   [32:36] frontal ratios from AF7/AF8 mean band powers:
@@ -15,7 +15,7 @@ Feature layout — FIXED 43 columns for every window:
   [40]    valid_TP9 (0/1), [41] valid_TP10 (0/1),
   [42]    both_temporals_masked (0/1)
 
-Masking rules (no leakage by construction — no statistics used at all here):
+Masking rules (no leakage by construction: no statistics used at all here):
   - A masked temporal channel's log/relative features are NaN in the output.
   - Temporal ratios are NaN iff BOTH temporals are masked.
   - Frontal channels are always valid in retained windows (Amendment 1

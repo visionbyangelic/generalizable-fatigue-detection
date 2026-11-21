@@ -1,9 +1,14 @@
-"""RQ3 tier-parity verification — LOPO tier vs within-subject tier.
+"""RQ3 tier-parity verification: LOPO tier vs within-subject tier.
 
-Added after the RQ3 results were reviewed (docs/methods_notes.md,
-review 38): before the two tiers are reported side by side, verify
-from the run configs and the code path that they differ ONLY in the
-fold structure, in the four respects the review names:
+Why this check exists: the two RQ3 tiers are reported side by side,
+and that comparison is only worth anything if the tiers differ in
+fold structure and nothing else. A difference in the label column,
+the window pool, the class-balance handling or the normalisation
+route would manufacture a tier gap out of bookkeeping, and the
+results invite exactly that misreading because the tiers disagree.
+So before I put them next to each other, I verify from the run
+configs and the code path that they differ ONLY in the fold
+structure, in the four respects that could silently break it:
 
   1. Target definition: same label column (primary subjective labels
      on Amendment-1 windows) feeding both protocols.

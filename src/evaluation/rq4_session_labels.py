@@ -1,4 +1,4 @@
-"""RQ4 diagnostic — SESSION-PHASE labels under the honest protocols.
+"""RQ4 diagnostic: SESSION-PHASE labels under the honest protocols.
 
 Why this run exists (PLAN.md RQ4, docs/label_rules.md section 3): my
 preliminary experiment reached 99.18% fatigued-class recall with labels
@@ -23,7 +23,7 @@ band-power features and the locked logistic-regression baseline:
                 the end, against the stored Week 2 summary tables).
   all36         restricted32 PLUS the 4 non-increasing sessions the
                 subjective rules set aside (P07/S01, P07/S02, P10/S03,
-                P12/S03 — the drift/sensitivity check set, saved
+                P12/S03, the drift/sensitivity check set, saved
                 separately as windows_a1_control). Session-phase labels
                 do not care whether the participant's rating rose, so
                 these sessions get labels too. The gap between the two
@@ -115,7 +115,7 @@ def load_arm(arm):
     The stored `label` column in both A1 files already IS the block
     label (build_windows_a1.py sets label = 0 for M1, 1 for M3 in the
     pool and in the check set alike), so the session-phase label needs
-    no new builder — but I re-derive it from the block column here and
+    no new builder, but I re-derive it from the block column here and
     assert the two agree, so the identity is verified, not assumed.
     """
     idx_p = pd.read_csv(PROC / "windows_a1_uncapped_index.csv")
@@ -260,7 +260,7 @@ def label_agreement():
     filter is part of their definition), so kappa is computed on the
     1,053 windows where both label sets are defined. On those windows
     the two constructions assign the same label to every window (both
-    are the block label), so kappa must come out at 1.0 — computed here
+    are the block label), so kappa must come out at 1.0, computed here
     with sklearn so the number is on record, not just asserted. The
     coverage rows record where the definitions actually differ: the 68
     check-set windows carry a session-phase label but no subjective

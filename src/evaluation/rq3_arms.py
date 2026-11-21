@@ -1,4 +1,4 @@
-"""RQ3 Phase 2 — the multimodal arms under the locked baseline.
+"""RQ3 Phase 2: the multimodal arms under the locked baseline.
 
 Design: docs/rq3_preregistration.md as amended by Amendment 1
 (21 Nov 2026, committed before any modelling). In short:

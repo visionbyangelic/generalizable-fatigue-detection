@@ -1,8 +1,11 @@
 """Phase C (revised) - 1D-CNN (EEGNet-8,2), within-subject protocol with
-SEGMENT-GROUPED validation (project lead decision 20 Nov 2026, Reviewer 2
-review 6 endorsed with caveats; replaces the session-grouped
-validation of src/models/cnn.py, which was structurally infeasible on
-this dataset - see the STOPPED run folders).
+SEGMENT-GROUPED validation (decided 20 Nov 2026; replaces the
+session-grouped validation of src/models/cnn.py, which was
+structurally infeasible on this dataset - see the STOPPED run
+folders). I changed the carve because whole sessions are too coarse
+a unit here: several participants cannot spare a full session for
+validation and still leave both classes in training, so the
+session-grouped version silently left them uncovered.
 
 Protocol: per participant, hold out one session as test (rotate over
 sessions containing both classes); training = the participant's other
@@ -18,12 +21,17 @@ validation measures SEGMENT generalisation within known sessions, NOT
 unseen-session transfer. The test session is still fully held out.
 
 Amendment 1 mask handling: as in cnn.py, 6 input channels (4 EEG,
-zero-filled masked temporals + 2 mask-indicator planes). ADDITION per
-Reviewer 1 review 5 (mask-as-fingerprint mitigation): CHANNEL DROPOUT
-on the temporal channels during training - for each training sample in
-each batch, TP9 and TP10 are independently dropped with p=0.2 (EEG
-channel zeroed AND its indicator plane set to 0), so the network cannot
-rely on a fixed masking pattern. Validation/test are never dropped.
+zero-filled masked temporals + 2 mask-indicator planes). ADDITION
+(mask-as-fingerprint mitigation): CHANNEL DROPOUT on the temporal
+channels during training. I added this because the mask pattern
+itself could act as a fingerprint of the session: if the network can
+always see which channels were masked, it can learn a session's
+masking signature instead of anything about fatigue, and the
+within-subject numbers would flatter it for the wrong reason. For
+each training sample in each batch, TP9 and TP10 are independently
+dropped with p=0.2 (EEG channel zeroed AND its indicator plane set
+to 0), so no fixed masking pattern is reliable enough to lean on.
+Validation/test are never dropped.
 
 Normalisation: per-EEG-channel mean/SD from the subtraining fold only.
 Class weights from the subtraining fold only. EEGNet-8,2 as in cnn.py;

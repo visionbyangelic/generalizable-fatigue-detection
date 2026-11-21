@@ -1,5 +1,5 @@
-"""RQ4 2x2 preliminary-replication arm (POST HOC, pre-specified by the
-panel, 21 Nov 2026).
+"""RQ4 2x2 preliminary-replication arm (POST HOC, pre-specified in
+full before the run, 21 Nov 2026).
 
 Why this run exists: the day-level arm of RQ4 priced whole-session
 labels, a leaky split and the session fingerprint separately, but it
@@ -12,7 +12,7 @@ the preliminary's own participant: model (band-power logistic
 regression vs the frozen EEGNet) by split (chronological vs random
 window), under day-level labels, on Subject 01 only. Subject 01 is
 the preliminary's participant, chosen for that reason and never for
-performance (panel specification, review 24).
+performance; any other choice would price a different question.
 
 Data (important, and stated wherever the numbers are quoted): the
 windows are THIS pipeline's retained Amendment-1 windows for P01
@@ -36,8 +36,9 @@ Splits (exact rules):
                  temporal adjacency across the cut is part of the
                  design being priced. (The preliminary's own audit
                  notebook used an 80/20 chronological cut per its
-                 repository README; this arm uses the panel-specified
-                 70/30 and says so.)
+                 repository README; this arm uses the pre-specified
+                 70/30 and says so wherever its numbers are quoted,
+                 because the two cuts are not interchangeable.)
   random         stratified by class over the pooled windows: per
                  class, n_test = max(1, round(0.3 * n_class)); the
                  class's windows are shuffled with the split seed

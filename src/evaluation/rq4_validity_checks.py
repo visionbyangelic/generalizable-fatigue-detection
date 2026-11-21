@@ -6,9 +6,11 @@ experiment's 99.18% fatigued recall in its own configuration, and its
 mask cut showed the fatigued class sitting almost entirely in windows
 whose AF7 channel fails the pre-specified Amendment-1 amplitude
 criterion (Session 03 retention 2.5% vs Session 01 retention 97.1%).
-Panel review 28 (docs/methods_notes.md) accepted the result softened
-to non-identifiability, and owed three checks before any stronger
-wording ("recording-quality failure") is allowed:
+The result stands softened to non-identifiability, and three checks
+are owed before any stronger wording ("recording-quality failure")
+is allowed. I hold that line deliberately: the mask cut shows where
+the fatigued class sits, not why, and each check below is aimed at
+one of the explanations the soft wording leaves open:
 
   Check 1 - AF7 validity audit. The amplitude criterion is a rule
     about a number, not a diagnosis: drowsiness itself raises frontal

@@ -5,7 +5,9 @@ more precisely under the same honest rules).
 
 Both variants are SENSITIVITIES. Nothing in this module declares a
 verdict under the lock doc's tier table; outputs are estimates + CIs +
-gate inputs only. Reporting status awaits the lead reviewer's ruling.
+gate inputs only. What may be claimed from them is decided by the
+lock's tier table, not by anything computed here, and until that is
+settled they are reported as estimates and nothing more.
 
   V1  UNCAPPED + CLASS-WEIGHTED. Full Amendment-1 retained pool
       (1,053 windows: 564 alert / 489 fatigued), NO per-session M1 cap.
@@ -18,8 +20,8 @@ gate inputs only. Reporting status awaits the lead reviewer's ruling.
       the cap reduced to zero windows) contribute their windows to the
       TRAINING pool here; they still cannot be test folds.
 
-  V2  WITHIN-SESSION-NORMALISED FEATURES (Reviewer 2 review 10
-      declared sensitivity). Each continuous feature is centred/scaled
+  V2  WITHIN-SESSION-NORMALISED FEATURES (declared sensitivity,
+      fixed in advance). Each continuous feature is centred/scaled
       per session using that session's OWN windows (nanmean / nanstd,
       ddof=0; labels never used). This is TRANSDUCTIVE at session
       level: a test session's windows are normalised with statistics
@@ -30,7 +32,11 @@ gate inputs only. Reporting status awaits the lead reviewer's ruling.
       centred only; if the session mean is undefined (all-NaN), the
       values stay NaN (training-fold median imputation downstream).
 
-  V2-MASK  Mask-only arm under the V2 protocol (Reviewer 1 ruling R3):
+  V2-MASK  Mask-only arm under the V2 protocol. The decision-table
+      lock requires V2 to carry its own mask-only arm and requires
+      both variants to be reported together, failures included, so
+      this arm is not optional: without it, a V2 change could be
+      credited to the EEG features when the mask produced it. It uses
       the 5 indicator/coverage features of panel_additions.mask_only
       (valid_TP9, valid_TP10, both_temporals_masked, n_valid_temporals,
       n_valid_channels), built from the index, NOT session-normalised

@@ -1,4 +1,4 @@
-"""CNN LOPO degeneracy report (21 Nov 2026, panel-owed follow-up).
+"""CNN LOPO degeneracy report (21 Nov 2026).
 
 Extraction only: reads the stored predictions.csv and config.yaml of
 the 55 CNN LOPO run folders (experiments/runs/2026-11-21_cnn_loso_

@@ -17,7 +17,7 @@ RQ2 / RQ1 summary artefacts:
 Intervals follow the closure-pack convention: participant-level
 bootstrap, 10,000 resamples over per-participant cross-seed means,
 percentile 95% CI. Everything is reported as estimates with intervals
-(the locked feasibility-gate ruling makes this phase estimation-only:
+(the locked feasibility gate makes this phase estimation-only:
 no equivalence or null verdicts are computed here).
 """
 import sys

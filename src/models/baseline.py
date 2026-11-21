@@ -1,4 +1,4 @@
-"""Phase B — band-power baseline (logistic regression) under Amendment 1.
+"""Phase B: band-power baseline (logistic regression) under Amendment 1.
 
 Data: data/processed/windows_a1_uncapped (npy + index). For each cap seed
 0-4 the M1 class is capped per session to the retained M3 count (same rule

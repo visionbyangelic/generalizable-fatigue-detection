@@ -1,21 +1,25 @@
-"""Ablation — band-power baseline WITHOUT the mask/validity indicators.
+"""Ablation: band-power baseline WITHOUT the mask/validity indicators.
 
-Commissioned by Reviewer 2 review 10 (docs/methods_notes.md): the
-mask-only baseline (BA 0.530) matching the full 43-feature model (0.515)
-shows EEG adds nothing beyond the mask across sessions, but does not by
-itself prove the mask CAUSES the cross-session residue. This run removes
-the 3 indicator features (valid_TP9, valid_TP10, both_temporals_masked)
+Why this run exists: the mask-only baseline (BA 0.530) matching the
+full 43-feature model (0.515) shows EEG adds nothing beyond the mask
+across sessions, but does not by itself prove the mask CAUSES the
+cross-session residue. Two matching scores are consistent with the
+mask carrying the residue, but also with the spectral features
+carrying the same information some other way. The causal test is to
+take the mask away and see what falls. This run removes the 3
+indicator features (valid_TP9, valid_TP10, both_temporals_masked)
 and keeps only the 40 spectral features (log/relative band powers +
 frontal/temporal ratios), everything else identical to
 src/models/baseline.py: same Amendment-1 window sets, same cap seeds
-0-4, same folds, same train-fold-only imputation/scaling/class weights.
-Reviewer 2's prediction: session-out collapses to ~0.50 and P08's
+0-4, same folds, same train-fold-only imputation/scaling/class
+weights. The prediction under test, stated before running: if the
+mask carries the residue, session-out collapses to ~0.50 and P08's
 within-subject inversion (0.225 with indicators) disappears.
 
 Note: masked temporal channels' spectral features remain NaN and are
-median-imputed from the training fold, exactly as in the full model —
-the ONLY change is that the model is no longer told which channels were
-masked.
+median-imputed from the training fold, exactly as in the full model.
+The ONLY change is that the model is no longer told which channels
+were masked.
 
 Outputs: run folders experiments/runs/2026-11-20_baseline_<protocol>_
 subjective_ablated_s<seed>/ (config.yaml, metrics.csv, predictions.csv,

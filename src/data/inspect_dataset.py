@@ -9,7 +9,7 @@ results/tables/inspection_key_results.json, and prints a full report.
 Usage (from project root):  python3 src/data/inspect_dataset.py
 """
 
-# @@SECTION: 0. Setup — paths, session/intensity map
+# @@SECTION: 0. Setup: paths, session/intensity map
 import json
 from pathlib import Path
 
@@ -31,7 +31,7 @@ for _, r in meta.iterrows():
 print(f"metadata.csv: {len(meta)} participants; intensity map built for {len(INTENSITY)} sessions")
 print("P01 mapping check:", {s: INTENSITY[('01', s)] for s in SESSIONS})
 
-# @@SECTION: 1. Structure — 39 core files per session
+# @@SECTION: 1. Structure: 39 core files per session
 CANONICAL = sorted(p.name for p in (RAW / "01" / "01").iterdir() if p.is_file())
 print(f"Canonical core-file list derived from P01/S01: {len(CANONICAL)} files")
 structure_rows, continuation_files = [], []
@@ -52,7 +52,7 @@ print(f"Sessions with all {len(CANONICAL)} core files: {(structure.n_core_presen
 print(f"Total *2.csv continuation files: {len(continuation_files)}")
 print("Sessions with continuations:", sorted({f'{p}/S{s}' for p, s, _ in continuation_files}))
 
-# @@SECTION: 2. Markers — phase durations + missing timestamps
+# @@SECTION: 2. Markers: phase durations + missing timestamps
 PHASES = [("baseline", "start_baseline", "end_baseline"),
           ("M1_block", "end_baseline", "start_activity"),
           ("activity", "start_activity", "end_activity"),
@@ -95,7 +95,7 @@ for ph, _, _ in PHASES:
     c = markers[f"{ph}_min"]
     print(f"  {ph:12s}: mean={c.mean():6.2f} min sd={c.std():.2f}  range {c.min():.2f}-{c.max():.2f} min  (NaN in {c.isna().sum()} sessions)")
 
-# @@SECTION: 3. Muse EEG — sampling, channels, duplicates, gaps (base + *2 concatenated)
+# @@SECTION: 3. Muse EEG: sampling, channels, duplicates, gaps (base + *2 concatenated)
 def read_sensor_csv(path):
     """Read a sensor CSV, dropping a stray leading index column if present."""
     df = pd.read_csv(path)
@@ -187,7 +187,7 @@ print("Worst 5 sessions by all-channel Good fit:")
 for _, r in fit.nsmallest(5, "good_all_pct").iterrows():
     print(f"  P{r.participant}/S{r.session}: good_all={r.good_all_pct:.1f}% bad_any={r.bad_any_pct:.1f}% blinks={r.blinks} jaw={r.jaw_clenches}")
 
-# @@SECTION: 5. Subjective labels — exp_fatigue VAS per block
+# @@SECTION: 5. Subjective labels: exp_fatigue VAS per block
 fat_rows = []
 for p in PARTICIPANTS:
     for s in SESSIONS:
@@ -217,7 +217,7 @@ for inten in ["low", "medium", "high"]:
     sub = fat[fat.intensity == inten]
     print(f"  {inten:6s}: delta_mental mean={sub.delta_mental.mean():.1f}, >0 in {(sub.delta_mental > 0).sum()}/12; delta_physical mean={sub.delta_physical.mean():.1f}")
 
-# @@SECTION: 6. Performance labels — CRT and 2-back per block
+# @@SECTION: 6. Performance labels: CRT and 2-back per block
 def block_stats(p, s, fname, rt_col="responseTime"):
     df = pd.read_csv(RAW / p / s / fname)
     out = {}
@@ -261,7 +261,7 @@ print(f"CRT stimulus-locked RT (responseTime - stimulus delay): block means M1={
 _bad_base = crt[crt.acc_M1 < 0.5]
 print(f"CRT sessions with broken M1 baseline (accuracy < 0.5): {[(f'P{r.participant}/S{r.session}', round(r.acc_M1, 2)) for _, r in _bad_base.iterrows()]}")
 
-# @@SECTION: 7. Alignment — two clocks, missing markers, continuation quirks
+# @@SECTION: 7. Alignment: two clocks, missing markers, continuation quirks
 off_rows = []
 for p in PARTICIPANTS:
     for s in SESSIONS:

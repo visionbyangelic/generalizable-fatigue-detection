@@ -1,4 +1,4 @@
-"""Phase C — 1D-CNN (EEGNet-8,2) under Amendment 1.
+"""Phase C: 1D-CNN (EEGNet-8,2) under Amendment 1.
 
 Architecture (Lawhern et al. 2018, per how-others-did-it.md section 6):
 EEGNet F1=8, D=2, F2=16, temporal kernel 64 @128 Hz, pools (1,4)/(1,8),
@@ -12,7 +12,7 @@ best) on a GROUPED validation split drawn from training data only:
     (subject-grouped).
 
 Amendment 1 mask handling (documented choice): the network input has 6
-channels — the 4 EEG channels (masked temporals zero-filled, exactly as
+channels: the 4 EEG channels (masked temporals zero-filled, exactly as
 stored in windows_a1*) PLUS 2 extra constant mask-indicator channels
 (mask_TP9, mask_TP10: the window's validity value broadcast over time).
 Missingness is therefore explicit to the model, never silent zeros alone.
@@ -22,8 +22,8 @@ only and applied to train/val/test alike; mask channels left as 0/1.
 
 Fold validity: subtrain, validation and test must each contain both
 classes (same spirit as the baseline's fold rule). Local Week-2 run:
-within protocol, cap seed 0 (canonical windows_a1 set), model seeds {0,1}
-— a REDUCED seed set, stated as such; the full LOSO x 5-seed run is
+within protocol, cap seed 0 (canonical windows_a1 set), model seeds {0,1}.
+That is a REDUCED seed set, stated as such; the full LOSO x 5-seed run is
 Weeks 3-4 on Colab (notebooks/04_cnn_colab.ipynb).
 """
 import argparse

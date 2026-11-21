@@ -1,6 +1,13 @@
-"""PSD verification of the temporal-noise diagnosis (Reviewer 1 peer-review add).
+"""PSD verification of the temporal-noise diagnosis.
 
-Case: P03/S01 — a session whose temporal channels fail almost everywhere
+Why this check exists: the Amendment-1 retention table says how much
+of the temporal signal was masked, but not what the masking was
+hiding, and the interpretation depends on the answer. Mains hum,
+muscle activity and contact noise are three different problems with
+three different consequences for the frontal-only comparison, so I
+look at the spectrum directly instead of guessing from the mask.
+
+Case: P03/S01, a session whose temporal channels fail almost everywhere
 (97% masking in the Amendment-1 retention table) while frontal channels are
 clean. For the M3 block we compute, per channel:
   - Welch PSD of the RAW signal (0.5-60 Hz shown; a narrow 50 Hz mains spike

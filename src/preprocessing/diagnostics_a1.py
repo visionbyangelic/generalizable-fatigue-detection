@@ -79,11 +79,13 @@ def _rate_test(df_a, df_b, name_a, name_b):
 def mnar_table(cand):
     lab = cand[cand.block.isin(["M1", "M3"])].copy()
     lab["temporal_fail"] = ~(lab.valid_TP9 & lab.valid_TP10)
-    # Frontal failure (Reviewer 1 peer-review addition): a candidate window is
-    # frontal-failed iff AF7 or AF8 fails any criterion — this is exactly
-    # the Amendment-1 rejection event. If fatigued (blink-heavy) windows
-    # were disproportionately rejected frontally, retention itself would
-    # be label-biased; that is what these rows test.
+    # Frontal failure: a candidate window is frontal-failed iff AF7 or
+    # AF8 fails any criterion, which is exactly the Amendment-1 rejection
+    # event. I test the frontal case separately because it is the one
+    # that decides retention. If fatigued (blink-heavy) windows were
+    # disproportionately rejected frontally, retention itself would be
+    # label-biased and every later number would inherit that bias;
+    # that is what these rows test.
     lab["frontal_fail"] = ~(lab.valid_AF7 & lab.valid_AF8)
     rows = []
     for scope, d in [("all_sessions", lab),

@@ -1,7 +1,15 @@
-"""Week 2 CLOSURE PACK (Reviewer 1 review 11 - docs/methods_notes.md).
+"""Week 2 closure pack.
 
-Fills the gaps Reviewer 1 required before Week 2 can close, under the
-docs/decision_table_lock.md rules. Same discipline throughout:
+Fills the gaps that have to close before I let Week 2 stand as
+finished, under the docs/decision_table_lock.md rules: a frontal-only
+comparison so the all-channel headline is not hostage to the temporal
+channels, a participant-level evaluation to sit beside the session
+ones, a positive control hard enough to price what the pipeline can
+detect (a graded, per-session-varying injection, not only the
+best-case homogeneous one), an interval on the leakage gap rather
+than a bare difference, and the feasibility-gate inputs computed
+without declaring a verdict they do not support. Same discipline
+throughout:
 Amendment-1 windows, cap seeds 0-4, logistic regression (C=1.0,
 class_weight='balanced'), imputation/scaling/class weights fit on the
 training fold only. Every analysis gets a run folder per

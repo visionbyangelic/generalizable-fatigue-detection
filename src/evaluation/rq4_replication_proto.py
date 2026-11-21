@@ -1,10 +1,10 @@
-"""RQ4 prototype-faithful replication (POST HOC, panel-owed, 21 Nov 2026).
+"""RQ4 prototype-faithful replication (POST HOC, 21 Nov 2026).
 
 Why this run exists: the 2x2 arm (src/evaluation/rq4_replication_2x2.py)
 crossed model by split on this pipeline's retained Amendment-1 windows,
-but the panel ruled it uninformative about the preliminary experiment,
-because two things had changed at once between the preliminary and that
-arm: the windowing (the preliminary epoched whole sessions at 4 s
+but that arm cannot answer the question it was built for, because two
+things had changed at once between the preliminary and that arm: the
+windowing (the preliminary epoched whole sessions at 4 s
 windows with a 2 s stride; this pipeline cuts non-overlapping windows
 inside blocks) and the retention (the preliminary applied no
 Amendment-1 rejection; Subject 01 keeps only 24 of its 1,353 windows

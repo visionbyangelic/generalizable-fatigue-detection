@@ -1,17 +1,18 @@
 """RQ4 tidy-up computations (21 Nov 2026).
 
-Three small jobs owed to the panel review of the RQ4 write-up
-(docs/rq4_session_labels.md, reviews 23 and 24 in
-docs/methods_notes.md). None of them changes a headline; each one
-either pins down a number the write-up quotes or closes a check the
-review asked for explicitly.
+Three small jobs the RQ4 write-up (docs/rq4_session_labels.md)
+depends on. None of them changes a headline; each one either pins
+down a number the write-up quotes or closes a check its claims need
+in order to stand. I am not willing to let the write-up assert any
+of the three on the strength of the earlier runs alone.
 
   1. Solver sensitivity for the bit-identity audit. The audit traced
      the gap between the stored Week 2 primary LOPO numbers and this
      arm's re-run to solver-level differences between two builds of
      the numeric stack (attribution by elimination: the old stack was
-     never reproduced and its versions were not recorded). The review
-     asked for two things: the solver's own convergence record
+     never reproduced and its versions were not recorded). Two
+     things are needed before that explanation can be trusted: the
+     solver's own convergence record
      (n_iter_ and any ConvergenceWarning) in the primary LOPO folds,
      which the Week 2 run folders did not store, and a re-run of the
      same folds with a tight solver tolerance, to show whether the
@@ -33,8 +34,8 @@ review asked for explicitly.
 
   3. Leaky-split accuracy. The day-level write-up reports balanced
      accuracy and fatigued recall for the deliberately leaky
-     random-window split; the review asked for plain accuracy and
-     BOTH class recalls next to them (the preliminary's 99.18% was a
+     random-window split; plain accuracy and BOTH class recalls
+     belong next to them (the preliminary's 99.18% was a
      fatigued-class recall, so the recalls are the comparable
      quantities). Recomputed here from the stored predictions of the
      leaky run folders, per split seed.

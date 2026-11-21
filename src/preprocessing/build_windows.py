@@ -1,4 +1,4 @@
-"""Phase A — build the window dataset exactly per docs/label_rules.md (LOCKED).
+"""Phase A: build the window dataset exactly per docs/label_rules.md (LOCKED).
 
 Pipeline per participant/session:
   load EEG (sample index = time base) -> split into continuous runs at
