@@ -6,6 +6,8 @@ reviews 19-20). Code: src/evaluation/drozy_positive_control.py,
 unchanged from the hash recorded in the amendment. Tables:
 results/tables/drozy_poscontrol_dose0.csv (identity check),
 results/tables/drozy_poscontrol_permuted.csv (the ladder),
+results/tables/drozy_poscontrol_companion.csv (the true-label
+companion ladder),
 results/tables/drozy_poscontrol_nulls.csv (every null statistic).
 One run folder per repeat under experiments/runs/, named
 2026-11-21_poscontrol_*.
@@ -123,6 +125,64 @@ results is not a sensitivity difference between the label
 structures: both arms' tests can see an effect of dose-0.5 size,
 and only the sleepiness labels carry one on the real data.
 
+## Companion ladder: true-label increments
+
+The amendment also specified a companion: the same dose ladder on
+the true labels, reported as the increment over each arm's
+uninjected score, with a swap-null p-value on the increment (the
+injected and uninjected statistics computed under the same swap
+pattern, so the null is a paired test on the increment itself).
+It was the one part of the amendment left unrun when the rest of
+this control was written up. Reviewer 1 ruled that it is owed
+because the amendment as adopted includes it (review 39), so it
+was run on 21 Nov 2026 and is reported here exactly as it came
+out. The run completed in a single pass with no restarts, under
+the same unchanged code.
+
+Sleepiness arm, uninjected score 0.602:
+
+| Dose | Injected BA | Increment | Null: swaps run, count at or above | p | Detected |
+|---|---|---|---|---|---|
+| 0.25 | 0.682 | +0.080 | 100 of 100, 0 | 0.010 | yes |
+| 0.5 | 0.746 | +0.144 | 100 of 100, 0 | 0.010 | yes |
+| 0.75 | 0.807 | +0.205 | 100 of 100, 0 | 0.010 | yes |
+| 1.0 | 0.851 | +0.249 | 100 of 100, 0 | 0.010 | yes |
+
+Reaction-time arm, uninjected score 0.482:
+
+| Dose | Injected BA | Increment | Null: swaps run, count at or above | p | Detected |
+|---|---|---|---|---|---|
+| 0.25 | 0.568 | +0.086 | 100 of 100, 0 | 0.010 | yes |
+| 0.5 | 0.650 | +0.168 | 100 of 100, 0 | 0.010 | yes |
+| 0.75 | 0.720 | +0.238 | 100 of 100, 0 | 0.010 | yes |
+| 1.0 | 0.779 | +0.297 | 100 of 100, 0 | 0.010 | yes |
+
+On the true labels, the injected effect adds a rising increment in
+both arms, and every increment clears its paired swap null: no
+null statistic in any of the eight combinations reached the
+observed increment. The manipulation check agrees with the
+permuted ladder (the band shifts land on their log10 targets, for
+example theta +0.093 against +0.097 at dose 0.25 and +0.291
+against +0.301 at full dose). One difference from the permuted
+ladder is worth stating plainly rather than smoothing over: the
+dose-0.25 increments are detected here, in both arms, while the
+permuted ladder's detection rule put the reaction-time arm's
+minimum detectable effect at dose 0.5. These are different
+statistics. The companion tests the lift over the arm's own
+uninjected score with a paired null, which removes the variation
+the two scores share; the minimum detectable effect rests on the
+permuted recovery test, where the whole score must separate from
+a null label structure. The pre-declared reading stands as
+written: the RT null excludes injected effects at dose 0.5 and
+above, and the companion does not revise it.
+
+The companion changes no verdict and no decision rule. The
+comparability gate and the minimum detectable effect rest on the
+permuted control, exactly as the amendment specified, and the
+locked wording everywhere else is untouched. With this run,
+Amendment 2 is complete as adopted: every component it specified
+has been run and reported.
+
 ## Paired sleepiness-minus-order contrast
 
 This contrast was owed since the exploratory checks (it is Check 6
@@ -153,13 +213,15 @@ is unchanged, and the sleepiness result (0.602) never depended on
 this control either way: its separation from its own swap null was
 established before the control was designed.
 
-One part of the amendment remains unrun: the companion ladder on
-the true labels, reported as increments over the uninjected scores
-with a swap-null p on the increment. The panel made the permuted
-control the primary one, and both verdicts in this document (the
-comparability gate and the minimum detectable effect) rest on it.
-The companion is a reporting extra rather than a gate; nothing here
-depends on it, and it stays available to run under the same code.
+The amendment's companion ladder on the true labels was the last
+component to run. It is reported in its own section above, it was
+run because Reviewer 1 ruled it owed under the amendment as
+adopted (review 39), and its results are recorded whatever they
+showed. It remains what the amendment made it: a reporting extra
+rather than a gate. Both verdicts in this document (the
+comparability gate and the minimum detectable effect) rest on the
+permuted control, and nothing in the companion section revises
+them.
 
 ## Environment and provenance
 
