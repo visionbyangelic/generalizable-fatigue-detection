@@ -1,0 +1,13 @@
+model: logistic_regression
+C: 1.0
+class_weight: balanced
+features: bandpower_43_amendment1 (see src/features/bandpower.py)
+imputation: training-fold median
+scaling: training-fold StandardScaler
+protocol: loso (leave-one-participant-out)
+labels: subjective (Amendment 1 windows)
+data: windows_a1 (canonical cap-seed-0 set, 806 windows, 11 participants) - the exact
+  window set and folds of the CNN LOPO run
+run_type: 'sensitivity (panel-owed): baseline on the CNN''s window set so the RQ2
+  contrast holds the window set fixed'
+git_commit: '4128237'
