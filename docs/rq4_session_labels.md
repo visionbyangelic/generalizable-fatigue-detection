@@ -198,10 +198,12 @@ suspect:
   and moves the LOPO headline from 0.5078 to 0.5066. The solver's
   own tolerance slack on a single stack is therefore about ten
   times the cross-environment difference being audited (at most
-  0.0024 on the LOPO folds, one flip), which is what "solver-iterate
-  differences" means concretely here: both environments' solvers
-  stop at slightly different iterates of the same optimum, well
-  inside the slack the default tolerance permits. Runs:
+  0.0024 on the LOPO folds, one flip). The locked summary of the
+  audit is one sentence: the cross-environment gap is within solver
+  tolerance slack. Both environments' solvers stop at slightly
+  different iterates of the same optimum, well inside what the
+  default tolerance permits, and nothing stronger than that is
+  claimed for the comparison. Runs:
   `experiments/runs/2026-11-21_baseline_loso_subjective-tolcheck-*`;
   table: `results/tables/rq4_tolerance_sensitivity.csv`.
 
@@ -547,7 +549,10 @@ exactly one training window in every split; any carve either
 removes it from training or leaves the validation set single-class.
 The CNN cells therefore train on all 16 training windows for a
 fixed budget of 100 epochs (the frozen maximum) with no early
-stopping, and every CNN run note says so.
+stopping, and every CNN run note says so. This is disclosed as a
+deviation with a consequence: because the training regime differs,
+these CNN cells are not comparable to the project's other CNN runs,
+and no cross-run CNN comparison in this project uses them.
 
 **Pre-declared reading.** If the chronological CNN cell approaches
 the preliminary's ~0.99 fatigued recall while the chronological LR
@@ -571,37 +576,222 @@ fit. Driver: `src/evaluation/rq4_replication_2x2.py`; per-fit table:
 | CNN, chronological | 3 | 1.000 (all seeds) | 1.000 | 1.000 (3/3 fits) | 1.000 | 1.000 |
 | CNN, random | 15 | 0.900 (SD 0.207) | 0.975 | 0.800 (12/15 fits) | 1.000 | 1.000 |
 
-**Which branch of the pre-declared reading applies: neither, and
-the write-up says so plainly.** The panel's two branches were
-"CNN-chronological approaches 0.99 while LR-chronological does
-not" (prices as model + split) and "no cell approaches 0.99" (not
-reproducible under this pipeline). What happened is a third
-pattern the pre-declaration did not list: the chronological LR
-cell also scores a perfect 8 of 8, as does the reversed split and
-every random LR split. On this pipeline's retained windows, the
-recording-sharing split inside one participant is by itself
-sufficient for a perfect score with either model, so the model
-factor prices at nothing here; if anything the CNN is the less
-reliable of the two, missing the single fatigued test window in 3
-of its 15 random fits (in each miss its AUC is still 1.000: it
-ranks the fatigued window first but below the 0.5 threshold, a
-calibration artefact of training on one fatigued example). The
-honest conclusion is the stronger form of the day-level arm's:
-P01's two retained sessions are trivially separable once both
-appear in training, which is the session-fingerprint mechanism
-operating at its purest, and a headline of the preliminary's
-magnitude needs no CNN and no fatigue signal to arise under this
-design family.
+**How this arm may be read (panel ruling, review 26).** The panel
+reviewed these numbers and ruled the arm uninformative about its
+purpose, and the write-up follows that ruling. The allowed summary
+sentence is this one: "All four cells were at or near ceiling;
+with one fatigued test window per split and no split lacking
+recording-sharing, the arm cannot discriminate between model or
+split." Three reasons, each sufficient on its own. First, the
+test sets are too small to price anything: every fatigued-class
+metric is 0/1 or 1/1, and the CNN random cell's 0.800 recall is
+three misses across 15 single-window fits, which is noise, not a
+model effect; 1.000 against 0.900 is not a difference this arm can
+see. Second, no cell lacks recording-sharing: under day-level
+labels the class is the session, both fatigued windows sit in
+Session 03, and every split puts the other one in training,
+adjacent in time, so the split factor was never varied along the
+dimension that matters. Third, a ceiling outcome gives no effect
+estimate: with every cell at or near 1.000 and AUC 1.000 in all
+fits, "the model makes no difference" cannot be told apart from
+"this design cannot discriminate anything". The arm therefore
+stands in this document as a null-by-design feasibility check: it
+shows the machinery runs end to end on day-level labels for both
+models, and it is evidence about neither model choice nor split
+effects. Neither branch of the pre-declared reading is claimed,
+because the arm cannot reach either branch's question.
 
-The bounds travel with the result. The fatigued class is 2 windows
-in total and 1 per test set, so each recall is a single coin flip
-landing heads; the retained 24 windows are a heavily filtered
-subset of the preliminary's 1,353, and nothing here shows the
-preliminary's own window set behaves the same way; and the
-chronological test fatigued window sits immediately after the one
-fatigued training window in time. What the arm settles is the
-factor pricing it was built for: split design alone, on one
-participant with whole-session labels, can produce the
-preliminary's headline number with the plain baseline model. The
-remaining distance to the preliminary (its exact windows, its own
-preprocessing) is not priced, and I do not claim it is.
+Two deviations from the preliminary's configuration are disclosed
+with the result: this arm cut its chronological split at 70/30
+where the preliminary's audit notebook used 80/20, and its CNN
+cells trained on the full 100-epoch budget with no early stopping
+(the Models paragraph above), so those cells are not comparable to
+the project's other CNN runs.
+
+One finding does stand on its own, and it is about retention, not
+about models: under Amendment-1 retention, Subject 01 keeps 24 of
+the preliminary's 1,353 windows (about 98% lost), so this arm was
+never run on the preliminary's data. Two things had changed at
+once between the preliminary and this arm, the windowing and the
+retention, and on 24 windows they cannot be separated. That is
+what makes the bounded replication in the next section owed: the
+preliminary's own windowing, its own chronological cut, both
+models, and the one cut this arm could not make, accuracy on the
+windows the Amendment-1 mask keeps against the windows it rejects.
+
+## Prototype-faithful replication (post hoc, panel-owed)
+
+This section's specification and outcome branches are written
+before the run, and the results are appended after them. The panel
+owed this run for a specific reason (reviews 25 and 26): between
+the preliminary experiment and the 2x2 arm above, two things
+changed at once, the windowing (the preliminary's 4 s windows at a
+2 s stride over whole sessions, against this pipeline's
+non-overlapping block windows) and the retention (the preliminary
+applied no Amendment-1 artefact rejection). On the 2x2's 24
+retained windows those two changes cannot be separated, so the
+question of where the preliminary's 99.18% came from cannot be
+closed from that arm. What remains is one participant, one
+windowing and one split, and the code already exists; this section
+runs exactly that.
+
+**What the preliminary's own record says.** The prototype
+repository (Neuro-Fatigue-Prediction, my own earlier project)
+documents its configuration in its README, and every choice below
+is either taken from that record or named as a departure from it.
+From the record: Subject 01 only; the `forehead_eeg_raw.csv` files
+of Session 01 (labelled alert) and Session 03 (labelled fatigued);
+the signal wrapped in MNE at 256 Hz; bandpass filter 1 to 50 Hz;
+sliding-window epoching with 4 s windows (1,024 samples) at a 2 s
+stride (50% overlap), producing 1,353 labelled samples from the
+two sessions; the main notebook reporting 99.18% fatigued-class
+recall (121 of 122 fatigued test samples caught); and a separate
+audit notebook applying a strict chronological split (train on the
+first 80% of a session, test on the last 20%) with a chronological
+test accuracy of 99.26%. The record's tech-stack table also
+credits MNE with "artifact removal", but its own pipeline step
+list contains no artefact-removal step and no method is named
+anywhere in the record; the replication therefore applies no
+artefact handling and names that as a remaining difference, rather
+than inventing a method the record does not contain.
+
+**The windowing decision, and the count that settles it.** The
+preliminary's MNE construction loads the session's samples as one
+continuous array; it has no concept of the recording's timestamp
+gaps. Epoching the loaded sample stream that way, as one
+continuous signal at 4 s windows and a 2 s stride, gives exactly
+the record's count: 720 windows from Session 01 and 633 from
+Session 03, 1,353 in total. Epoching the way this pipeline does,
+inside continuous runs only (splitting at timestamp gaps over
+100 ms), gives 389 (93 and 296). The replication follows the count
+that matches the record: whole-stream epoching. A consequence is
+worth stating plainly, because it is part of what the prototype's
+design priced in: Session 01 alone contains 898 timestamp gaps
+over 100 ms, so many of the prototype's "4-second windows" join
+samples that are not contiguous in time. My windows reproduce that
+property deliberately; it is the prototype's geometry, not an
+oversight in this run.
+
+**Preprocessing (named departures).** Both frozen models in this
+project take 512-sample windows at 128 Hz, so the stream is
+filtered and downsampled before epoching, using this pipeline's
+documented chain: 4th-order Butterworth bandpass 1 to 40 Hz,
+zero-phase, applied to the whole stream, then resampling 256 to
+128 Hz. The prototype's documented chain was an MNE bandpass at
+1 to 50 Hz with 1,024-sample windows at 256 Hz feeding its own
+Keras 1D-CNN. The filter band, the sampling rate at the model and
+the architectures therefore differ from the prototype's, and those
+differences are named here rather than hidden: what this run
+replicates exactly is the participant, the whole-session labels,
+the windowing geometry and count, and the split. What it holds
+fixed is this project's two models, so that windowing, split and
+retention are the only moving parts between this run and the rest
+of RQ4.
+
+**Windows and labels.** Window k of a session is downsampled
+samples [256k, 256k + 512), in stream order; the label is the
+session's (Session 01 = alert, Session 03 = fatigued). No block
+restriction: the whole sessions are epoched, as the prototype
+did. No cap. No rejection and no masking anywhere in the primary
+run: the band-power features are computed with every channel
+treated as valid (so the three mask-indicator features are
+constant), and the CNN's mask-indicator planes are constant 1.
+Alongside, and used for nothing except slicing the test
+predictions afterwards, the Amendment-1 mask is computed for
+every window with the Amendment-1 criteria exactly as implemented
+in `src/preprocessing/build_windows_a1.py`: a channel fails if its
+largest 1 s sub-window peak-to-peak exceeds 150 µV, or its window
+SD is under 0.5 µV, or any sample in the window's raw-rate span
+carries a Bad fit value on that channel; a window counts as
+mask-retained iff both frontal channels (AF7, AF8) pass, which is
+the Amendment-1 retention rule.
+
+**Split (the prototype's audit configuration).** Chronological
+80/20 within each session: the first floor(0.8 x n) windows in
+stream order are train, the remainder test, with no purge at the
+cut (adjacency across the cut is part of the prototype's design,
+as it was in the 2x2 arm). Counts: Session 01 gives 576 train and
+144 test windows; Session 03 gives 506 train and 127 test; totals
+1,082 train and 271 test (144 alert, 127 fatigued). One
+discrepancy against the record is reported rather than adjusted
+away: the prototype's README reports 122 fatigued test samples in
+its confusion matrix, where this run's cut gives 127. Its
+per-session window counts are not in the record, so the
+five-window difference cannot be traced from the record; my
+counts stand as computed.
+
+**Models.** (i) The frozen band-power logistic regression (43
+features, training-fold imputation and scaling; deterministic, one
+fit per split). (ii) The frozen EEGNet from `src/models/cnn.py`,
+trained through that file's own `train_fold`: same architecture,
+Adam, balanced class weights and per-channel normalisation from
+the subtraining windows only, early stopping with patience 15 on
+a grouped validation carve with the best weights restored, at
+model seeds 0, 1 and 2. One adaptation, stated: cnn.py's
+within-protocol carve is grouped by session, which is impossible
+here because the session is the label (any session carve is
+single-class). The carve unit is therefore the contiguous tail
+segment of the training span: validation is the last quintile
+(20%) of each session's training windows, subtraining the first
+four quintiles, which is the same grouped-carve mechanism with a
+time-segment grouping. There is no purge at the carve boundary, so
+the last subtraining window overlaps the first validation window
+by 2 s; that can only make early stopping marginally optimistic
+and it does not touch the test set.
+
+**The blocked comparator (and why nothing stronger exists here).**
+A session-held-out control within Subject 01 is mathematically
+degenerate: with two sessions and session-level labels, holding
+out a session removes an entire class from one side of the split,
+so no such control exists for this participant. The honest
+cross-participant anchor for day-level labels is the LOPO arm
+above (0.484), and the within-session position control from Week 2
+is already reported in this document. What this section adds is a
+blocked split on the same windows, which removes exactly one
+ingredient, window overlap, while keeping the recording shared:
+within each session, windows are grouped into consecutive blocks
+of 30 (60 s of window starts); blocks are numbered in time order
+and every fifth block (5, 10, 15, ...) is test, the rest train;
+any training window that shares samples with a test window (the
+windows immediately before and after each test block, whose
+starts sit 2 s from a test window's start) is then purged from
+training and counted. Both models run on it, the CNN with the
+same quintile carve computed within each session's blocked
+training windows. It is reported as "overlap removed, recording
+still shared", never as an honest fatigue evaluation: train and
+test still come from the same two recordings.
+
+**The key cut and the intervals.** For each model, on each split,
+test accuracy, balanced accuracy, both class recalls and ROC-AUC
+are reported on three slices of the same test predictions: all
+test windows, the mask-retained subset, and the mask-rejected
+subset. Headline intervals come from a contiguous-block
+bootstrap: the test windows of each session are resampled as
+30-window blocks with replacement (10,000 resamples, rng 42) and
+the metrics recomputed; for the CNN the statistic in each resample
+is the mean over the 3 model seeds. The effective sample size is
+far below the window count: the chronological test set's 271
+windows form 10 blocks, so the intervals should be read as resting
+on roughly 10 independent units per class slice, not 271.
+
+**Pre-declared outcome branches.** (A) The chronological scores
+sit near the preliminary's (fatigued recall around 0.99) on all
+test windows AND collapse on the mask-retained subset: the
+preliminary number rode on windows the quality bar rejects, a
+recording-quality shortcut. (B) The chronological scores sit near
+0.99 on all windows AND the mask-retained subset scores high too:
+overlap plus recording-sharing suffices even on clean windows.
+(C) No configuration approaches 0.99: the preliminary number is
+not reproducible under this pipeline even in its own windowing
+and split configuration, and the remaining differences (filter
+band, sampling rate at the model, architectures, the record's
+unspecified preprocessing) are the named candidates. (D) Neither
+pattern cleanly: report descriptively and say so.
+
+Driver: `src/evaluation/rq4_replication_proto.py`. Run folders:
+`experiments/runs/2026-11-21_replication-proto_*`. Summary table:
+`results/tables/rq4_replication_proto_summary.csv`. The window set
+is saved as `data/processed/windows_proto_p01.npy` with its index
+(participant, session, stream position, label, per-channel
+Amendment-1 pass flags and the retention flag) so the run can be
+rebuilt exactly.
