@@ -1,0 +1,2 @@
+scope,n_participants,n_fits,balanced_accuracy,ci_lo,ci_hi
+"non-degenerate fits only (descriptive, post hoc)",11,39,0.4916347131672624,0.4391448060426256,0.5384885498820647

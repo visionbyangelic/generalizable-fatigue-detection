@@ -1,4 +1,4 @@
-# CNN leave-one-participant-out results (RQ2 headline, RQ1 gap) — 21 Nov 2026
+# CNN leave-one-participant-out results (RQ2 headline, RQ1 gap), 21 Nov 2026
 
 The field's open problem is not whether a fatigue model can score well
 on people it has already seen; it is whether anything survives the move
@@ -57,10 +57,10 @@ for either model.
 
 ## Headline result
 
-Neither the frozen-configuration EEGNet CNN nor the band-power
-baseline exceeds chance in cross-participant fatigue classification
-on FatigueSet (N = 11 analysed of 12 enrolled), with no advantage
-for the CNN.
+There is no evidence that either the frozen-configuration EEGNet
+CNN or the band-power baseline exceeds chance in cross-participant
+fatigue classification on FatigueSet (N = 11 analysed of 12
+enrolled), and no evidence of an advantage for the CNN.
 
 CNN LOPO, mean over the 11 participants of per-participant seed means
 (intervals: participant bootstrap, 10,000 resamples over the
@@ -105,8 +105,10 @@ single class, so I extracted the stored predictions from all 55 run
 folders (no retraining; src/evaluation/cnn_loso_degeneracy.py, table
 results/tables/cnn_loso_degeneracy.csv) and counted, per fit, the
 fraction of test windows predicted fatigued and the epoch at which
-training stopped. A fit is called degenerate here if one class
-accounts for at least 95% of its test predictions.
+training stopped. A fit is one held-out participant under one model
+seed, so the 55 fits are 11 participants by 5 seeds. A fit is called
+degenerate here if one class accounts for at least 95% of its test
+predictions.
 
 - 16 of the 55 fits are degenerate by that rule. Three of them
   (P04 seed 3, P07 seed 3, P08 seed 3) predict fatigued for every
@@ -119,57 +121,106 @@ accounts for at least 95% of its test predictions.
   about 95 to 97% of windows) or seed 3 (11 fits, one for every
   participant, each predicting fatigued for about 97 to 100% of
   windows). Seeds 1, 2 and 4 have none.
-- Training usually stopped as early as it could. 43 of the 55 fits
-  stopped at epoch 16, the earliest stop the patience of 15 permits,
-  which means the best validation loss was the first epoch's and
-  never improved afterwards; the median run is 16 epochs and the
-  longest is 36. Every degenerate fit stopped at epoch 16.
+- Training usually stopped as early as it could. Early stopping
+  here monitors validation loss with a patience of 15 over at most
+  100 epochs, so epoch 16 is the earliest stop possible, and it
+  happens only when the first epoch's validation loss is never
+  improved on. 43 of the 55 fits stopped at epoch 16: in those fits,
+  validation loss never improved after epoch 1. The median run is
+  16 epochs and the longest is 36. Every degenerate fit stopped at
+  epoch 16.
 
-Plainly: in a large share of these folds the network barely learned
-anything beyond a near-constant output, and the headline estimate
-averages over those fits. The RQ2 comparison below is therefore a
-comparison between the baseline and a network that, in many folds,
-produced little more than a constant prediction. That is part of the
-result, not a footnote to it.
+What this pattern means needs care. A stop at epoch 16 says the
+validation loss of the first epoch was never beaten; it does not say
+why. Two explanations fit equally well: the optimisation found
+nothing to work with, or there was no transferable signal in the
+training folds for early stopping to find. These fits cannot
+separate the two, and I do not try to make them. The CNN result is
+a null for this configuration and does not bound what a differently
+trained network could do.
 
-## RQ2 — CNN vs band-power baseline on identical splits
+For completeness, one descriptive number, labelled post hoc and
+reported here only: the 39 non-degenerate fits average 0.492
+[0.439, 0.538] balanced accuracy (per-participant means over each
+participant's non-degenerate seeds, averaged over the 11
+participants, participant bootstrap interval;
+src/evaluation/cnn_loso_nondegen.py,
+results/tables/cnn_loso_nondegen_descriptive.csv). Degeneracy is
+defined from the predictions alone, never from the labels, so the
+subset is well defined; but the subset is chosen after seeing the
+predictions, so the number is not a headline, not a sensitivity and
+not a replacement for the primary estimate, and it is promoted
+nowhere. Its closeness to the full estimate (0.493) is itself only
+an observation.
 
-Paired per-participant contrast, CNN minus baseline balanced accuracy
-(each model averaged over its own seeds first; participant bootstrap
-CI): **-0.014 [-0.075, +0.042]** over the 11 participants
-(results/tables/cnn_loso_rq2_contrast.csv). Per participant the
-difference runs from -0.226 (P07) to +0.144 (P10); those values are
-reported for completeness and are not read as evidence about
-individual participants. The interval includes zero and small
-differences in either direction: the data are consistent with no
-difference between the two models, and they do not support an
-advantage for the CNN. They are not used to exclude an advantage of
-0.05 or more either: the interval's upper limit (+0.042) falls 0.008
-short of the 0.05 smallest effect size of interest, and under the
-estimation-only ruling no exclusion claim is made in either
-direction. Two qualifications from the follow-up checks belong with
-this contrast. First, the CNN side includes the 16 near-constant
-fits counted above, so the contrast is against a network that often
-barely learned. Second, the baseline's numbers in this contrast come
-from the primary Week 2 run, whose cap seeds vary the window
-subsample while the CNN's seeds are model seeds on the fixed
-cap-seed-0 set; the sensitivity directly below removes that
-asymmetry.
+One mechanical consequence of the degeneracy belongs in the RQ2
+text rather than down here, and it is stated there: constant-output
+fits score exactly 0.5 by construction, so the degenerate fits pull
+the CNN's mean toward chance, and the CNN-versus-baseline contrast
+is biased toward a null because of them.
 
-**Sensitivity: baseline rerun on the CNN's exact window set.** The
-band-power baseline was rerun LOPO on the identical canonical
-cap-seed-0 set of 806 windows, same folds
+## RQ2: CNN vs band-power baseline on identical splits
+
+The paired number for RQ2 is the corrected paired contrast on the
+canonical window set: CNN minus baseline balanced accuracy
+**+0.005 [-0.068, +0.071]**
+(results/tables/cnn_loso_rq2_contrast_canonical806.csv). Both sides
+are computed on the identical canonical cap-seed-0 set of 806
+windows, same folds: on those windows the CNN averages 0.493 and
+the baseline 0.488 over the 11 participants. Every contrast in this
+document is computed on per-participant seed means and paired and
+bootstrapped at the participant level (10,000 resamples over the 11
+participants), because the participant is the independent unit in a
+cross-participant evaluation; the counts behind the contrast are 55
+CNN fits (11 participants by 5 model seeds) and the baseline's
+per-participant values on the same windows. Per participant the
+corrected difference runs from -0.269 (P07) to +0.205 (P10); those
+values are reported for completeness and are not read as evidence
+about individual participants.
+
+The interval includes zero and spans about +/- 0.07, so it rules
+out only large differences in either direction. The data do not
+support an advantage for the CNN. Under the estimation-only ruling
+the contrast is reported as an estimate with its interval and
+nothing more: no exclusion is claimed in either direction, and an
+interval that spans zero is not treated as equivalence.
+
+One mechanical consequence belongs with this contrast, not in the
+caveats. Three of the CNN fits output a single class for every test
+window and so score exactly 0.500 by construction, and the 16
+degenerate fits counted above all pull the CNN's mean toward
+chance, because a near-constant prediction cannot score far from
+0.5 in either direction. The degenerate fits also cluster by seed
+(11 of the 16 under seed 3, the other 5 under seed 0), which points
+to initialisation sensitivity in this configuration. The
+CNN-versus-baseline test is therefore biased toward a null, and
+the CNN null is weak evidence: a null for this configuration,
+reached by a comparison that degeneracy pushes toward finding
+nothing.
+
+How this contrast got here, disclosed in full. The first-reported
+paired contrast was **-0.014 [-0.075, +0.042]**
+(results/tables/cnn_loso_rq2_contrast.csv), computed against the
+baseline's primary Week 2 numbers. Its interval's upper limit fell
+0.008 short of the 0.05 smallest effect size of interest, and under
+the estimation-only ruling it was never used to exclude an
+advantage of 0.05 or more. That first contrast mixed window sets:
+the baseline side averaged over cap subsamples of the 1,053-window
+primary pool, while the CNN ran on the fixed canonical set of 806
+windows. The two baseline numbers belong to those different window
+sets and are named with them wherever they appear: 0.508 on the
+primary pool, 0.488 on the canonical set. The correction was made
+after the results were seen: the baseline was rerun LOPO on the
+identical canonical 806 windows, same folds
 (experiments/runs/2026-11-21_baseline_loso_subjective_canonical806;
-src/models/baseline_loso_canonical806.py). On those windows the
-baseline averages 0.488 balanced accuracy over the 11 participants
-(against 0.508 for the primary headline over the larger pool), and
-the paired CNN-minus-baseline contrast recomputed on the identical
-window set is **+0.005 [-0.068, +0.071]**
-(results/tables/cnn_loso_rq2_contrast_canonical806.csv). The small
-negative tilt of the primary contrast was therefore a property of
-the differing window sets, not of the models: on identical windows
-the two estimates are centred on the same value, with an interval
-that again includes zero.
+src/models/baseline_loso_canonical806.py), and the contrast was
+recomputed on identical windows. Recomputing removes the small
+negative tilt of the first-reported number. The shift between the
+two contrasts is 0.019, itself inside the noise of either interval,
+so the correction is reported as fixing a mismatched comparison,
+not as a measured effect. The +0.005 carries its own name, the
+corrected paired contrast on the canonical window set, and the
+first-reported -0.014 stays on record here with its cause.
 
 ## Sensitivity (post hoc): early-stopping validation carved by whole participant
 
@@ -199,10 +250,13 @@ Result: CNN LOPO balanced accuracy **0.509 [0.482, 0.538]** (ROC-AUC
 per-participant movement is **+0.016 [-0.012, +0.047]**
 (results/tables/cnn_loso_partval_vs_segval.csv): the estimate moved
 up slightly, by an amount whose interval includes no movement, and
-it remains centred on chance. That movement is reported as an
-observation; it is not a verdict that the carve choice is irrelevant
-in general, only that under this dataset and design the two carves
-gave estimates this close.
+it remains centred on chance. This sensitivity is reported with its
+interval and given no interpretive weight: the movement is an
+observation, not a verdict that the carve choice is irrelevant in
+general, only that under this dataset and design the two carves
+gave estimates this close. The primary result stays the original
+carve's 0.493; the 0.509 is never set against any baseline number,
+because no paired baseline exists for this carve.
 
 One related point the review asked to have verified from the code
 rather than assumed: whether the original carve-strategy search ever
@@ -217,7 +271,7 @@ post-purge subtraining set of both classes with at least 20 windows.
 It computes no performance score of any kind and optimises nothing;
 the first feasible carve is simply the one used.
 
-## RQ1 — the generalisation gap, in three tiers
+## RQ1: the generalisation gap, in three tiers
 
 RQ1 is clearest as three tiers of estimate, from the least honest
 split to the most honest:
@@ -304,6 +358,11 @@ level, which is why the paired version is reported alongside.
   it was computed for.
 - Claims are scoped to this feature family, this evaluation and the
   Muse S headset data of FatigueSet, as everywhere in this project.
+- The null itself holds for this frozen architecture, this
+  preprocessing and windowing pipeline, this early-stopping rule
+  and this seed set. It is not a blanket statement about deep
+  learning, and not a blanket statement about cross-participant EEG
+  fatigue signal in general.
 
 ## Problems encountered
 
