@@ -1,0 +1,14 @@
+participant,latest_test_with_data,kss_fatigued_test,rt_fatigued_test,kss_alert_test,rt_alert_test,kss_fatigued_is_latest,rt_fatigued_is_latest,fatigued_agrees,alert_agrees
+P01,3,3,2,1,1,True,False,False,True
+P02,3,2,1,1,3,False,False,False,False
+P03,3,3,3,1,2,True,True,True,False
+P04,3,3,2,1,1,True,False,False,True
+P05,3,3,2,1,1,True,False,False,True
+P06,3,3,3,1,1,True,True,True,True
+P07,3,3,3,2,2,True,True,True,True
+P08,3,3,3,1,1,True,True,True,True
+P09,3,3,3,2,2,True,True,True,True
+P10,3,3,3,1,1,True,True,True,True
+P11,3,3,3,1,2,True,True,True,False
+P13,2,1,1,2,2,False,False,True,True
+P14,3,3,3,1,1,True,True,True,True

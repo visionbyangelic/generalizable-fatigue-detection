@@ -1,0 +1,9 @@
+model: logistic_regression
+C: 1.0
+class_weight: balanced
+imputation: training-fold median
+scaling: training-fold StandardScaler
+protocol: loso (leave-one-participant-out)
+git_commit: 08c42c3
+features: DROZY Fz-only (12)
+labels: protocol order (earliest vs latest session with data), exploratory

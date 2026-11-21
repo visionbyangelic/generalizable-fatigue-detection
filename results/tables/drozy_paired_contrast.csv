@@ -1,0 +1,2 @@
+contrast,n_participants,mean_difference,ci95_low,ci95_high,bootstrap_share_above_zero
+"BA(KSS all-channel) - BA(RT all-channel), paired by participant",13,0.1198133687398415,0.06153608794960228,0.17860772788558918,1.0

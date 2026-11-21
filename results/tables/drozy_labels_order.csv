@@ -1,0 +1,15 @@
+participant,sessions_with_data,alert_test,fatigued_test,middle_test,alert_value,fatigued_value,included,note
+P01,"1,2,3",1.0,3.0,2.0,1.0,3.0,True,labels from session order only: earliest session with data vs latest
+P02,"1,2,3",1.0,3.0,2.0,1.0,3.0,True,labels from session order only: earliest session with data vs latest
+P03,"1,2,3",1.0,3.0,2.0,1.0,3.0,True,labels from session order only: earliest session with data vs latest
+P04,"1,2,3",1.0,3.0,2.0,1.0,3.0,True,labels from session order only: earliest session with data vs latest
+P05,"1,2,3",1.0,3.0,2.0,1.0,3.0,True,labels from session order only: earliest session with data vs latest
+P06,"1,2,3",1.0,3.0,2.0,1.0,3.0,True,labels from session order only: earliest session with data vs latest
+P07,"2,3",2.0,3.0,,2.0,3.0,True,labels from session order only: earliest session with data vs latest
+P08,"1,2,3",1.0,3.0,2.0,1.0,3.0,True,labels from session order only: earliest session with data vs latest
+P09,"2,3",2.0,3.0,,2.0,3.0,True,labels from session order only: earliest session with data vs latest
+P10,"1,3",1.0,3.0,,1.0,3.0,True,labels from session order only: earliest session with data vs latest
+P11,"1,2,3",1.0,3.0,2.0,1.0,3.0,True,labels from session order only: earliest session with data vs latest
+P12,1,,,,,,False,fewer than two usable sessions; excluded: no within-person contrast exists
+P13,"1,2",1.0,2.0,,1.0,2.0,True,labels from session order only: earliest session with data vs latest
+P14,"1,2,3",1.0,3.0,2.0,1.0,3.0,True,labels from session order only: earliest session with data vs latest
