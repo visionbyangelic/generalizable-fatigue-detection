@@ -83,7 +83,7 @@ I directed: **use Google Colab**, with the Google account I already has access t
 
 Flow: develop locally → push to GitHub → run heavy CNN in Colab (notebook pulled from GitHub, data pulled from the official source) → results (CSV + logs + plots) committed back to GitHub.
 
-**Status (20 Nov 2026):** dataset downloaded + verified locally; repo live with scaffold pushed; Colab verification in progress.
+**Status (updated 21 Nov 2026):** all analysis complete. All four research questions are answered and closed, the DROZY diagnostic study and its Amendment 2 positive control are complete, the chapter notebooks and the writing-support pack are assembled, and the repository has had its final polish pass. What remains is mine alone: writing the project report and the defense slides.
 
 ## 9. Repo Structure
 
@@ -128,30 +128,30 @@ generalizable-fatigue-detection-fatigueset-drozy/
 
 ### Week 1: Data + preprocessing + label rules
 - [x] Obtain FatigueSet, verify files/checksums, inventory per participant/session/modality, **done 20 Nov 2026** (official Drive download, CRC-verified; see `docs/DATA_INVENTORY.md`)
-- [ ] Inspect Muse EEG: sampling rate, channels, quality, missing segments
-- [ ] Inspect ratings + task performance: scales, timing, alignment to EEG
-- [ ] Implement preprocessing: filtering, artefact handling, fixed-length windows (no cross-split overlap)
-- [ ] Write + lock `docs/label_rules.md` (subjective + performance rules, baseline period, thresholds)
-- [ ] Examine label agreement/disagreement
+- [x] Inspect Muse EEG: sampling rate, channels, quality, missing segments
+- [x] Inspect ratings + task performance: scales, timing, alignment to EEG
+- [x] Implement preprocessing: filtering, artefact handling, fixed-length windows (no cross-split overlap)
+- [x] Write + lock `docs/label_rules.md` (subjective + performance rules, baseline period, thresholds)
+- [x] Examine label agreement/disagreement
 
 ### Week 2: Baseline + CNN + within / session-out
-- [ ] Band-power feature extraction
-- [ ] Classical baseline with training-only validation
-- [ ] 1D-CNN implementation + training loop (seeded)
-- [ ] Within-subject evaluation (both models, both label sets)
-- [ ] Leave-one-session-out evaluation
+- [x] Band-power feature extraction
+- [x] Classical baseline with training-only validation
+- [x] 1D-CNN implementation + training loop (seeded)
+- [x] Within-subject evaluation (both models, both label sets)
+- [x] Leave-one-session-out evaluation
 
 ### Weeks 3–4: LOSO + seeds + RQ4 (core results)
-- [ ] LOSO × 12 participants, both models, both label sets
-- [ ] Repeat with 5+ seeds; separate seed variance from participant variance
-- [ ] RQ4: session-label run under identical protocols; compare
-- [ ] Generalisation gap analysis; per-participant tables + figures
+- [x] LOSO × 12 participants, both models, both label sets
+- [x] Repeat with 5+ seeds; separate seed variance from participant variance
+- [x] RQ4: session-label run under identical protocols; compare
+- [x] Generalisation gap analysis; per-participant tables + figures
 - [ ] Start project draft (Methods + Results skeleton)
 
 ### Weeks 5–6: Multimodal extension (optional, RQ3)
-- [ ] Align E4/Zephyr/eSense signals to EEG windows + labels (only where reliable)
-- [ ] Compare: EEG only / HR only / EDA only / EEG+HR / EEG+HR+EDA under LOSO
-- [ ] Decide keep/cut based on LOSO gain
+- [x] Align E4/Zephyr/eSense signals to EEG windows + labels (only where reliable)
+- [x] Compare: EEG only / HR only / EDA only / EEG+HR / EEG+HR+EDA under LOSO
+- [x] Decide keep/cut based on LOSO gain
 
 ### Weeks 7–8: Writing / slides / repo cleanup
 - [ ] Full analysis + discussion + limitations
