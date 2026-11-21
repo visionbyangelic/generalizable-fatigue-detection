@@ -90,3 +90,68 @@ What that means for this design, stated in advance:
 ## Code
 
 Phase 2 adds one new file, the peripheral feature extractor, implementing only the rules declared here and joining the frozen EEG features by window identity (participant, session, block, run_id, start_sample). No frozen file changes. The extractor's hash is recorded in the Phase 2 run notes before any result is examined. Anything else that has to change is a logged deviation with its reason, written before results are seen.
+
+---
+
+## Amendment 1 (21 Nov 2026): the panel ruling on the declared design, recorded before any modelling
+
+This design was reviewed before a single peripheral feature was computed for modelling (the review record is `docs/methods_notes.md`, reviews 35 and 36). The ruling changes what counts as the headline, what the restricted pool is for, and several names and statements. Where this amendment and the original declaration above differ, this amendment governs, and the difference is recorded here rather than edited away. Nothing in this amendment was written after seeing an RQ3 result: at the time of writing, the peripheral feature table does not exist yet.
+
+### The headline quantities are the increments, not the levels
+
+The original declaration named one primary contrast (combined minus EEG-only). The ruling widens and reorders the headline. The headline quantities are now two paired increments, each computed per participant (seed means first) with participant bootstrap intervals:
+
+1. **Peripheral-only minus indicators-only.** This is the quantity that speaks to physiology, because the indicators-only arm is the ceiling that the missingness pattern alone can reach under the same model and splits (see below). A peripheral-only level above 0.5 with an increment near zero says the score was bought by the missingness pattern, not by the signals.
+2. **Combined minus EEG-only.** This stays a headline contrast, as originally declared.
+
+Absolute balanced accuracy against 0.5 is still reported for every arm and tier, but it is not the headline and carries no claim on its own. Within a cap seed every arm sees the identical window set, and imputation and scaling are fitted inside training folds only, as everywhere in this project.
+
+### The restricted pool is a co-gate, and its estimand is conditional
+
+The complete-peripheral restriction (993 of the 1,053 pool windows) is upgraded from a sensitivity to a **co-gate**: no physiology claim may be made from the keep-all pool alone. The restricted pool is a conditional estimand and is described that way: it estimates performance **when the band worked**. It is never called clean, unbiased or complete-case in a complimentary sense, because the restriction is itself class-asymmetric (it removes fatigued windows at about 12% and alert windows at about 0.2%).
+
+**Pre-declared divergence rule.** If the keep-all pool sits above chance and the restricted pool does not, the reading is fixed in advance: **missingness-driven, no physiology claim**. Any other divergence is reported with both pools' numbers on the page and no claim picked between them.
+
+### What the indicators-only diagnostic is, and the stronger check beside it
+
+Indicators-only is the **shortcut ceiling**: the best the two validity indicators can do under the same model and splits. It is not an apportioning tool. Scores are not additive, so no percentage of any arm's performance will be attributed to missingness, here or anywhere in the write-up.
+
+One stronger check is added beside it, because a ceiling does not test what a trained model does on windows where the shortcut carries no information: **train on the keep-all pool, score only the complete-data test windows**, per participant, leave-one-participant-out, with P08 and P10 flagged in the reporting (they are the two participants whose fatigued windows the stopped bands removed). On complete test windows the indicators are constant, so whatever the peripheral and combined arms score there cannot come from the missingness pattern in the test fold.
+
+### Model statement and indicator coefficients
+
+The regularisation is identical to the Week 2 baseline, stated here so there is no ambiguity: logistic regression, L2 penalty, C = 1.0, class weights balanced, median imputation and standardisation inside a pipeline fitted on each training fold only (`src/models/baseline.py`). Because the validity indicators come close to separating one class inside some folds, the fitted coefficients on `hr_valid` and `eda_valid` are reported per fold for the peripheral-only and combined arms, so any quasi-separation shows up as visibly large coefficients rather than hiding inside an aggregate score.
+
+### A within-participant-normalised sensitivity, declared now
+
+A V2-style variant is declared as a labelled sensitivity for the peripheral-only and combined arms: each continuous feature is centred and scaled within participant, using that participant's own unlabelled windows (the participant's pool windows, labels never used; the Week 2 V2 normalised within session, this variant's grouping unit is the participant). Indicator features are not normalised. The pipeline's training-fold imputation and scaling still apply afterwards, exactly as in the Week 2 V2. This variant is transductive at participant level in the same declared way V2 was at session level: a held-out participant's features are normalised with statistics that include that participant's own unlabelled windows. It is a sensitivity only and cannot upgrade any headline.
+
+### Validity thresholds, stated exactly as implemented
+
+The thresholds below were fixed after the class asymmetry was inventoried (the inventory's Section 3 counts were computed under these rules), and they are stated here verbatim so the implementation can be checked against them:
+
+- **hr_valid** = 1 if the window holds at least 2 usable `wrist_hr` samples, else 0, where usable means a sample inside the window span with a positive value.
+- **eda_valid** = 1 if the window holds at least 8 `wrist_eda` samples and their maximum exceeds 0.002 µS, else 0.
+
+The Empatica HR product is described accurately wherever it is mentioned: `wrist_hr` is the E4 firmware's own 1 Hz heart-rate product, **a smoothed trailing average over the preceding 10 seconds**, not an instantaneous rate. The HR arm of this study is mean heart rate only; nothing in RQ3 measures beat-to-beat variability, and no wording will suggest otherwise.
+
+### Indicator correlation, reported for the combined arm
+
+The EEG features already carry their own validity indicators (the Amendment-1 mask indicators). Before the combined arm is interpreted, the correlation between the EEG mask indicators and the peripheral validity indicators across the pool windows is computed and reported, so a reader can see whether the two devices' missingness patterns travel together or separately.
+
+### A name change: rise count
+
+Feature 4 of the declared set is renamed. In a 4-second window, with a 0.01 µS threshold sitting near the E4's quantisation floor, calling the counted events skin conductance responses overclaims what the count is. The feature is named **rise count** (`eda_rise_count`) everywhere from here on: the number of rises of at least 0.01 µS from a local minimum to the next local maximum in the window's raw EDA series, by the fixed scanning rule declared above. The rule itself is unchanged; only the name, and the claims the name would have smuggled in, change. "SCR frequency" is not used.
+
+### The outcome table, rewritten before running
+
+The pre-declared readings table above is replaced by this one. Aggregation is fixed: per-participant balanced accuracy, seed means first, and the leave-one-participant-out tier carries the headline intervals.
+
+| # | Outcome pattern | Pre-declared reading |
+|---|---|---|
+| 1 | Peripheral-only above chance, but about equal to indicators-only (the increment's interval spans or sits below zero) | The peripheral score is carried by the missingness pattern. No physiology claim. The arm measured the shortcut ceiling, and the write-up says so. |
+| 2 | Peripheral-only above indicators-only in BOTH pools (keep-all and restricted increments both positive, intervals excluding zero) | Evidence that the peripheral signals carry transferable information beyond the missingness pattern, scoped to this pool, this feature set, this device, these labels and this model. Levels are still reported plainly: an increment is not a working detector. |
+| 3 | Null in both pools (no arm's LOPO estimate separates from chance and the increments span zero) | No evidence of transferable signal in the peripheral features under this design, with the estimates compatible with effects up to the intervals' upper limits. The FatigueSet null is not specific to EEG. Never worded as proof that no peripheral signal exists. |
+| 4 | The pools diverge (keep-all and restricted readings disagree) | If keep-all sits above chance and the restricted pool does not: missingness-driven, no physiology claim (the divergence rule above). Any other divergence: both pools reported, the disagreement stated, no claim picked between them. |
+
+The second reviewer's additions converge with this ruling and are adopted with it: matched windows within each fold (already the design), preprocessing fitted within training folds (already the rule), and the non-truncated check (supplied by the restricted pool as co-gate and by the complete-test-window scoring). The suggestion to add wrist accelerometry is not adopted: the exclusion rationale in the original declaration stands (motion in this protocol is a designed confound, with the activity block sitting between the labelled blocks by construction).
