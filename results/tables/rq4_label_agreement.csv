@@ -1,0 +1,4 @@
+comparison,n_windows,observed_agreement,cohen_kappa
+"session-phase vs subjective, shared windows (restricted pool, uncapped)",1053,1.0,1.0
+coverage: windows with a session-phase label but no subjective label (non-increasing sessions),68,,
+coverage: all session-labelled windows,1121,,

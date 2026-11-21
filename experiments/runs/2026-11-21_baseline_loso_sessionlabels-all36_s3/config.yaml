@@ -1,0 +1,15 @@
+model: logistic_regression
+C: 1.0
+class_weight: balanced
+features: bandpower_43_amendment1 (see src/features/bandpower.py)
+imputation: training-fold median
+scaling: training-fold StandardScaler
+protocol: loso
+labels: 'SESSION-PHASE (RQ4 diagnostic, never ground truth): M1 block = alert, M3
+  block = fatigued, assigned by block only; no rating consulted'
+arm: all36
+sessions: all 36 sessions (primary pool + the 4 non-increasing drift/sensitivity check
+  sessions)
+cap_seed: 3
+data: windows_a1_uncapped (+ windows_a1_control for all36), M1 capped per session
+git_commit: ed3a307
