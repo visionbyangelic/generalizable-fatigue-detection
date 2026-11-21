@@ -1,0 +1,3 @@
+model,within_ba,within_participants,lopo_ba,lopo_participants,gap_within_minus_lopo
+band-power baseline,0.48355558512032165,8,0.5075366314137985,11,-0.023981046293476804
+1D-CNN (EEGNet),0.4930644062562689,7,0.49311652274097023,11,-5.211648470132557e-05
