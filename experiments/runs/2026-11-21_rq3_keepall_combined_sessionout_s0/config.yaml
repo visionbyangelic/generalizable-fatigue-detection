@@ -1,0 +1,63 @@
+model: logistic_regression
+C: 1.0
+class_weight: balanced
+imputation: training-fold median
+scaling: training-fold StandardScaler
+arm: combined
+features:
+- logpow_TP9_delta
+- logpow_TP9_theta
+- logpow_TP9_alpha
+- logpow_TP9_beta
+- logpow_AF7_delta
+- logpow_AF7_theta
+- logpow_AF7_alpha
+- logpow_AF7_beta
+- logpow_AF8_delta
+- logpow_AF8_theta
+- logpow_AF8_alpha
+- logpow_AF8_beta
+- logpow_TP10_delta
+- logpow_TP10_theta
+- logpow_TP10_alpha
+- logpow_TP10_beta
+- relpow_TP9_delta
+- relpow_TP9_theta
+- relpow_TP9_alpha
+- relpow_TP9_beta
+- relpow_AF7_delta
+- relpow_AF7_theta
+- relpow_AF7_alpha
+- relpow_AF7_beta
+- relpow_AF8_delta
+- relpow_AF8_theta
+- relpow_AF8_alpha
+- relpow_AF8_beta
+- relpow_TP10_delta
+- relpow_TP10_theta
+- relpow_TP10_alpha
+- relpow_TP10_beta
+- frontal_ratio_th_al_over_beta
+- frontal_ratio_al_over_beta
+- frontal_ratio_th_al_over_al_beta
+- frontal_ratio_th_over_beta
+- temporal_ratio_th_al_over_beta
+- temporal_ratio_al_over_beta
+- temporal_ratio_th_al_over_al_beta
+- temporal_ratio_th_over_beta
+- valid_TP9
+- valid_TP10
+- both_temporals_masked
+- hr_mean
+- eda_mean
+- eda_slope
+- eda_rise_count
+- hr_valid
+- eda_valid
+pool: keepall
+protocol: sessionout
+labels: primary subjective (Amendment 1 windows)
+cap_seed: 0
+data: windows_a1_uncapped + peripheral_features_a1
+peripheral_extractor_sha256: ced46c05914303145c7e88d755999288de759a01613f2d99d39c90821d6a9f12
+git_commit: e35f998

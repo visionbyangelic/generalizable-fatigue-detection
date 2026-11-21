@@ -1,0 +1,9 @@
+contrast,n_participants,diff_mean,diff_lo,diff_hi,note
+peripheral - indicators (keepall LOPO),11,0.2017551692920101,0.08508399840772392,0.314314488898789,headline increment 1: peripheral signal beyond the shortcut ceiling
+combined - EEG-only stored Week 2 (keepall LOPO),11,0.22977262535599222,0.12832477559905275,0.3323814547356834,"headline increment 2, against the stored Week 2 per-participant values as declared"
+combined - eeg-stored (keepall LOPO),11,0.22950524567684782,0.12820208379737802,0.33211284175831046,computed against this harness's eeg arm; verified equal to the stored Week 2 values before use (see results doc)
+peripheral - indicators (restricted LOPO),11,0.2244098326729853,0.1330966458792246,0.31493664210958944,co-gate increment on the conditional pool
+combined - eeg (restricted LOPO),11,0.19440196307089508,0.11693222119611474,0.27358995902836764,co-gate: combined increment on identical restricted windows
+peripheral - indicators (norm sensitivity LOPO),11,0.21414079836481636,0.0849641322184457,0.3314142875860705,"indicators are unchanged by normalisation, so the keep-all indicators arm is the comparator"
+combined - combined-unnormalised (norm sensitivity),11,-0.016219531802030264,-0.08021278546726542,0.05192183927863182,descriptive movement under within-participant normalisation
+peripheral - peripheral-unnormalised (norm sensitivity),11,0.012385629072806194,-0.06159080877716464,0.09003418271042107,descriptive movement under within-participant normalisation
