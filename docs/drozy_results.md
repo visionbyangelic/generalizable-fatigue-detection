@@ -138,7 +138,13 @@ docs/drozy_exploratory_checks.md; the short version:
   to the opposite session from the one the KSS labels call
   fatigued, so a model tracking the session structure the KSS labels
   follow is scored against them. With n = 4 that split is a
-  description of where the contrast lives, not a finding.
+  description of where the contrast lives, not a finding. One
+  bookkeeping point, verified from the stored tables
+  (results/tables/drozy_contrast_share.csv and
+  drozy_label_agreement.csv): the 4 participants who carry the 62%
+  are exactly the 4 whose two arms disagree on the fatigued session
+  (P01, P02, P04, P05), so the subset caveat and the
+  arm-disagreement are one fragility, not two.
 
 ## Against the pre-declared outcome table
 
@@ -185,10 +191,17 @@ in an estimation-only regime, and its direction reverses the
 pre-registered label prediction; all three qualifiers travel with
 it wherever it is reported. The DROZY positive control has since
 been run under Amendment 2 (docs/drozy_positive_control.md): the
-comparability gate passed and the RT arm's sensitivity is now
-priced (minimum detectable effect at dose 0.5), so the one
-statement about sensitivity this document makes is the one in the
-Row 3 note above. Statements about absolute ceilings on either
+comparability gate passed, and the RT arm's sensitivity is priced
+only to within the ladder's grid. Injected shifts aligned with
+the RT labels were detected at dose 0.5 and above, with 3 of 5
+repeats already detecting at dose 0.25, so the detection
+threshold is bounded only to within the grid; the RT result is
+informative only about shifts of at least that size and does not
+rule out smaller RT-related band-power changes, and the dose
+scale, calibrated on label-permuted data, is not mapped onto the
+observed KSS score. The one statement about sensitivity this
+document makes is the one in the Row 3 note above, read with
+those bounds. Statements about absolute ceilings on either
 dataset remain out of reach of this design and are not made.
 
 ## Problems encountered

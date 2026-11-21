@@ -12,6 +12,37 @@ results/tables/drozy_poscontrol_nulls.csv (every null statistic).
 One run folder per repeat under experiments/runs/, named
 2026-11-21_poscontrol_*.
 
+## Summary statement
+
+The control's findings, in the summary wording settled at review
+(reviews 39 to 41 in docs/methods_notes.md):
+
+"A spectral-injection positive control run through the frozen
+DROZY pipeline detected theta/alpha band-power shifts aligned with
+RT labels at injected dose 0.5 and above (dose grid in steps of
+0.25, five repeats; detection criterion as pre-stated, with 3 of 5
+repeats detecting at dose 0.25), so the detection threshold is
+bounded only to within the grid; the RT-label result is therefore
+informative only about shifts of at least that size and does not
+rule out smaller RT-related band-power changes, and because the
+dose scale was calibrated on label-permuted data it is not mapped
+onto the observed KSS score."
+
+The companion sentence, added under the pre-commitment recorded at
+the same review (the companion's values get one sentence at the
+same doses; only dose figures may change, never the claim
+structure or the decision rules): on the true labels, the
+companion ladder's increments over each arm's uninjected score at
+doses 0.25, 0.5, 0.75 and 1.0 were +0.080, +0.144, +0.205 and
++0.249 for the sleepiness arm and +0.086, +0.168, +0.238 and
++0.297 for the reaction-time arm, every increment detected
+against its paired swap null (p = 0.010). The companion tests a
+different statistic from the permuted ladder's recovery rule, so
+its detection at dose 0.25 does not move the pre-declared
+minimum-detectable-effect reading, and the headline dose stays
+0.5 because the companion produced no higher threshold. The full
+companion table is in its own section below.
+
 ## Why this control exists
 
 The DROZY results (docs/drozy_results.md) left two questions that
@@ -120,10 +151,12 @@ dose 0.25 the same test detects the injection in only 3 of 5
 repeats, so an effect of that size could be present in the RT
 labels and still produce the observed null. The two arms' ladders
 are close throughout (the RT means sit within about 0.015 of the
-KSS means at every dose), so the dissociation in the headline
-results is not a sensitivity difference between the label
-structures: both arms' tests can see an effect of dose-0.5 size,
-and only the sleepiness labels carry one on the real data.
+KSS means at every dose), so the two arms' tests show similar
+sensitivity to an injected shift of this kind: both can see an
+effect of dose-0.5 size. Similar is the word the results review
+settled on, not equivalent: no equivalence test was run, and the
+ladders say nothing about label quality, or about effects smaller
+than the detection floor, in either arm.
 
 ## Companion ladder: true-label increments
 
