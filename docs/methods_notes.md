@@ -143,3 +143,12 @@ Reviewer 1's ruling pending at time of logging.
 **Framing adjustment:** present the result as a construct dissociation — where subjective sleepiness and vigilance come apart (4 of 13), the EEG tracks the subjective state and the reaction-time predictions invert (0.388, close to 1 minus 0.630) — and anchor claims on the comparative difference (+0.120) rather than on 0.602 as a standalone detector score.
 Reviewer 1's ruling on the criterion (including whether the RT arm carries its own pass/fail) pending at time of logging.
 *Lead to cross-check, not a citable source.*
+
+## Reviewer 1 review 20 — Amendment 2 ruling (21 Nov 2026) + panel synthesis
+**Do not adopt the criterion as drafted.** Both reviewers caught the same flaw independently (bar below the uninjected baseline). The redesign, adopted as the panel specification:
+- Recovery is measured CLEAN: primary control injects into a within-participant label-permuted version of the data (natural signal null by construction); the increment over the uninjected score (with a swap-null p on the increment) is the companion report.
+- The RT arm carries its own criterion as a DOSE LADDER (dose 0 plus graded doses), reporting recovery and detection per dose; pre-declared reading: the RT null excludes effects of the size that gives at least 80% detection at N = 13. That ladder is the RT arm's minimum-detectable-effect statement.
+- The sleepiness arm's control is a comparability gate: the FatigueSet thresholds (0.75 full / 0.60 half) applied to the clean permuted-label recovery.
+- Dose 0 run through the injection path must reproduce 0.602 / 0.482 exactly (adapter validation). Units (power gains), channels (all 5 PSG), fatigued-labelled windows only, mask handling, seeds and repeats all stated in the amendment; amendment + code hashed and timestamped before the run; post hoc label kept.
+**Two wording cautions applied to the write-up:** (1) protocol order is NOT ruled out — the sleepiness-vs-order gap rests on the 2 participants whose labels differ between the arms, and no paired sleepiness-minus-order contrast had been run; permitted wording is "protocol order alone does not reach significance", and the paired contrast is now owed. (2) The +0.120 label contrast is about 60% carried by the 4 disagreeing participants, and the RT arm's 0.388 there is largely mechanical (its labels point at the opposite session); the write-up states it that way.
+*Leads to cross-check, not citable sources.*
