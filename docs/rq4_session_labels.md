@@ -69,11 +69,78 @@ for within/LOPO, sessions for session-out). Driver:
 frozen fold, model and metric code; no frozen file was edited.
 
 **Reproduction check.** The restricted32 arm's point estimates match
-the Week 2 subjective headlines to within 0.0004 on all three protocols
+the Week 2 subjective headlines closely on all three protocols
 (within 0.484, session-out 0.515, LOPO 0.508), and the LOPO interval
 reproduces exactly ([0.471, 0.542]). The label identity above is
 therefore not just a construction argument; it is visible in the
-numbers.
+numbers. The panel then required the stronger statement, bit-identity,
+and the small gap that remains is audited in full below.
+
+**Bit-identity audit (panel-owed, 21 Nov 2026).** With identical
+windows, features, model and seeds, this arm should in principle
+reproduce the stored Week 2 primary exactly. It does not quite, and
+the difference has a mechanical cause that I traced suspect by
+suspect:
+
+- *Cap sampling: identical.* Both paths call the same frozen
+  `cap_pool` on the same window index. The stored predictions of the
+  Week 2 runs and of this arm line up row for row (participant,
+  session, fold, true label) in every run compared, which only
+  happens if the capped pools are the same sets.
+- *Feature extraction: identical.* `extract_features` works window by
+  window, so extracting on the full uncapped array and subsetting
+  afterwards (this driver, and the Week 2 closure pack for LOPO)
+  gives a bit-identical feature matrix to extracting on the capped
+  subset only (the Week 2 baseline script). I verified the two
+  matrices are exactly equal (maximum absolute difference 0.0, NaN
+  pattern equal), and that the two paths produce bit-identical
+  predictions when run in the same environment.
+- *Seed handling, normalisation, feature ordering: identical.* Same
+  frozen fold builders, same training-fold imputation and scaling,
+  same metric code; the logistic regression carries no seed of its
+  own.
+- *The `np.trapz` alias: not the cause.* `np.trapezoid` is the
+  renamed `np.trapz`, the same computation, and the feature matrices
+  above are bit-identical with the alias in place.
+- *What actually differs: the environment the stored numbers were
+  computed in.* The Week 2 runs were made on 20 Nov, before the VM
+  restart; this arm ran on 21 Nov, after the numeric stack was
+  reinstalled (numpy 2.5.5, scipy 1.18.1, scikit-learn 1.9.1,
+  pandas 3.1.1). One hard marker of the change: the 20 Nov runs
+  execute `np.trapz` natively, and NumPy 2.5 removed that name, so
+  the 20 Nov runs used an earlier NumPy. Re-running the identical
+  code in today's environment reproduces this arm's stored
+  predictions bit for bit, and differs from the stored Week 2
+  predictions only in the probabilities: every probability moves by
+  at most 0.0025, and every predicted label is the same except one
+  window (next point). That is the signature of solver-level
+  floating-point drift, the logistic regression stopping at a
+  slightly different point of the same optimum under a different
+  build of the numeric stack, not of any difference in data,
+  features or code path. (Consistent with this, the earlier
+  reproduction checks that passed exactly, such as the Week 2
+  seed-0 session-out aggregate of 0.4991, are all label-based
+  metrics, which this drift does not move.)
+- *The one flipped window.* Leave-one-participant-out, cap seed 4,
+  P04's fold: a fatigued window of P04/S01 whose stored probability
+  is 0.4994 in the Week 2 run (predicted alert) and 0.5006 here
+  (predicted fatigued). It sits within 0.0013 of the decision
+  boundary in both environments. It moves P04's seed-4 balanced
+  accuracy by 0.0147 (one fatigued window of 34), P04's cross-seed
+  mean by 0.0029, and the LOPO headline by +0.000267. Of the 195
+  per-group balanced accuracies across the three protocols and five
+  seeds, 194 are identical; this window is the only exception. The
+  within-subject and session-out headline aggregates are identical
+  to the Week 2 values to six decimal places (0.483556 and 0.515133
+  in both). The probability drift does move some fold-level AUCs
+  (largest 0.048, in a 10-window fold), because AUC reads the
+  probabilities while balanced accuracy reads only the labels.
+
+So the restricted arm is not bit-identical to the stored Week 2
+numbers, for an understood and mechanical reason: same data, same
+features, same code, a different build of the numeric stack, and one
+borderline window. Neither path contains a bug, and no Week 2
+conclusion is affected; its headlines move by at most 0.0003.
 
 **Environment note (recorded, not hidden).** The frozen feature code
 calls `np.trapz`, which NumPy 2.5 removed after renaming it
