@@ -795,3 +795,108 @@ is saved as `data/processed/windows_proto_p01.npy` with its index
 (participant, session, stream position, label, per-channel
 Amendment-1 pass flags and the retention flag) so the run can be
 rebuilt exactly.
+
+**Results.** The window build lands exactly on the preliminary's
+count: 720 windows from Session 01 and 633 from Session 03, 1,353
+in total, against 389 for run-split epoching. The replication
+therefore ran on the preliminary's own window population, not an
+approximation of it.
+
+Chronological split (the prototype's audit configuration; 271 test
+windows, 144 alert and 127 fatigued):
+
+| Model | Slice | n (alert / fatigued) | Accuracy | Balanced accuracy [95% CI] | Fatigued recall [95% CI] | ROC-AUC |
+|---|---|---|---|---|---|---|
+| LR | all | 271 (144 / 127) | 1.000 | 1.000 [1.000, 1.000] | 1.000 [1.000, 1.000] | 1.000 |
+| LR | mask-retained | 142 (142 / 0) | 1.000 | no fatigued class present | no fatigued class present | n/a |
+| LR | mask-rejected | 129 (2 / 127) | 1.000 | 1.000 [1.000, 1.000] | 1.000 [1.000, 1.000] | 1.000 |
+| CNN | all | 271 (144 / 127) | 0.993 | 0.993 [0.979, 1.000] | 1.000 [1.000, 1.000] | 1.000 |
+| CNN | mask-retained | 142 (142 / 0) | 1.000 | no fatigued class present | no fatigued class present | n/a |
+| CNN | mask-rejected | 129 (2 / 127) | 0.984 | 0.500 [0.500, 0.500] | 1.000 [1.000, 1.000] | 1.000 |
+
+The preliminary's headline is reproduced in its own configuration,
+and slightly exceeded: its audit notebook reported 99.26%
+chronological test accuracy and its headline was 99.18% fatigued
+recall (121 of 122); here the logistic regression is perfect on
+every test window and the CNN's only errors, identical across its
+three seeds (44 to 47 epochs each, early stopping restored), are
+the two mask-rejected alert windows, which it calls fatigued. So
+branch (C) is excluded: the number is reproducible. What the mask
+cut shows is where it lives. Across the whole sessions, the
+Amendment-1 rules retain 699 of Session 01's 720 windows (97.1%)
+and 16 of Session 03's 633 (2.5%). The failure is specific: AF7
+fails the amplitude criterion in 617 of Session 03's 633 windows
+(and carries a Bad fit value in 88), against 19 amplitude failures
+in Session 01. In the chronological test slice the consequence is
+total: every one of the 127 fatigued test windows is a window the
+quality bar rejects, so the mask-retained slice contains no
+fatigued class at all and no retained fatigued score exists to
+report. The retained alert windows, all 142 of them, are classified
+correctly by both models, so the retained slice is not
+unclassifiable; it is simply missing the class the headline is
+about.
+
+Blocked comparator (240 test windows, 120 per class; 16 training
+windows purged for sharing samples with a test window):
+
+| Model | Slice | n (alert / fatigued) | Accuracy | Balanced accuracy [95% CI] | Fatigued recall [95% CI] | ROC-AUC |
+|---|---|---|---|---|---|---|
+| LR | all | 240 (120 / 120) | 0.975 | 0.975 [0.925, 1.000] | 0.950 [0.850, 1.000] | 0.999 |
+| LR | mask-retained | 119 (112 / 7) | 0.983 | 0.857 [0.857, 0.857] | 0.714 (5 of 7) [0.714, 0.714] | 1.000 |
+| LR | mask-rejected | 121 (8 / 113) | 0.967 | 0.982 [0.939, 1.000] | 0.965 [0.879, 1.000] | 0.994 |
+| CNN | all | 240 (120 / 120) | 0.915 | 0.915 [0.757, 1.000] | 0.842 [0.525, 1.000] | 0.994 |
+| CNN | mask-retained | 119 (112 / 7) | 0.941 | 0.500 [0.500, 0.500] | 0.000 (0 of 7) [0.000, 0.000] | 0.987 |
+| CNN | mask-rejected | 121 (8 / 113) | 0.890 | 0.864 [0.656, 1.000] | 0.894 [0.636, 1.000] | 0.955 |
+
+Removing window overlap does not deflate the design: with no shared
+samples between train and test, the scores stay at 0.975 (LR) and
+0.915 (CNN), so the inflation in this configuration is not mainly
+an overlap artefact; it is what sharing the two recordings buys,
+which is the day-level arm's mechanism again, now at full strength.
+The blocked split is also the only place a retained fatigued sample
+exists at all, 7 windows, and it is weak evidence in both senses:
+the logistic regression catches 5 of the 7, the CNN catches none of
+the 7 at threshold in any seed (its retained-slice AUC is 0.987, so
+it ranks those windows high but below 0.5), and the 7 windows sit
+inside a single test block, which is why their bootstrap intervals
+collapse to points. Those point intervals are a warning about
+effective sample size, not precision.
+
+**Which branch applies: (A), in a stronger form than its wording.**
+Branch (A) asked for scores near the preliminary's on all windows
+together with a collapse on the mask-retained subset. The scores
+are there (fatigued recall 1.000 for both models, against the
+preliminary's 0.9918), and the retained subset does not merely
+score lower: in the chronological slice it contains no fatigued
+windows whatsoever, and across the whole fatigued session the
+quality bar keeps 16 windows of 633. The preliminary's fatigued
+class, on its own participant and in its own configuration, is
+almost entirely composed of windows whose AF7 channel fails this
+project's amplitude rule. Two precisions keep the claim honest.
+First, neither model ever saw the mask: the indicator features and
+planes were held constant, so the mechanism is not a model reading
+a mask. It is that the label is almost perfectly confounded with
+frontal recording quality in this participant's two sessions, and
+the artefact-laden signal itself is part of the EEG the models
+read. Second, the scope is one participant and two recording days,
+the preliminary's own data slice: this run prices the
+preliminary's design on the data the preliminary used, and claims
+nothing beyond it. Branch (B) is excluded because the retained
+fatigued evidence is absent in one slice and weak in the other;
+branch (C) is excluded because the configuration reproduces the
+number. What remains unpriced is the preliminary's exact
+preprocessing chain (its 1 to 50 Hz filter at 256 Hz and its own
+Keras architecture), which this run names as a departure rather
+than reproducing; nothing in the results suggests those choices
+would move a score that two different models both place at 0.99
+and above, but that is a judgement stated as such, not a result.
+
+Execution note, recorded rather than hidden: the first execution
+of the driver was interrupted by an environment restart during the
+CNN blocked stage. That stage was completed by a recovery run that
+reused the driver's own functions and the saved window set, with
+the specification unchanged (the recovery is noted in those run
+folders), and the completed stages' bootstrap intervals were
+recomputed from their stored predictions in the process and
+reproduce the stored values exactly. No number in this section
+comes from the interrupted partial run.

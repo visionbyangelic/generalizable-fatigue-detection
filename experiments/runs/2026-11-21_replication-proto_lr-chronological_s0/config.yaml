@@ -1,0 +1,12 @@
+model: band-power logistic regression (frozen baseline)
+features/input: bandpower_43, all channels treated as valid (no masking)
+protocol: 'RQ4 prototype-faithful replication (POST HOC, panel-owed): Subject 01 only,
+  day-level labels (whole Session 01 = alert, whole Session 03 = fatigued), prototype
+  windowing (4 s windows, 2 s stride, whole-stream epoching, 1,353 windows)'
+split: 'chronological 80/20 within each session (first floor(0.8*n) windows in stream
+  order = train, remainder = test, no purge at the cut): the prototype audit notebook''s
+  configuration'
+seed: deterministic (s0 by convention)
+data: windows_proto_p01 (this run's window build; see the driver docstring for the
+  count check and the named preprocessing departures)
+git_commit: db77ec2
