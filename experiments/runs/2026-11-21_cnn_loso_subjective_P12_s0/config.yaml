@@ -1,0 +1,19 @@
+model: EEGNet-8,2 (kernel 64 @128 Hz)
+input: '6 channels: 4 EEG + mask_TP9 + mask_TP10 indicator planes'
+validation: 'SEGMENT-GROUPED: whole run-segments carved from training participants
+  only, 2-window purge at boundaries'
+channel_dropout: temporal channels dropped p=0.2 per sample per batch during training
+training: Adam lr=0.001, batch=64, max_epochs=100, early stopping patience=15 on segment-grouped
+  validation loss
+class_weights: subtraining-fold balanced
+normalisation: per-EEG-channel mean/SD from subtraining fold only
+protocol: loso (leave-one-participant-out)
+held_out_participant: P12
+labels: subjective (Amendment 1 windows)
+cap_seed: 0
+model_seed: 0
+carve: strategy=last1, val_runs=[('P11/S02', 11), ('P11/S02', 20)], val_n=15, subtrain_n=719
+  (post-purge), epochs_run=16, best_val_loss=0.6942
+wall_time_s: 15.6
+git_commit: 700b67a
+torch: 2.15.0+cpu

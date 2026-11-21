@@ -1,0 +1,2 @@
+participant,n,n_alert,n_fatigued,balanced_accuracy,macro_f1,mcc,recall_alert,recall_fatigued,precision_alert,precision_fatigued,roc_auc
+P10,98,33,65,0.507925407925408,0.29544676480657306,0.03785919247151279,0.9696969696969697,0.046153846153846156,0.3404255319148936,0.75,0.5398601398601399
