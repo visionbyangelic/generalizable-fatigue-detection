@@ -76,7 +76,7 @@ I directed: **use Google Colab**, with the Google account I already has access t
 
 | Layer | Role | Access needed |
 |---|---|---|
-| **GitHub** (public repo `generalizable-fatigue-detection`) | Home — all code, notebooks, docs, results logs, project notes. The reproducible deliverable. | ✅ DONE 20 Nov 2026 — repo created, SSH-key push working |
+| **GitHub** (public repo `generalizable-fatigue-detection-fatigueset-drozy`) | Home — all code, notebooks, docs, results logs, project notes. The reproducible deliverable. | ✅ DONE 20 Nov 2026 — repo created, SSH-key push working |
 | **Google Colab** | **The GPU training engine.** Notebooks live in GitHub and open/run in Colab from the browser, using the already-signed-in visonbyangelic@gmail.com account. Dataset reaches Colab from its official Drive link / my Drive — never a public re-upload (no licence to redistribute). | Already signed in — nothing needed from me |
 | **Local VM** (small CPU) | Development, data inspection, preprocessing, classical baseline. | Already available |
 | ~~Kaggle~~ | Not used. Named fallback only if Colab free-tier limits ever block a run. No token needed. | — |
@@ -88,7 +88,7 @@ Flow: develop locally → push to GitHub → run heavy CNN in Colab (notebook pu
 ## 9. Repo Structure
 
 ```
-generalizable-fatigue-detection/
+generalizable-fatigue-detection-fatigueset-drozy/
 ├── README.md                  # How to reproduce — entry point for examiners
 ├── PLAN.md                    # This plan (also kept in local workspace)
 ├── .gitignore                 # data/, checkpoints, secrets excluded
