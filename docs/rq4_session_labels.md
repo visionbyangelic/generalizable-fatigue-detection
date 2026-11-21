@@ -496,8 +496,8 @@ reproduces the number too, and the single-participant chronological
 configuration is where the confound documented there lives. The
 third, the preliminary's own preprocessing chain, remains unpriced.)
 What the day-level arm settles is narrower and sufficient
-for the thesis: the 99.18% is not evidence about fatigue detection,
-because the same labels collapse to chance the moment the evaluation
+for the thesis: the 99.18% cannot be read as evidence of fatigue
+decoding, because the same labels collapse to chance the moment the evaluation
 stops sharing recordings, and a large part of what a
 recording-sharing evaluation measures is which session a window
 came from.
@@ -881,15 +881,19 @@ almost entirely composed of windows whose AF7 channel fails this
 project's amplitude rule. Two precisions keep the claim honest.
 First, neither model ever saw the mask: the indicator features and
 planes were held constant, so the mechanism is not a model reading
-a mask. It is that in this participant's two sessions the fatigued
-class is almost completely confounded with failure of the
-pre-specified AF7 amplitude criterion, so the score cannot be
-attributed to fatigue: the artefact-laden signal itself is part of
-the EEG the models read. (Panel review 28 locked the wording of
-this claim; the validity checks in the next subsection are the
-checks that wording was made conditional on, and they also
-supersede branch (A)'s shorthand "recording-quality shortcut" as
-the way the finding is stated.) Second, the scope is one participant and two recording days,
+a mask. The claim itself, in the wording the closing review
+locked, is this: the preliminary result reproduces in its own
+configuration, but there the fatigued class coincides almost
+perfectly with a session-wide amplitude regime that fails the
+pre-declared quality criterion (mask-retained 97.1% of Session
+01's windows against 2.5% of Session 03's). The score therefore
+identifies the session and cannot be read as evidence of fatigue
+decoding. The available data do not separate placement or contact
+differences from state-correlated physiology or behaviour. (The
+validity checks in the next subsection are the checks that wording
+was made conditional on, and they also supersede branch (A)'s
+shorthand "recording-quality shortcut" as the way the finding is
+stated.) Second, the scope is one participant and two recording days,
 the preliminary's own data slice: this run prices the
 preliminary's design on the data the preliminary used, and claims
 nothing beyond it. Branch (B) is excluded because the retained
@@ -916,16 +920,22 @@ comes from the interrupted partial run.
 
 The replication verdict above was reviewed before it was allowed to
 stand as the RQ4 headline (reviews 27 and 28), and the review locked
-the claim's wording and owed three checks. The locked claim is this
-sentence: "In its own configuration (Subject 01, two sessions,
-chronological split) the preliminary result reproduces (LR BA 1.000;
-CNN 0.993). In that configuration the fatigued class is almost
-completely confounded with failure of the pre-specified AF7
-amplitude criterion (2.5% of Session-03 windows retained vs 97.1% of
-Session-01; every fatigued test window mask-rejected), so the score
-cannot be attributed to fatigue. Blocked splitting within the same
-recordings barely reduces it (LR 0.975, CNN 0.915). Post hoc
-analysis; one participant." The three checks exist because three
+the claim's wording and owed three checks. The wording was adjusted
+once more in the closing review (review 30), which dropped the
+criterion-channel framing for a session-wide one and added the
+non-separation clause; as it now stands, the claim is this: "The
+preliminary result reproduces in its own configuration, but there
+the fatigued class coincides almost perfectly with a session-wide
+amplitude regime that fails the pre-declared quality criterion
+(mask-retained 97.1% of Session-01 windows against 2.5% of
+Session-03 windows). The score therefore identifies the session and
+cannot be read as evidence of fatigue decoding. The available data
+do not separate placement or contact differences from
+state-correlated physiology or behaviour." The numbers behind it
+are unchanged: LR BA 1.000 and CNN 0.993 in the chronological
+configuration, every fatigued test window mask-rejected, blocked
+splitting within the same recordings barely reducing the scores
+(LR 0.975, CNN 0.915); post hoc analysis, one participant. The three checks exist because three
 parts of that sentence were, at verdict time, thinner than they
 looked: the amplitude criterion is a rule about a number, and
 drowsiness itself raises frontal slow-wave and slow-eye-movement
@@ -991,16 +1001,24 @@ as the session wears on) is not the shape of this data; the
 session starts in the high-amplitude regime and stays there.
 Session 01's sparse failures (2.6%) show no such structure.
 
-*The independent streams agree the session differed physically.*
-Streams that do not depend on my amplitude rule, Session 03 vs
-Session 01: the device's own fit stream rates AF7 Bad for 5.8% of
-samples vs 0.1% (worse, but nowhere near the amplitude failure's
-97.5% of windows; the device does not see a wholesale contact
-loss); forehead accelerometer dynamic component averages 0.062 g
-vs 0.027 g, with 12.9% vs 6.4% of samples above 0.1 g of dynamic
-acceleration; Muse-detected blinks run at 2,848 vs 1,189 per hour
-and jaw clenches at 223 vs 37 per hour; the touch stream shows the
-headset worn throughout both sessions (99.7% vs 99.9%).
+*The device-derived indicators agree the session differed, with a
+provenance caveat.* The headset records more than EEG, and its
+other indicators, Session 03 vs Session 01: the device's own fit
+indicator rates AF7 Bad for 5.8% of samples vs 0.1% (worse, but
+nowhere near the amplitude failure's 97.5% of windows; the device
+does not see a wholesale contact loss); forehead accelerometer
+dynamic component averages 0.062 g vs 0.027 g, with 12.9% vs 6.4%
+of samples above 0.1 g of dynamic acceleration; device-detected
+blinks run at 2,848 vs 1,189 per hour and jaw clenches at 223 vs
+37 per hour; the touch indicator shows the headset worn throughout
+both sessions (99.7% vs 99.9%). The caveat governs how much weight
+these can carry: the blink, jaw-clench and fit indicators are in
+all likelihood derived from the EEG itself, so a session carrying
+much larger signals would trigger more detections without any
+change in the participant's behaviour. They are device-derived
+indicators, not independent corroboration. Only the accelerometer
+is plausibly independent of the EEG, and its change, roughly a
+doubling of an already small dynamic component, is modest.
 
 *What Check 1 does and does not establish.* It establishes that
 the criterion failure is a wholesale, session-long, headset-wide
@@ -1010,13 +1028,15 @@ why the regime differs, and the alternative has to be stated
 plainly: drowsiness itself raises frontal slow-wave amplitude and
 produces slow eye movements, and a fatigued participant blinks
 more, clenches their jaw and moves their head more, which is
-exactly what the independent streams record. Electrode placement
+exactly the direction the device-derived indicators point (subject
+to the provenance caveat above: those indicators may be reading
+the signal rather than the behaviour). Electrode placement
 differing that day and fatigue-linked physiology and behaviour
 both predict large frontal amplitudes, and nothing in this check
-separates them. That is why the locked claim says "failure of the
-pre-specified AF7 amplitude criterion" and not a hardware
-diagnosis: the criterion failure is a measured fact about the
-signal, its cause is not identified, and the confound stands under
+separates them. That is why the locked claim speaks of a
+session-wide amplitude regime that fails the pre-declared quality
+criterion, and not of a hardware diagnosis: the criterion failure
+is a measured fact about the signal, its cause is not identified, and the confound stands under
 either cause, because a label that coincides with a different
 recording regime cannot be separated from that regime by any split
 inside the two recordings.
@@ -1093,10 +1113,11 @@ largest coefficients are the mask indicators, and removing them
 returns P08 to 0.467). It was not Subject 01, and no LOPO fold sits
 at 0.225 (P08's LOPO value is 0.447).
 
-**Where this leaves the claim.** The locked sentence above stands,
-and the checks change its basis rather than its wording: the
-criterion failure behind it is now known to be a wholesale
-amplitude-regime property of the fatigued session (Check 1), the
+**Where this leaves the claim.** The claim above stands in its
+final wording, and the checks change its basis rather than its
+substance: the criterion failure behind it is now known to be a
+wholesale, session-wide amplitude-regime property of the fatigued
+session (Check 1), the
 score is now known to be reachable through the validity pattern
 alone and through every channel family with the frontals removed
 (Check 2), and Subject 01's asymmetry is now known to be the
@@ -1113,6 +1134,23 @@ stated at the verdict. The panel's optional exploratory extension
 plotted against retention asymmetry) was not run; nothing in the
 locked claim rests on it, and it stays available as future work
 rather than being silently dropped.
+
+Two limitations belong with the claim. First, the cohort pattern
+in Check 3 cuts mildly against reading the regime as a pure
+fatigue artefact: if fatigue reliably produced a high-amplitude,
+low-retention day, the day-level retention gaps would not change
+sign across participants, yet they run from −96.4 to +76.5 points.
+That is a limitation, not a refutation: the cohort is small, and
+whether each participant's latest session is their most fatigued
+session in the same sense is not established, so the alignment the
+comparison assumes is loose. Second, the mechanism question stays
+open. Whether Session 03's regime came from placement or contact
+differences that day, or from the physiology and behaviour of the
+participant's state, cannot be resolved from these recordings.
+What would settle it is data this dataset does not contain:
+repeat sessions recorded in the same state with placement
+deliberately controlled, so that regime and state can be varied
+separately.
 
 Execution note for these checks, recorded rather than hidden: an
 environment restart interrupted the first execution during Check
