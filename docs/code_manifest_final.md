@@ -1,0 +1,69 @@
+# Code manifest, final (21 Nov 2026)
+
+SHA-256 hashes of every Python file under `src/` as it stands after
+the polish pass of 21 Nov 2026.
+
+Why this exists: the polish pass rewrote docstrings, comments and
+prose across the repository so that everything reads in my own
+voice, and it changed no computation. A claim like that needs
+evidence, not assertion. The evidence is twofold. First, this
+manifest pins the exact post-polish state of the code, so any later
+edit shows up as a changed hash. Second, the Week 2 baseline seed 0
+was re-run from the stored windows on the pinned stack
+(docs/environment_pin.md) after the pass and reproduced its stored
+numbers exactly: session-out balanced accuracy 0.4991, MCC 0.0090,
+P08 within-subject 0.245, with every per-fold value identical to the
+stored run. Words changed, behaviour did not, and this file is the
+reference point that lets anyone check the first half of that
+sentence from now on.
+
+```
+e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855  src/__init__.py
+e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855  src/data/__init__.py
+765d3a72e3ebb49dd084607e97a9daf44f015ea2b9f9abc846c3c58245716b08  src/data/drozy_adapter.py
+8b70709b5265f1a1e6eeeb96c7b60264c52af66d066a3f051cc868624a65191b  src/data/inspect_dataset.py
+a1c53058063b2ddc7b4eae25e9d807bfb734d9ba83b9c1dfe82c05ad96a59541  src/data/load_session.py
+e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855  src/evaluation/__init__.py
+bf2da4059132cf15555d69ba504a134aa855e791eda6594d29b5f2309b1ebd21  src/evaluation/closure_pack.py
+b199d138dc671bbf51ba9b9a2371484fda3a476377d8e53545a83f238f2302b7  src/evaluation/cnn_loso_aggregate.py
+25633a2de09355aed246565dba284419b3626a4ae431caae5fefaaefa126d279  src/evaluation/cnn_loso_degeneracy.py
+d4ca4bf8ba8d95a85e06c86fbb5e268d8473846f6e1fe8b5d99cbcb766b8687d  src/evaluation/cnn_loso_nondegen.py
+4ca08a4d3b249e3ba01829ea297d8db190aa2944fce5bbcecef515f72c4d609b  src/evaluation/cnn_loso_partval_aggregate.py
+defd0c60e37dd68633da9abb7769fa4fe491b2ffa118e1a437e79a0111115622  src/evaluation/diagnostics.py
+3db179a59c5f02ef09421131fecd126b54b23953af2f548c088fc2ad896019af  src/evaluation/diagnostics_followup.py
+465e330810f2015e58510a8b1c72f1262d20d8a7abd6f62e4ad84ab336b48713  src/evaluation/drozy_baseline.py
+ea088fbe142b563cdc2028633a64c50878281e3b23b63bd45b70839c2e8a2f92  src/evaluation/drozy_exploratory.py
+62f0cff9207d29f5fbdd94c8a6e6985a0923e200d4e51effa984810648c4ac5e  src/evaluation/drozy_positive_control.py
+1147fef24f7864580e6d7959b1b2b460a1f027c7c174c8560a7f9e49ab8b408e  src/evaluation/metrics.py
+3bd47ad0e9aa5a407e89fd3db6ea0679a74b67d94ead73f54e27cc72d3c0f6d8  src/evaluation/panel_additions.py
+2a9b17047533928301c92be385210f558edf9202f60e9eed7eb6fd9692baae13  src/evaluation/precision_variants.py
+06c12ffd126370ecfa65ffd73564d3b7440cb287476dd3a43740565084ed298f  src/evaluation/rq3_ablation.py
+378b3701ffa2121b3d0243d2661035326b69b46ecbe5c621bc5aa8c9ee20fd77  src/evaluation/rq3_arms.py
+f7309c212a049db2c67e3ab96a57eadc009b09c1c37b82cd807ad15879c63895  src/evaluation/rq3_feature_checks.py
+f959ac3964e38e3450dd301eb84dfae28ae2992e5ac97006e26328900582c5bc  src/evaluation/rq3_hr_by_intensity.py
+38223fe0790b612485330f1dc872e103e1d14e2be0dd77f731ccac3cac8cff7c  src/evaluation/rq3_tier_parity.py
+f48ca1faa47ca87b2b9584c56263696da9653c05e9df0fa4e14692fab6e40075  src/evaluation/rq4_day_level.py
+69e685923d6f85be0eaa2c5e89d7900e88fc64c77fb8558a2ea56db0ecadbad3  src/evaluation/rq4_replication_2x2.py
+fe4c498155505be65d9bcc5f5ae5310217a4c2cfec6096b5dd3830fdfc1f2ebe  src/evaluation/rq4_replication_proto.py
+9c47f41b1f42760a842fa545aaba5aeead9d2b218dced8a5f334d3d2f8af5098  src/evaluation/rq4_session_labels.py
+76f9bb6952222484e99bcd7c013cf31759e638355fc03b6e3cc9f2e00cdb1e16  src/evaluation/rq4_tidyup.py
+d95f18aea13c592eef1f5b4c6b2bae2d7df4f64c68e520c0c0e525b2d118bfa7  src/evaluation/rq4_validity_checks.py
+e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855  src/features/__init__.py
+35755647823e8048302700c051b2b859894749a30c736710654fc82995a0d7eb  src/features/bandpower.py
+ced46c05914303145c7e88d755999288de759a01613f2d99d39c90821d6a9f12  src/features/peripheral.py
+e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855  src/labels/__init__.py
+e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855  src/models/__init__.py
+c59c4893f6a41be91598569cf636418d8b51c261105dfbe415fdc82ef575b194  src/models/baseline.py
+b3d08263c3ee388856f19f5a2eadcac6f473e1ac3bbdc289e7426b7613e5be7c  src/models/baseline_ablated.py
+eadc31553d06f4f617aa8df33240d983c0eb937eaf43bd5e8b1f7b0a52eaba1e  src/models/baseline_loso_canonical806.py
+64607c283582ccf7268363cf66bbcf893ead78b2d4c5a6d98c85052a88e99c69  src/models/cnn.py
+f024405bdc9aaca6824b7cddb0f83c58f1d57fc8eb516de63dfcffbcd73c70de  src/models/cnn_loso_partval.py
+ce0fa14fe8b62c106dd129e314cfeca03bf7cba60f22fde93fc07639858839b4  src/models/cnn_loso_segval.py
+bce53f4fb269d12461795e2401fe2bcf9396fbd4f815bdef63f21cbefd1c35ce  src/models/cnn_segval.py
+e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855  src/preprocessing/__init__.py
+9d67c7840beb43595ad0df8cbb8485caa58cddf1a56ef7c21a75b1231eb7cee3  src/preprocessing/build_windows.py
+a6584b854d658bc0191bd5e49f02df959f25e5819804d9e3a45340aed5a484ab  src/preprocessing/build_windows_a1.py
+11c5f59553195107dfd9efd06569a2ae00b00b0ebf7f3ab58de0343d550b02f1  src/preprocessing/diagnostics_a1.py
+3f8afde5d033b2306bb807dee61cba979465f582891f80a0b1c89ebac7902bf7  src/preprocessing/psd_diagnostic.py
+e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855  src/utils/__init__.py
+```
