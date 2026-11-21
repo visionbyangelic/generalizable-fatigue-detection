@@ -45,15 +45,41 @@ Consumer EEG headbands are cheap enough to put fatigue monitoring in trucks, fac
 
 Short version: when the evaluation is honest, the EEG fatigue signal on FatigueSet is not there, and the numbers that look like it are measuring something else. What follows is what I found, dataset by dataset, and then why I think it matters beyond this project.
 
-On FatigueSet, both models sit at chance on people they have never seen: leave-one-participant-out balanced accuracy 0.508 for the band-power baseline and 0.493 for the EEGNet CNN, with honest within-subject evaluation also at chance (0.484 and 0.493). The one high number, 0.744 within a session, is position-confounded: where a window sits inside its block ranks the labels perfectly on its own, and a block permutation null scores 0.508 (p = 0.612), so 0.744 is an upper bound on separability, not decoding. On the identical window set the CNN and baseline differ by +0.005 [-0.068, +0.071]. The conclusion I locked: no evidence that either model exceeds chance on unseen participants on FatigueSet, and no evidence of a CNN advantage. The CNN half of that is weak evidence, because 16 of its 55 fits were near-constant and a constant fit scores exactly 0.5; the null belongs to this configuration, not to neural networks in general.
+On FatigueSet, both models sit at chance on people they have never seen: leave-one-participant-out balanced accuracy 0.508 for the band-power baseline and 0.493 for the EEGNet CNN, with honest within-subject evaluation also at chance (0.484 and 0.493). The one high number, 0.744 within a session, is position-confounded: where a window sits inside its block ranks the labels perfectly on its own, and a block permutation null scores 0.508 (p = 0.612), so 0.744 is an upper bound on separability, not decoding.
+
+![Bar chart of FatigueSet balanced accuracy across the three evaluation tiers: same-session 0.744, honest within-subject at chance, leave-one-participant-out at chance](results/figures/fig_rq1_tiers.png)
+
+*The three tiers of evaluation on FatigueSet. The same-session figure of 0.744 is an upper bound on separability, not decoding; both honest tiers sit at chance.*
+
+On the identical window set the CNN and baseline differ by +0.005 [-0.068, +0.071]. The conclusion I locked: no evidence that either model exceeds chance on unseen participants on FatigueSet, and no evidence of a CNN advantage. The CNN half of that is weak evidence, because 16 of its 55 fits were near-constant and a constant fit scores exactly 0.5; the null belongs to this configuration, not to neural networks in general.
+
+![Per-participant leave-one-participant-out balanced accuracy for the EEGNet CNN and the band-power baseline on identical windows](results/figures/fig_rq2_perparticipant.png)
+
+*Per-participant leave-one-participant-out scores, CNN against baseline on the identical window set. The two models track each other closely, and both sit at chance overall.*
 
 These nulls are not a broken pipeline. On both datasets the pipeline recovers effects I injected at known sizes: on FatigueSet down to theta ×1.5 and alpha ×1.25, and on DROZY the recovery gate passed at 0.798 at full dose and 0.672 at half dose, against pre-set bars of 0.75 and 0.60. When it reports nothing, nothing of that size was there to find.
 
 My preliminary result is the clearest case. The preliminary result reproduces in its own configuration (logistic regression 1.000, CNN 0.993 balanced accuracy), but there the fatigued class coincides almost perfectly with a session-wide amplitude regime that fails the pre-declared quality criterion (mask-retained 97.1% vs 2.5%). The score therefore identifies the session and cannot be read as evidence of fatigue decoding. The available data do not separate placement or contact differences from state-correlated physiology or behaviour, and I have left that question open rather than picking a mechanism.
 
+![Ladder of scores for the rebuilt preliminary experiment, from its original configuration to honest splits, with mask retention by session](results/figures/fig_rq4_ladder.png)
+
+*My preliminary experiment rebuilt step by step. The original configuration reproduces its score, while the quality mask keeps 97.1% of the alert session and 2.5% of the fatigued session, the session identity the score was reading.*
+
 DROZY shows the labels deciding what transfers. On identical recordings, subjective sleepiness labels (KSS extremes) decode across participants at 0.602 [0.563, 0.644], while reaction-time labels do not (0.482 [0.421, 0.549]), a paired contrast of +0.120 [0.062, 0.179]. The locked headline: KSS-extreme labels were decodable across participants; RT-extreme labels from the same recordings were not; this contrast is not isolated from session order and rests on a small disagreeing subset. The positive control prices the RT null: injected shifts aligned with RT labels were detected at dose 0.5 and above on a 0.25-step dose grid, so smaller RT-related changes are not ruled out. I also do not claim the pre-registered cross-dataset row: the KSS advantage over FatigueSet is +0.094, under the 0.10 line set in advance for calling it clearly interpretable.
 
+![DROZY leave-one-participant-out balanced accuracy under KSS sleepiness labels at 0.602 and reaction-time labels at 0.482 on identical recordings](results/figures/fig_drozy_dissociation.png)
+
+*DROZY, one set of recordings under two label definitions. Sleepiness labels decode across participants at 0.602; reaction-time labels from the same recordings do not, and the contrast rests on a small disagreeing subset.*
+
 The wrist signals are the one positive FatigueSet result, and it comes with its confound attached. Peripheral features (heart rate and electrodermal activity) reach 0.741 [0.633, 0.851] across participants, against 0.539 [0.500, 0.595] for a model given only which windows have valid wrist data, an increment of +0.202 [0.085, 0.314], and +0.230 [0.128, 0.332] over EEG alone. The locked claim: peripheral features recover the protocol-defined M1/M3 contrast across participants, and the design cannot separate fatigue from exercise-related physiology. The early block is pre-treadmill and the late block post-treadmill, and the heart-rate gap scales with the day's treadmill intensity, so this is exertion physiology tracking the protocol, not a fatigue detector.
+
+![FatigueSet leave-one-participant-out balanced accuracy by feature arm: EEG only, peripheral only, combined, and validity indicators only](results/figures/fig_rq3_arms.png)
+
+*The FatigueSet arms side by side. Peripheral features recover the protocol-defined M1/M3 contrast across participants at 0.741, well above the 0.539 from data-validity indicators alone; the contrast is early block against late block, before and after the treadmill.*
+
+![Late minus early block mean heart rate difference by treadmill intensity day: low, medium and high](results/figures/fig_rq3_hr_intensity.png)
+
+*Mean heart rate, late block minus early block, by the day's treadmill intensity. The gap grows with exercise load, which is why I read the wrist result as exertion physiology tracking the protocol.*
 
 Why this matters: a large share of the fatigue-detection literature reports accuracies in the high nineties from evaluations that share people, sessions or windows between training and test. Under the evaluation those deployments actually need, a model meeting people it has never seen, this study finds the EEG effect at chance on a consumer headset, finds a published-style 99% result measuring session identity instead, and shows the label definition, not the recording, deciding whether anything transfers on clinical EEG. The practical lesson travels: report participant-held-out scores, publish the artefact controls beside the headline, and run a positive control so a null means the signal is absent, not that the pipeline is deaf. Until a fatigue model survives that standard, its accuracy is a property of its evaluation, not of fatigue.
 
