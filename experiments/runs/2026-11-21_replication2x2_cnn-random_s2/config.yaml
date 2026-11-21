@@ -1,0 +1,11 @@
+model: EEGNet CNN (frozen cnn.py configuration)
+features/input: raw windows, 6 channels (4 EEG + mask indicator planes), EEGNet-8,2
+protocol: 'RQ4 2x2 preliminary-replication arm (POST HOC, panel-specified): Subject
+  01 only, day-level labels (S01 = alert, S03 = fatigued)'
+split: stratified random window split, per class n_test = max(1, round(0.3*n_class)),
+  split seed as in the folder name; the same split is used for the LR and CNN cells
+seed: split seed 2, model seeds [0, 1, 2]
+data: 'retained Amendment-1 windows for P01 (uncapped pool + check set), 24 windows:
+  S01 22 alert, S03 2 fatigued; no cap'
+git_commit: ef735a6
+torch: 2.15.0+cpu

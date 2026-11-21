@@ -1,0 +1,2 @@
+cell,split,split_seed,model_seed,n_train,n_test,n_test_alert,n_test_fatigued,n,n_alert,n_fatigued,balanced_accuracy,macro_f1,mcc,recall_alert,recall_fatigued,precision_alert,precision_fatigued,roc_auc,accuracy
+cnn,chronological,0,0,16,8,7,1,8,7,1,1.0,1.0,1.0,1.0,1.0,1.0,1.0,1.0,1.0

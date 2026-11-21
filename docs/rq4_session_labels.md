@@ -557,5 +557,51 @@ under this pipeline, and the write-up says so. Either way, no cell
 in this arm is a performance estimate: every cell shares both
 recordings between train and test by design.
 
-**Results.** (To be filled in after the runs; the reading above was
-fixed first.)
+**Results.** Every fit tests on the same 8 windows (7 alert, 1
+fatigued), so each fatigued recall below is a count out of 1 per
+fit. Driver: `src/evaluation/rq4_replication_2x2.py`; per-fit table:
+`results/tables/rq4_replication_2x2_fits.csv`; cell summary:
+`results/tables/rq4_replication_2x2_summary.csv`.
+
+| Cell | Fits | Balanced accuracy | Accuracy | Fatigued recall | Alert recall | ROC-AUC |
+|---|---|---|---|---|---|---|
+| LR, chronological | 1 | 1.000 | 1.000 | 1.000 (1/1) | 1.000 | 1.000 |
+| LR, chronological reversed | 1 | 1.000 | 1.000 | 1.000 (1/1) | 1.000 | 1.000 |
+| LR, random | 5 | 1.000 (all seeds) | 1.000 | 1.000 (5/5 fits) | 1.000 | 1.000 |
+| CNN, chronological | 3 | 1.000 (all seeds) | 1.000 | 1.000 (3/3 fits) | 1.000 | 1.000 |
+| CNN, random | 15 | 0.900 (SD 0.207) | 0.975 | 0.800 (12/15 fits) | 1.000 | 1.000 |
+
+**Which branch of the pre-declared reading applies: neither, and
+the write-up says so plainly.** The panel's two branches were
+"CNN-chronological approaches 0.99 while LR-chronological does
+not" (prices as model + split) and "no cell approaches 0.99" (not
+reproducible under this pipeline). What happened is a third
+pattern the pre-declaration did not list: the chronological LR
+cell also scores a perfect 8 of 8, as does the reversed split and
+every random LR split. On this pipeline's retained windows, the
+recording-sharing split inside one participant is by itself
+sufficient for a perfect score with either model, so the model
+factor prices at nothing here; if anything the CNN is the less
+reliable of the two, missing the single fatigued test window in 3
+of its 15 random fits (in each miss its AUC is still 1.000: it
+ranks the fatigued window first but below the 0.5 threshold, a
+calibration artefact of training on one fatigued example). The
+honest conclusion is the stronger form of the day-level arm's:
+P01's two retained sessions are trivially separable once both
+appear in training, which is the session-fingerprint mechanism
+operating at its purest, and a headline of the preliminary's
+magnitude needs no CNN and no fatigue signal to arise under this
+design family.
+
+The bounds travel with the result. The fatigued class is 2 windows
+in total and 1 per test set, so each recall is a single coin flip
+landing heads; the retained 24 windows are a heavily filtered
+subset of the preliminary's 1,353, and nothing here shows the
+preliminary's own window set behaves the same way; and the
+chronological test fatigued window sits immediately after the one
+fatigued training window in time. What the arm settles is the
+factor pricing it was built for: split design alone, on one
+participant with whole-session labels, can produce the
+preliminary's headline number with the plain baseline model. The
+remaining distance to the preliminary (its exact windows, its own
+preprocessing) is not priced, and I do not claim it is.

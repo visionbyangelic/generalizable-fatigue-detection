@@ -1,0 +1,11 @@
+model: EEGNet CNN (frozen cnn.py configuration)
+features/input: raw windows, 6 channels (4 EEG + mask indicator planes), EEGNet-8,2
+protocol: 'RQ4 2x2 preliminary-replication arm (POST HOC, panel-specified): Subject
+  01 only, day-level labels (S01 = alert, S03 = fatigued)'
+split: within each session, first floor(0.7*n) windows in recording order = train,
+  remainder = test; no purge gap (windows are non-overlapping)
+seed: model seed 1
+data: 'retained Amendment-1 windows for P01 (uncapped pool + check set), 24 windows:
+  S01 22 alert, S03 2 fatigued; no cap'
+git_commit: ef735a6
+torch: 2.15.0+cpu
