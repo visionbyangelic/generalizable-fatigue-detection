@@ -22,9 +22,9 @@
 
 **The replication covers one participant.** The preliminary experiment existed only for Subject 01, so the replication and the amplitude-regime finding are established for that participant; the cohort context (Subject 01 is the extreme of the retention-gap distribution) is descriptive. Source: docs/rq4_session_labels.md.
 
-**DROZY session order is not isolated.** KSS-extreme and protocol-order labellings differ for only 2 of 13 DROZY participants, so the KSS result cannot be separated from session order, and the KSS-minus-RT contrast rests on the 4 participants whose arms disagree. Source: docs/drozy_results.md, docs/drozy_exploratory_checks.md.
+**DROZY session order is not isolated.** KSS-extreme and protocol-order labellings differ for only 2 of 13 DROZY participants, so the KSS result cannot be separated from session order, and the KSS-minus-RT contrast rests on the 4 participants whose arms disagree; those are the same 4 who carry about 62% of the paired contrast, so the subset caveat and the arm-disagreement are one fragility, not two. Source: docs/drozy_results.md, docs/drozy_exploratory_checks.md.
 
-**DROZY positive control still pending.** The injected-signal recovery control that would license cross-dataset statements about the pipeline had not finished when this pack was written, so the DROZY outcome-table verdict is open. Source: docs/drozy_results.md (Amendment 2).
+**The DROZY control bounds the RT null but does not pinpoint it.** The injected-signal recovery control is complete and its comparability gate passed, but it prices the reaction-time null only to within a 0.25-step dose grid (detection at dose 0.5 and above, with 3 of 5 repeats already detecting at dose 0.25), so smaller RT-related band-power changes are not excluded; and the dose scale, calibrated on label-permuted data, is not mapped onto the observed KSS score. Source: docs/drozy_positive_control.md.
 
 **RQ3 cannot separate fatigue from exercise.** The FatigueSet protocol varies treadmill intensity across days and time-on-task across blocks, so heart rate and skin conductance can recover the first-block/last-block contrast through exercise physiology alone; the design has no contrast that separates the two explanations. Source: docs/rq3_results.md.
 

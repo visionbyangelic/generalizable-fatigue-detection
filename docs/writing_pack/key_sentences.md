@@ -37,15 +37,17 @@ Claims I do not make:
 
 **Locked headline:** "KSS-extreme labels were decodable across participants; RT-extreme labels from the same recordings were not; this contrast is not isolated from session order and rests on a small disagreeing subset."
 
+**Locked control sentence** (settled at review, quoted in full in docs/drozy_positive_control.md and in the results summary): the spectral-injection control detected RT-aligned band-power shifts at dose 0.5 and above on a 0.25-step grid, so the RT result is informative only about shifts of at least that size and does not rule out smaller RT-related band-power changes, and the dose scale is not mapped onto the observed KSS score.
+
 Claims I do not make:
 
 - "Subjective labels transfer" or "KSS labels generalise." The decodability statement is scoped to the extreme sessions of this dataset and this pipeline.
-- "Performance labels do not transfer." The RT arm is a null estimate with a wide interval, not a proven absence.
+- "Performance labels do not transfer." The RT arm is a null estimate with a wide interval, not a proven absence. The positive control prices it only to within its grid: injected effects at dose 0.5 and above are excluded, smaller RT-related band-power changes are not, and the RT point estimate itself (0.482) is evidence of nothing.
 - "The KSS result (0.602) is clinically useful or viable." No viability claim of any kind.
-- "The pipeline is validated across datasets." A cross-dataset statement waits on the Amendment 2 positive control, which is still running.
+- "The pipeline is validated across datasets." The Amendment 2 positive control has run and its comparability gate passed, but under the amendment's scope rule a passed control upgrades no claim, so this sentence is still not made.
 - "Protocol order is ruled out." The only permitted order wording: order alone does not reach significance. KSS and order labels differ for only 2 of 13 participants, so the arms are nearly the same labelling.
 - The Fz-only result carries no spatial interpretation (never "the effect is frontal" or "the effect is not frontal").
-- The DROZY section is framed as an exploratory dissociation that reversed the pre-registered label prediction; no pre-declared outcome-table row is claimed (verdict pending the positive control).
+- The DROZY section is framed as an exploratory dissociation that reversed the pre-registered label prediction; no pre-declared outcome-table row is claimed in full (Row 1's control and interval conditions are met, but the 0.094 cross-dataset gap sits under the pre-registered 0.10 line).
 
 ## RQ4 and the preliminary result (docs/rq4_session_labels.md)
 
