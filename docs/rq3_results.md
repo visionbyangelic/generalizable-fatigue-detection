@@ -1,10 +1,10 @@
 # RQ3 results: heart rate and EDA on top of EEG, cross-participant
 
-**Status: run 21 Nov 2026 under `docs/rq3_preregistration.md` as amended by Amendment 1 (committed before any modelling).** Estimation-only throughout, as everywhere in this project. Code: `src/features/peripheral.py` (the declared extractor, SHA-256 ced46c05914303145c7e88d755999288de759a01613f2d99d39c90821d6a9f12) and `src/evaluation/rq3_arms.py`. Run folders: `experiments/runs/2026-11-21_rq3_*` (90 folders, one per pool/arm/protocol/cap seed, each with its leakage checklist). Tables: `results/tables/rq3_arm_summary.csv`, `rq3_per_participant_seedmeans.csv`, `rq3_contrasts.csv`, `rq3_indicator_coefficients.csv`, plus the pre-modelling checks in `rq3_feature_sanity.csv`, `rq3_feature_distributions.csv` and `rq3_indicator_correlation.csv`.
+**Status: run 21 Nov 2026 under `docs/rq3_preregistration.md` as amended by Amendment 1 (committed before any modelling).** Estimation-only throughout, as everywhere in this project. Code: `src/features/peripheral.py` (the declared extractor, SHA-256 ced46c05914303145c7e88d755999288de759a01613f2d99d39c90821d6a9f12) and `src/evaluation/rq3_arms.py`. Run folders: `experiments/runs/2026-11-21_rq3_*` (90 folders, one per pool/arm/protocol/cap seed, each with its leakage checklist). Tables: `results/tables/rq3_arm_summary.csv`, `rq3_per_participant_seedmeans.csv`, `rq3_contrasts.csv`, `rq3_indicator_coefficients.csv`, plus the pre-modelling checks in `rq3_feature_sanity.csv`, `rq3_feature_distributions.csv` and `rq3_indicator_correlation.csv`. Post hoc additions after the results review: the HR-only and EDA-only ablation (`src/evaluation/rq3_ablation.py`; 10 further run folders; tables `rq3_ablation_per_participant.csv`, `rq3_ablation_summary.csv`, `rq3_ablation_indicator_coefficients.csv`), the descriptive heart-rate-by-intensity table (`src/evaluation/rq3_hr_by_intensity.py`; `rq3_hr_by_intensity.csv`), and the tier-parity verification (`src/evaluation/rq3_tier_parity.py`; `rq3_within_per_participant.csv`).
 
 ## The question, and why a positive answer had to survive three defences
 
-RQ3 asks whether the Empatica E4 signals (mean heart rate from the E4's own 1 Hz product, and three EDA summaries: mean, slope, rise count) add anything to EEG for cross-participant fatigue detection on FatigueSet, under the primary subjective labels, the locked logistic regression, and the same windows and splits as the Week 2 baseline. EEG alone does not transfer on this dataset (LOPO balanced accuracy 0.508). The wrist data bring one specific danger, measured in the Phase 1 inventory before any modelling: the missingness is class-asymmetric. Session-level data loss in two participants (P08/S02 and P10/S01; the cause is not established) removed the wrist streams before the M3 block, so 59 of the 60 windows with unusable peripheral data are fatigued windows. A model given the validity indicators could in principle score above chance by learning "the band had stopped" instead of anything physiological. The amended design therefore built three defences in advance, and this result is reported only through them:
+RQ3 asks whether the Empatica E4 signals (mean heart rate from the E4's own 1 Hz product, and three EDA summaries: mean, slope, rise count) carry the protocol-defined M1/M3 block contrast across participants on FatigueSet, on their own or added to the EEG features, under the primary subjective labels, the locked logistic regression, and the same windows and splits as the Week 2 baseline. EEG alone does not transfer on this dataset (LOPO balanced accuracy 0.508). The wrist data bring one specific danger, measured in the Phase 1 inventory before any modelling: the missingness is class-asymmetric. Session-level data loss in two participants (P08/S02 and P10/S01; the cause is not established) removed the wrist streams before the M3 block, so 59 of the 60 windows with unusable peripheral data are fatigued windows. A model given the validity indicators could in principle score above chance by learning "the band had stopped" instead of anything physiological. The amended design therefore built three defences in advance, and this result is reported only through them:
 
 1. **The headline quantities are increments, not levels**: peripheral-only minus indicators-only, and combined minus EEG-only, paired per participant.
 2. **The restricted pool is a co-gate**: all arms re-evaluated on the 993 windows where both streams are usable. That pool estimates performance when the band worked; it is a conditional estimand, not a cleaner pool, because the restriction itself removes fatigued windows at about 12% against about 0.2% of alert windows.
@@ -12,7 +12,9 @@ RQ3 asks whether the Empatica E4 signals (mean heart rate from the E4's own 1 Hz
 
 ## Headline (leave-one-participant-out, keep-all pool)
 
-Per-participant balanced accuracy, cap-seed means first, participant bootstrap intervals (10,000 resamples):
+The claim this phase is licensed to make, stated before the numbers: **peripheral features recover the protocol-defined M1/M3 contrast across participants, and the design cannot separate fatigue from exercise-related physiology.** In its strongest licensed form, on the leave-one-participant-out tier: wrist HR and EDA features separate the pre-treadmill from the post-treadmill window class in unseen participants (balanced accuracy 0.741, against 0.539 for the missingness indicators alone on the same tier; the paired increment is +0.202 [0.085, 0.314]); EEG features from the same sessions show no such separation (0.508). The tier is named with every number in this document, and the peripheral level is never reported without the indicators level beside it.
+
+Per-participant balanced accuracy, cap-seed means first; every interval in this document is a participant-level bootstrap over the per-participant seed means (10,000 resamples), the project convention:
 
 | Arm | BA | 95% CI | AUC | MCC |
 |---|---|---|---|---|
@@ -62,14 +64,41 @@ The peripheral and combined arms hold their level on test windows where the miss
 
 ## Secondary tiers
 
-The LOPO tier governs every claim, as declared. The other tiers, for the record:
+The LOPO tier governs every claim, as declared. The tiers differ only in fold structure. LOPO trains on ten participants and tests on the held-out participant's sessions. Session-out pools all participants and holds out one (participant, session) at a time, with metrics aggregated per participant. Within-subject rotates the held-out session inside one participant, training on that participant's other sessions. Before the tiers are set side by side, their parity was verified from the run configs and the code path (`src/evaluation/rq3_tier_parity.py`): the target definition (primary subjective labels on the Amendment-1 windows), the capped window pool at each cap seed, the class-balance handling (the per-session M1 cap, plus class weights balanced inside the pipeline), and the normalisation route (training-fold median imputation and standardisation, fitted per fold) are identical across the tiers, and every run config matches except the protocol field. At each cap seed the LOPO folds cover all 806 capped windows exactly once; the within-subject folds cover the 557 capped windows that sit in feasible rotations. P07, P10 and P12 have no feasible rotation (no rotation leaves both classes on both sides) and form no within-subject fold, so the within tier covers eight participants.
 
 | Tier | Peripheral-only BA [CI] | Combined BA [CI] |
 |---|---|---|
 | Session-out (pooled, per-participant aggregation) | 0.709 [0.599, 0.828] | 0.705 [0.607, 0.807] |
 | Within-subject (session rotation, n = 8) | 0.549 [0.448, 0.655] | 0.506 [0.367, 0.637] |
 
-The within-subject tier is the weak one here, which is the reverse of the EEG pattern: there is no evidence of a within-subject peripheral effect under session rotation, with the estimates compatible with effects up to 0.655 (peripheral) and 0.637 (combined). One structural fact is relevant to reading that tier and is stated without further interpretation: the three sessions are counterbalanced treadmill-intensity days, so the size of any block-to-block physiological shift varies by session by design, and a within-subject rotation trains on two days and tests on a third. The LOPO and session-out tiers pool across days and participants, and they agree with each other.
+The session-out tier pools across days and participants, and it agrees with the LOPO tier. The within-subject tier is at chance, imprecisely: its interval is too wide to establish absence either. Per participant (seed means; full table in `results/tables/rq3_within_per_participant.csv`):
+
+| Participant | Peripheral | Combined |
+|---|---|---|
+| P01 | 0.359 | 0.374 |
+| P02 | 0.512 | 0.606 |
+| P03 | 0.680 | 0.480 |
+| P04 | 0.654 | 0.729 |
+| P06 | 0.480 | 0.138 |
+| P08 | 0.377 | 0.365 |
+| P09 | 0.830 | 0.768 |
+| P11 | 0.500 | 0.588 |
+
+The spread across the eight participants is wide in both arms (peripheral: SD 0.161, range 0.359 to 0.830; combined: SD 0.210, range 0.138 to 0.768), and the values are reported as values, with no individual-difference claim made from them.
+
+Set against the EEG pattern (at chance on every tier), the peripheral pattern (strong across participants, at chance within) is an inversion. The more parsimonious reading of that inversion: a physiological response that is similar across people but varies in size from day to day within a person, of the kind the treadmill exercise between the blocks produces, predicts exactly this ordering. That is a reading, not a finding. One candidate mechanism behind it is the intensity structure of the protocol: the three sessions are counterbalanced treadmill-intensity days, a within-subject rotation trains on two days and tests on a third, and if the size of the block-to-block shift differs by day, the within tier is the one that suffers. This explanation is a hypothesis the design cannot resolve; it is recorded as a hypothesis, and it is not used to account for the weak tier. The descriptive table in the next section is the agreed non-modelled companion to it.
+
+## Descriptive table: mean heart rate by block and treadmill-intensity day
+
+No model is fitted to this table, and no interval or test is attached to it (`src/evaluation/rq3_hr_by_intensity.py`; `results/tables/rq3_hr_by_intensity.csv`). It records the mean of the heart-rate feature over the primary pool's HR-usable windows (993 of 1,053), grouped by the treadmill intensity of the session the windows come from (the dataset's own metadata mapping, as in `docs/DATA_INVENTORY.md`):
+
+| Treadmill intensity | M1 windows (n) | Mean HR, M1 (bpm) | M3 windows (n) | Mean HR, M3 (bpm) | M3 minus M1 (bpm) |
+|---|---|---|---|---|---|
+| Low | 119 | 71.6 | 88 | 70.3 | -1.3 |
+| Medium | 234 | 72.4 | 200 | 85.7 | +13.3 |
+| High | 210 | 77.3 | 142 | 95.4 | +18.2 |
+
+In the table, the M3-minus-M1 difference is -1.3 bpm on low-intensity days, +13.3 bpm on medium-intensity days and +18.2 bpm on high-intensity days.
 
 ## Within-participant-normalised sensitivity
 
@@ -81,6 +110,33 @@ The declared V2-style sensitivity (continuous features centred and scaled within
 | Combined | 0.721 [0.624, 0.809] | -0.016 [-0.080, +0.052] |
 
 Normalising away each participant's own level changes very little: the increments survive it (normalised peripheral-only minus indicators-only: +0.214 [0.085, 0.331]). The cross-participant contrast in these features is therefore not carried by stable between-person level differences alone.
+
+## Post hoc ablation: HR-only and EDA-only arms (descriptive)
+
+Post hoc and descriptive: these arms were not in the pre-registration. They were added after the results review to record what each signal family scores on its own under the identical design (keep-all pool, LOPO tier, cap seeds 0-4, the locked logistic regression; `src/evaluation/rq3_ablation.py`; tables `rq3_ablation_per_participant.csv`, `rq3_ablation_summary.csv`, `rq3_ablation_indicator_coefficients.csv`). The HR-only arm uses hr_mean and hr_valid; the EDA-only arm uses eda_mean, eda_slope, eda_rise_count and eda_valid.
+
+| Arm | BA | 95% CI | AUC | MCC |
+|---|---|---|---|---|
+| HR-only | 0.647 | [0.556, 0.748] | 0.821 | 0.285 |
+| EDA-only | 0.640 | [0.558, 0.735] | 0.747 | 0.321 |
+
+Beside them, on the same tier and pool: peripheral-only 0.741, indicators-only 0.539. Per participant (seed means):
+
+| Participant | HR-only | EDA-only |
+|---|---|---|
+| P01 | 0.500 | 0.500 |
+| P02 | 0.872 | 0.531 |
+| P03 | 0.575 | 0.500 |
+| P04 | 0.779 | 0.500 |
+| P06 | 0.680 | 0.557 |
+| P07 | 0.500 | 0.979 |
+| P08 | 0.501 | 0.688 |
+| P09 | 0.964 | 0.675 |
+| P10 | 0.746 | 0.791 |
+| P11 | 0.500 | 0.793 |
+| P12 | 0.500 | 0.529 |
+
+The fitted coefficients on each arm's validity indicator stay in a sane range across folds (largest absolute value 1.45), with no sign of the blow-up that near-separation inside a fold would produce. Both arms are reported as description: no feature set is selected on the basis of these numbers, and no conclusion about which channel matters more is drawn from them beyond the two estimates themselves.
 
 ## Per-participant values (LOPO, keep-all pool, seed means)
 
@@ -120,12 +176,14 @@ Before any RQ3 number was trusted, the harness re-ran the EEG-only arm on the id
 
 ## Which outcome row this matches, and what it means
 
-**Row 2 of the amended outcome table**: peripheral-only above indicators-only in both pools, both increments' intervals excluding zero. The pre-declared reading of that row, applied as written: the peripheral signals carry transferable information beyond the missingness pattern, scoped to this pool, this feature set, this device, these labels and this model. An increment is not a working detector, and the levels say so themselves: 0.72 to 0.74 is far from the usefulness line this project uses, and nowhere near the within-session numbers the literature reports.
+**Row 2 of the amended outcome table**: peripheral-only above indicators-only in both pools, both increments' intervals excluding zero. The pre-declared reading of that row, applied as written: the peripheral signals carry transferable information beyond the missingness pattern, scoped to this pool, this feature set, this device, these labels and this model. An increment is not a working detector, and the levels say so themselves: the LOPO levels, 0.72 to 0.74 across the two pools, are far from the usefulness line this project uses, and nowhere near the within-session numbers the literature reports.
 
 The caveat that was written into the pre-registration before running travels with this result, unchanged and unsoftened. **M1 and M3 differ in protocol position by construction, and heart rate in particular answers to the treadmill activity the protocol places between the blocks, and to time on task, not only to fatigue.** Honest splits remove participant and session identity from the test fold; they cannot remove block position, because block position is part of how the labels are built, in the EEG arms just as much as here. What has been shown is that the M1-to-M3 peripheral contrast (higher mean heart rate, higher EDA level on the later block) is consistent enough across people for a model trained on other people to use it on a new person. Whether that contrast is fatigue, exercise recovery, warming skin over a long session, or some mixture, this design cannot separate, and no sentence in this document claims that it does. RQ3 inherits that limitation from the label design; it does not solve it, and it is the first thing a reader should hold against the headline.
 
-Two scope statements, for the record. The HR arm is mean heart rate only, taken from the E4's smoothed trailing-average product; nothing here measures beat-to-beat variability, and nothing is claimed about it. Skin temperature was excluded by design before modelling; nothing here is evidence about whether it carries information, in either direction.
+Two scope statements, for the record. The HR arm is mean heart rate only, taken from the E4's smoothed trailing-average product; nothing is claimed beyond that feature. Skin temperature was excluded by design before modelling; nothing here is evidence about whether it carries information, in either direction.
 
 ## Problems encountered
 
-One, minor and caught before use: the first version of the sanity-check script tried to read `both_temporals_masked` from the window index, where it does not exist (it is a derived band-power feature, both temporal channels masked). The script was fixed to derive it from the index's per-channel validity flags, and the correlation table was produced by the fixed version. The extractor itself ran clean, and its validity counts matched the inventory on the first pass.
+One, minor and caught before use: the first version of the sanity-check script tried to read `both_temporals_masked` from the window index, where it does not exist (it is a derived band-power feature, both temporal channels masked). The script was fixed to derive it from the index's per-channel validity flags, and the correlation table was produced by the fixed version. The extractor itself ran without errors, and its validity counts matched the inventory on the first pass.
+
+One more, in the post hoc ablation script: its first run completed the HR-only arm and then stopped on a variable-shadowing error (the fold summary reused the name of the peripheral frame, so the EDA features could not be found). The script was fixed and re-run in full; the HR-only numbers were identical on the re-run, as expected for a deterministic model on identical capped sets.
