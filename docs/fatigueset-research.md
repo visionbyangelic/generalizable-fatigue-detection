@@ -187,7 +187,7 @@ The proposal is unusually accurate (12 participants ✓, devices ✓, tasks ✓,
 - Official dataset page — https://www.esense.io/datasets/fatigueset (read in full, incl. HTML source for the download link, 20 Nov 2026)
 - Original paper (open PDF) — https://alessandro-montanari.github.io/papers/Kalanadhabhatta-PervasiveHealth2021-Camera.pdf ; DOI https://doi.org/10.1007/978-3-030-99194-4_14 ; Springer listing https://www.springerprofessional.de/en/fatigueset-a-multi-modal-dataset-for-modeling-mental-fatigue-and/20244516
 - The downloaded archive itself — `fatigueset/README.md`, `metadata.csv`, `exp_*.csv` samples (P01 S01/S03 read directly), full archive listing (20 Nov 2026)
-- Kodikara et al. 2025, FatigueSense, ACM TCH — abstract via https://ouci.dntb.gov.ua/en/works/7PGGrxx9/ ; citation via https://dl.acm.org/doi/10.1145/3797885
+- Kodikara et al. 2025, FatigueSense, ACM TCH — abstract via https://ouci.dntb.gov.ua/en/works/7PGGrxx9/ ; citation via https://dl.acm.org/doi/10.1145/3709363 (DOI corrected 21 Nov 2026: 10.1145/3797885, recorded here earlier, belongs to a different article; verification note in docs/literature.md, entry F5)
 - Ramakrishna et al. 2026, MSARNet — https://www.frontiersin.org/journals/artificial-intelligence/articles/10.3389/frai.2026.1952954/full ; code https://github.com/ARama-K/MSARNet_FL
 - Jeribi & Khubrani 2026, FATE — https://www.frontiersin.org/journals/public-health/articles/10.3389/fpubh.2026.2011960/abstract
 - rs2lab preprocessing — https://github.com/rs2lab/fatigueset-data-preprocessing ; Kaggle derivative https://www.kaggle.com/datasets/anaxmenobrito/fatigueset-pre-processed

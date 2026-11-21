@@ -21,7 +21,7 @@
 2. **Block inheritance** (Shuchih-Negi): windows inherit their measurement block's rating — no interpolation assumptions, but coarse (3 distinct values/session) and block = phase-confounded.
 3. **Linear interpolation** (MSARNet): smooth continuous targets — but interpolation uses *future* ratings to label earlier windows (look-ahead; see §6).
 
-> **DOI correction:** the FatigueSense DOI recorded in `fatigueset-research.md`/`literature.md` (10.1145/3797885, from the ACM listing) conflicts with the DOI given by rs2lab's README and secondary indexes (**10.1145/3709363**). Verify against ACM before the project bibliography is finalised.
+> **DOI correction (verified 21 Nov 2026):** the FatigueSense DOI is **10.1145/3709363**, confirmed against the ACM Digital Library record for the paper; the 10.1145/3797885 recorded earlier belongs to a different article in the same journal. Full verification note in `docs/literature.md`, entry F5.
 >
 > **The gap, stated plainly:** no published FatigueSet pipeline found uses LOSO or any subject-wise split, and none models the EEG specifically. Our design is not a replication of any of these — it is the evaluation they all skipped.
 
@@ -212,7 +212,7 @@ Each default is tied to the sources above and checked against PLAN.md §7 leakag
 1. **rs2lab's per-participant median label threshold leaks in LOSO** if applied to the held-out participant (PLAN §7). Use pooled or M1-only thresholds. (§6, Labels #3)
 2. **MSARNet-style interpolation is look-ahead leakage** under PLAN §7 — excluded from the primary pipeline despite being published practice on this dataset. (Labels #4)
 3. **Performance Δ-vs-M1 labels use held-out-subject data (their M1 block)** — defensible under §7's "estimable without held-out labels" clause because block identity is protocol metadata, but it must be argued explicitly in `label_rules.md`, not assumed. (Labels #2)
-4. **No conflict, but a correction:** FatigueSense's DOI is likely **10.1145/3709363**, not the 10.1145/3797885 recorded earlier — verify before citing. (§1)
+4. **No conflict, but a correction:** FatigueSense's DOI is **10.1145/3709363** (verified against the ACM record, 21 Nov 2026), not the 10.1145/3797885 recorded earlier. (§1)
 5. **No conflict, but a scope note:** PLAN §5 says the baseline classifier is picked "via training-only validation, then frozen" — the literature supports pre-registering LR as primary *now* (Lan comparability) and treating SVM/RF as secondaries, which satisfies §5/§7 without any test-informed choice. (§6, Baseline)
 6. **FatigueSense's split strategy is unverifiable** — do not claim in the project that FatigueSense did or did not use subject-wise splits; claim only that no subject-wise FatigueSet evaluation was *found in verifiable sources* (FATE excepted). (§1)
 
